@@ -25,12 +25,12 @@ class Database extends Config
      * @var array<string, mixed>
      */
     public array $default = [
-        'DSN'          => '',
+        'DSN'          => 'DBDriver://postgres:postgres@localhost:5432/db_portal_ppdb',
         'hostname'     => 'localhost',
-        'username'     => '',
-        'password'     => '',
-        'database'     => '',
-        'DBDriver'     => 'MySQLi',
+        'username'     => 'postgres',
+        'password'     => 'postgres',
+        'database'     => 'db_portal_ppdb',
+        'DBDriver'     => 'pgsql',
         'DBPrefix'     => '',
         'pConnect'     => false,
         'DBDebug'      => true,
@@ -41,7 +41,7 @@ class Database extends Config
         'compress'     => false,
         'strictOn'     => false,
         'failover'     => [],
-        'port'         => 3306,
+        'port'         => 5432,
         'numberNative' => false,
         'foundRows'    => false,
         'dateFormat'   => [
