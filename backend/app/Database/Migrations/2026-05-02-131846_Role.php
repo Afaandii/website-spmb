@@ -5,7 +5,7 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class User extends Migration
+class Role extends Migration
 {
     public function up()
     {
@@ -15,22 +15,17 @@ class User extends Migration
                 'unsigned' => true,
                 'auto_increment' => true
             ],
-            'role_id' => [
-                'type' => 'INT',
-                'unsigned' => true,
-            ],
-            'username' => [
+            'nama_role' => [
                 'type' => 'varchar',
                 'constraint' => 255,
                 'null' => true,
             ],
-            'email' => [
+            'deskripsi' => [
                 'type' => 'varchar',
                 'constraint' => 255,
-                'unique' => true,
                 'null' => true,
             ],
-            'password' => [
+            'login_destinasi' => [
                 'type' => 'varchar',
                 'constraint' => 255,
                 'null' => true,
@@ -38,16 +33,15 @@ class User extends Migration
             'dibuat_pada' => [
                 'type' => 'timestamp',
                 'default' => new RawSql('CURRENT_TIMESTAMP'),
-                "null" => true,
+                'null' => true,
             ]
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('role_id', 'role', 'id', 'CASCADE', 'RESTRICT');
-        $this->forge->createTable('user');
+        $this->forge->createTable('role');
     }
 
     public function down()
     {
-        $this->forge->dropTable('user');
+        $this->forge->dropTable('role');
     }
 }
