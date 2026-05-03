@@ -132,3 +132,64 @@ in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
 12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
 13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
 14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-03 13:34:38 --> pg_query(): Query failed: ERROR:  relation "users" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "pengumuman" (
+	"id" SERIAL NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"dibuat_oleh" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"title" varchar(255) NULL,
+	"slug" varchar(255) NULL,
+	"deskripsi" TEXT NULL,
+	"tipe_pengumuman" varchar(255) NULL,
+	"status_pengumuman" varchar(255) NULL,
+	"tanggal_publish" date NULL,
+	CONSTRAINT "pk_pengumuman" PRIMARY KEY("id"),
+	CONSTRAINT "pengumuman_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pengumuman_dibuat_oleh_foreign" FOREIGN KEY ("dibuat_oleh") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pengumuman_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "pengumuman" (
+	"id" SERIAL NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"dibuat_oleh" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"title" varchar(255) NULL,
+	"slug" varchar(255) NULL,
+	"deskripsi" TEXT NULL,
+	"tipe_pengumuman" varchar(255) NULL,
+	"status_pengumuman" varchar(255) NULL,
+	"tanggal_publish" date NULL,
+	CONSTRAINT "pk_pengumuman" PRIMARY KEY("id"),
+	CONSTRAINT "pengumuman_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pengumuman_dibuat_oleh_foreign" FOREIGN KEY ("dibuat_oleh") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pengumuman_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "pengumuman" (
+	"id" SERIAL NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"dibuat_oleh" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"title" varchar(255) NULL,
+	"slug" varchar(255) NULL,
+	"deskripsi" TEXT NULL,
+	"tipe_pengumuman" varchar(255) NULL,
+	"status_pengumuman" varchar(255) NULL,
+	"tanggal_publish" date NULL,
+	CONSTRAINT "pk_pengumuman" PRIMARY KEY("id"),
+	CONSTRAINT "pengumuman_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pengumuman_dibuat_oleh_foreign" FOREIGN KEY ("dibuat_oleh") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pengumuman_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-122936_Pengumuman.php(65): CodeIgniter\Database\Forge->createTable('pengumuman')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\Pengumuman->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
