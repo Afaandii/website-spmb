@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_User extends Model
+class M_Tahun_ajaran extends Model
 {
-    protected $table            = 'user';
+    protected $table            = 'tahun_ajaran';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['role_id', 'username', 'email', 'password', 'dibuat_pada'];
+    protected $allowedFields    = ['tahun', 'status', 'dibuat_pada'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -29,42 +29,32 @@ class M_User extends Model
 
     // Validation
     protected $validationRules      = [
-        "role_id" => 'required|integer',
-        "username" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
-        "email" => 'required|valid_email|is_unique[user.email]|max_length[120]',
-        "password" => 'required|min_length[6]|max_length[120]',
+        'tahun' => 'required|numeric|exact_length[4]|is_unique[tahun_ajaran.tahun]',
+        'status' => 'required|in_list[Aktif,Tidak Aktif]'
     ];
     protected $validationMessages   = [
-        "email" => [
-            "is_unique" => 'Email sudah digunakan sebelumnya, mohon gunakan email lain.',
+        'tahun' => [
+            'required' => 'Tahun wajib diisi.',
+            'numeric' => 'Tahun harus berupa angka.',
+            'exact_length' => 'Tahun harus terdiri dari 4 karakter.',
+            'is_unique' => 'Tahun sudah digunakan, mohon gunakan tahun lain.'
         ],
+        'status' => [
+            'required' => 'Status wajib diisi.',
+            'in_list' => 'Status tidak valid.'
+        ]
     ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = ['hashPassword'];
+    protected $beforeInsert   = [];
     protected $afterInsert    = [];
-    protected $beforeUpdate   = ['hashPassword'];
+    protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-
-    public function hashPassword(array $data)
-    {
-        if (isset($data['data']['password'])) {
-            $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
-        }
-        return $data;
-    }
-
-    public function getAllUser(){
-        $this->select('user.*, role.nama_role');
-        $this->join('role', 'role.id = user.role_id');
-        return $this->findAll();
-    }
 }
