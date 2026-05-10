@@ -2,7 +2,7 @@
 
 use App\Controllers\BaseController;
 
-class Siswa_controller extends BaseController{
+class Siswa extends BaseController{
   
 }
 
