@@ -1,1 +1,1 @@
-##### Aplication in stage develop!
+##### Aplikasi masih dalam pengembangan!
