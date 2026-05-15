@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_Akademik extends Model
+class M_akademik extends Model
 {
     protected $table            = 'akademik';
     protected $primaryKey       = 'id';
@@ -12,7 +12,7 @@ class M_Akademik extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['pendaftaran_id', 'tahun_ajaran_id', 'semester', 'nilai_rata_rata', 'dibuat_pada'];
+    protected $allowedFields    = ['pendaftaran_id', 'tahun_ajaran_id', 'semester', 'nilai_rata_rata', 'created_at', 'updated_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -23,8 +23,8 @@ class M_Akademik extends Model
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'dibuat_pada';
-    protected $updatedField  = '';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     protected $deletedField  = '';
 
     // Validation

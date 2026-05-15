@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_Jalur_daftar extends Model
+class M_jalur_daftar extends Model
 {
     protected $table            = 'jalur_daftar';
     protected $primaryKey       = 'id';
@@ -12,7 +12,7 @@ class M_Jalur_daftar extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nama_jalur', 'tipe_seleksi', 'kuota', 'deskripsi', 'dibuat_pada'];
+    protected $allowedFields    = ['nama_jalur', 'tipe_seleksi', 'kuota', 'metode_perankingan', 'tanggal_mulai', 'tanggal_selesai', 'is_active', 'created_at', 'updated_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -23,8 +23,8 @@ class M_Jalur_daftar extends Model
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'dibuat_pada';
-    protected $updatedField  = '';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     protected $deletedField  = '';
 
     // Validation
@@ -32,7 +32,10 @@ class M_Jalur_daftar extends Model
         'nama_jalur' => 'required|alpha_numeric_space|max_length[100]',
         'tipe_seleksi' => 'required|max_length[50]',
         'kuota' => 'required|integer',
-        'deskripsi' => 'max_length[255]'
+        'metode_perankingan' => 'required|max_length[100]',
+        'tanggal_mulai' => 'required|valid_date',
+        'tanggal_selesai' => 'required|valid_date|greater_than[tanggal_mulai]',
+        'is_active' => 'required|in_list[1,2]'
     ];
     protected $validationMessages   = [
         'nama_jalur' => [
@@ -48,8 +51,22 @@ class M_Jalur_daftar extends Model
             'required' => 'Kuota wajib diisi.',
             'integer' => 'Kuota harus berupa angka bulat.'
         ],
-        'deskripsi' => [
-            'max_length' => 'Deskripsi tidak boleh lebih dari 255 karakter.'
+        'metode_perankingan' => [
+            'required' => 'Metode perankingan wajib diisi.',
+            'max_length' => 'Metode perankingan tidak boleh lebih dari 100 karakter.'
+        ],
+        'tanggal_mulai' => [
+            'required' => 'Tanggal mulai wajib diisi.',
+            'valid_date' => 'Tanggal mulai tidak valid.'
+        ],
+        'tanggal_selesai' => [
+            'required' => 'Tanggal selesai wajib diisi.',
+            'valid_date' => 'Tanggal selesai tidak valid.',
+            'greater_than' => 'Tanggal selesai harus setelah tanggal mulai.'
+        ],
+        'is_active' => [
+            'required' => 'Status aktif wajib diisi.',
+            'in_list' => 'Status aktif tidak valid.'
         ]
     ];
     protected $skipValidation       = false;

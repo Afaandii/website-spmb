@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_Pendaftaran extends Model
+class M_pendaftaran extends Model
 {
     protected $table            = 'pendaftaran';
     protected $primaryKey       = 'id';
@@ -12,7 +12,7 @@ class M_Pendaftaran extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['siswa_id', 'jalur_id', 'tahun_ajaran_id', 'nomor_pendaftaran', 'status_pendaftaran', 'dibuat_pada'];
+    protected $allowedFields    = ['siswa_id', 'sekolah_asal_id', 'jalur_id', 'tahun_ajaran_id', 'kode_registrasi', 'status_daftar', 'tanggal_daftar', 'created_at', 'updated_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -23,8 +23,8 @@ class M_Pendaftaran extends Model
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'dibuat_pada';
-    protected $updatedField  = '';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     protected $deletedField  = '';
 
     // Validation
@@ -32,8 +32,8 @@ class M_Pendaftaran extends Model
         'siswa_id' => 'required|integer',
         'jalur_id' => 'required|integer',
         'tahun_ajaran_id' => 'required|integer',
-        'nomor_pendaftaran' => 'required|alpha_numeric_space|max_length[50]',
-        'status_pendaftaran' => 'required|in_list[proses,diterima,ditolak]'
+        'kode_registrasi' => 'required|alpha_numeric_space|max_length[50]',
+        'status_daftar' => 'required|in_list[proses,diterima,ditolak]'
     ];
     protected $validationMessages   = [
         'siswa_id' => [
@@ -48,12 +48,12 @@ class M_Pendaftaran extends Model
             'required' => 'ID tahun ajaran wajib diisi.',
             'integer' => 'ID tahun ajaran harus berupa angka bulat.'
         ],
-        'nomor_pendaftaran' => [
-            'required' => 'Nomor pendaftaran wajib diisi.',
-            'alpha_numeric_space' => 'Nomor pendaftaran hanya boleh berisi huruf, angka, dan spasi.',
-            'max_length' => 'Nomor pendaftaran tidak boleh lebih dari 50 karakter.'
+        'kode_registrasi' => [
+            'required' => 'Kode registrasi wajib diisi.',
+            'alpha_numeric_space' => 'Kode registrasi hanya boleh berisi huruf, angka, dan spasi.',
+            'max_length' => 'Kode registrasi tidak boleh lebih dari 50 karakter.'
         ],
-        'status_pendaftaran' => [
+        'status_daftar' => [
             'required' => 'Status pendaftaran wajib diisi.',
             'in_list' => 'Status pendaftaran tidak valid.'
         ]

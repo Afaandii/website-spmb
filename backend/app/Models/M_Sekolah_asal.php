@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_Sekolah_asal extends Model
+class M_sekolah_asal extends Model
 {
     protected $table            = 'sekolah_asal';
     protected $primaryKey       = 'id';
@@ -12,7 +12,7 @@ class M_Sekolah_asal extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['siswa_id', 'npsn', 'nama_sekolah', 'alamat_sekolah', 'tingkat_sekolah', 'dibuat_pada'];
+    protected $allowedFields    = ['npsn', 'nama_sekolah', 'jenjang_sekolah', 'alamat_sekolah', 'created_at', 'updated_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -23,23 +23,18 @@ class M_Sekolah_asal extends Model
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'dibuat_pada';
-    protected $updatedField  = '';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     protected $deletedField  = '';
 
     // Validation
     protected $validationRules      = [
-        'siswa_id' => 'required|integer',
         'npsn' => 'required|numeric|exact_length[10]|is_unique[sekolah_asal.npsn]',
         'nama_sekolah' => 'required|alpha_numeric_space|max_length[100]',
         'alamat_sekolah' => 'required|max_length[255]',
-        'tingkat_sekolah' => 'required|in_list[SD,SMP,SMA]'
+        'jenjang_sekolah' => 'required|in_list[SD,SMP,SMA]'
     ];
     protected $validationMessages   = [
-        'siswa_id' => [
-            'required' => 'ID siswa wajib diisi.',
-            'integer' => 'ID siswa harus berupa angka bulat.'
-        ],
         'npsn' => [
             'required' => 'NPSN wajib diisi.',
             'numeric' => 'NPSN harus berupa angka.',
@@ -55,9 +50,9 @@ class M_Sekolah_asal extends Model
             'required' => 'Alamat sekolah wajib diisi.',
             'max_length' => 'Alamat sekolah tidak boleh lebih dari 255 karakter.'
         ],
-        'tingkat_sekolah' => [
-            'required' => 'Tingkat sekolah wajib diisi.',
-            'in_list' => 'Tingkat sekolah tidak valid.'
+        'jenjang_sekolah' => [
+            'required' => 'Jenjang sekolah wajib diisi.',
+            'in_list' => 'Jenjang sekolah tidak valid.'
         ]
     ];
     protected $skipValidation       = false;

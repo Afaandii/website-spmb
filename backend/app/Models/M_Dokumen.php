@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_Dokumen extends Model
+class M_dokumen extends Model
 {
     protected $table            = 'dokumen';
     protected $primaryKey       = 'id';
@@ -12,7 +12,7 @@ class M_Dokumen extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["pendaftaran_id", "jenis_dokumen", "file_path", "status_verifikasi", "keterangan_dokumen", "dibuat_pada"];
+    protected $allowedFields    = ["pendaftaran_id", "jenis_dokumen", "file_path", "status_verifikasi", "keterangan_dokumen", "mimes_type", "ukuran_file", "created_at","updated_at"];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -23,8 +23,8 @@ class M_Dokumen extends Model
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'dibuat_pada';
-    protected $updatedField  = '';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     protected $deletedField  = '';
 
     // Validation
@@ -33,7 +33,9 @@ class M_Dokumen extends Model
         "jenis_dokumen" => 'required|in_list[ijazah,skhu,akte_kelahiran,foto]',
         "file_path" => 'required|string|max_length[255]',
         "status_verifikasi" => 'required|in_list[belum diverifikasi,terverifikasi,ditolak]',
-        "keterangan_dokumen" => 'permitted|string|max_length[255]'
+        "keterangan_dokumen" => 'permitted|string|max_length[255]',
+        "mimes_type" => 'permitted|string|max_length[255]',
+        "ukuran_file" => 'permitted|integer'
     ];
     protected $validationMessages   = [
         "pendaftaran_id" => [
@@ -56,6 +58,13 @@ class M_Dokumen extends Model
         "keterangan_dokumen" => [
             "string" => 'Keterangan dokumen harus berupa string.',
             "max_length" => 'Keterangan dokumen tidak boleh lebih dari 255 karakter.'
+        ],
+        "mimes_type" => [
+            "string" => 'Mimes type harus berupa string.',
+            "max_length" => 'Mimes type tidak boleh lebih dari 255 karakter.'
+        ],
+        "ukuran_file" => [
+            "integer" => 'Ukuran file harus berupa angka bulat.'
         ]
     ];
     protected $skipValidation       = false;

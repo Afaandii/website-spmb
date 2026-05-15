@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_Siswa extends Model
+class M_siswa extends Model
 {
     protected $table            = 'siswa';
     protected $primaryKey       = 'id';
@@ -12,7 +12,7 @@ class M_Siswa extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nik', 'nisn', 'npsn', 'nama_lengkap', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'agama', 'alamat', 'no_telp', 'latitude', 'longlatitude', 'dibuat_pada'];
+    protected $allowedFields    = ['nik', 'nisn', 'npsn', 'nama_lengkap', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'agama', 'alamat', 'no_telp', 'latitude', 'longitude', 'created_at', 'updated_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -23,8 +23,8 @@ class M_Siswa extends Model
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'dibuat_pada';
-    protected $updatedField  = '';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     protected $deletedField  = '';
 
     // Validation
@@ -40,7 +40,7 @@ class M_Siswa extends Model
         "alamat" => 'required|alpha_numeric_space|min_length[3]|max_length[255]',
         "no_telp" => 'required|alpha_numeric_space|integer|min_length[3]|max_length[20]',
         "latitude" => 'required|numeric',
-        "longlatitude" => 'required|numeric',
+        "longitude" => 'required|numeric',
     ];
     protected $validationMessages   = [
         "nik" => [
