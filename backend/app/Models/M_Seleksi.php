@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_Seleksi extends Model
+class M_seleksi extends Model
 {
     protected $table            = 'seleksi';
     protected $primaryKey       = 'id';
@@ -12,7 +12,7 @@ class M_Seleksi extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["pendaftaran_id", "nilai_seleksi", "rangkis", "status_seleksi", "jarak_meter", "dibuat_pada"];
+    protected $allowedFields    = ["pendaftaran_id", "nilai_akhir", "rangking", "jarak_meter", "status_seleksi", "created_at", "updated_at"];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -23,15 +23,15 @@ class M_Seleksi extends Model
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'dibuat_pada';
-    protected $updatedField  = '';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     protected $deletedField  = '';
 
     // Validation
     protected $validationRules      = [
         "pendaftaran_id" => 'required|integer',
-        "nilai_seleksi" => 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]',
-        "rangkis" => 'required|in_list[ya,tidak]',
+        "nilai_akhir" => 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]',
+        "rangking" => 'required|integer|min_length[1]',
         "status_seleksi" => 'required|in_list[lulus,gagal]',
         "jarak_meter" => 'required|numeric|greater_than_equal_to[0]'
     ];
@@ -40,15 +40,16 @@ class M_Seleksi extends Model
             "required" => 'ID pendaftaran wajib diisi.',
             "integer" => 'ID pendaftaran harus berupa angka bulat.'
         ],
-        "nilai_seleksi" => [
-            "required" => 'Nilai seleksi wajib diisi.',
-            "numeric" => 'Nilai seleksi harus berupa angka.',
-            "greater_than_equal_to" => 'Nilai seleksi tidak boleh kurang dari 0.',
-            "less_than_equal_to" => 'Nilai seleksi tidak boleh lebih dari 100.'
+        "nilai_akhir" => [
+            "required" => 'Nilai akhir wajib diisi.',
+            "numeric" => 'Nilai akhir harus berupa angka.',
+            "greater_than_equal_to" => 'Nilai akhir tidak boleh kurang dari 0.',
+            "less_than_equal_to" => 'Nilai akhir tidak boleh lebih dari 100.'
         ],
-        "rangkis" => [
-            "required" => 'Rangkis wajib diisi.',
-            "in_list" => 'Rangkis tidak valid.'
+        "rangking" => [
+            "required" => 'Rangking wajib diisi.',
+            "integer" => 'Rangking harus berupa angka bulat.',
+            "min_length" => 'Rangking tidak boleh kurang dari 1.'
         ],
         "status_seleksi" => [
             "required" => 'Status seleksi wajib diisi.',

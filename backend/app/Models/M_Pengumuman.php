@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_Pengumuman extends Model
+class M_pengumuman extends Model
 {
     protected $table            = 'pengumuman';
     protected $primaryKey       = 'id';
@@ -12,7 +12,7 @@ class M_Pengumuman extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['jalur_id', 'dibuat_oleh', 'tahun_ajaran_id', 'title', 'slug', 'deskripsi', 'tipe_pengumuman', 'status_pengumuman', 'tanggal_publish'];
+    protected $allowedFields    = ['jalur_id', 'dibuat_oleh', 'tahun_ajaran_id', 'judul', 'slug', 'content', 'kategori', 'thumbnail', 'tanggal_publish', 'status_publish', 'created_at', 'updated_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -23,8 +23,8 @@ class M_Pengumuman extends Model
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'tanggal_publish';
-    protected $updatedField  = '';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     protected $deletedField  = '';
 
     // Validation
@@ -34,9 +34,9 @@ class M_Pengumuman extends Model
         "tahun_ajaran_id" => 'required|integer',
         "title" => 'required|alpha_numeric_space|min_length[3]|max_length[255]',
         "slug" => 'required|alpha_numeric_dash|min_length[3]|max_length[255]|is_unique[pengumuman.slug]',
-        "deskripsi" => 'required|alpha_numeric_space|min_length[3]',
-        "tipe_pengumuman" => 'required|in_list[umum,khusus]',
-        "status_pengumuman" => 'required|in_list[draft,publish]'
+        "content" => 'required|alpha_numeric_space|min_length[3]',
+        "kategori" => 'required|in_list[umum,khusus]',
+        "status_publish" => 'required|in_list[draft,publish]'
     ];
     protected $validationMessages   = [
         "jalur_id" => [
@@ -67,13 +67,13 @@ class M_Pengumuman extends Model
             "required" => 'Deskripsi pengumuman wajib diisi.',
             "min_length" => 'Deskripsi pengumuman minimal 3 karakter.'
         ],
-        "tipe_pengumuman" => [
-            "required" => 'Tipe pengumuman wajib diisi.',
-            "in_list" => 'Tipe pengumuman tidak valid.'
+        "kategori" => [
+            "required" => 'Kategori pengumuman wajib diisi.',
+            "in_list" => 'Kategori pengumuman tidak valid.'
         ],
-        "status_pengumuman" => [
-            "required" => 'Status pengumuman wajib diisi.',
-            "in_list" => 'Status pengumuman tidak valid.'
+        "status_publish" => [
+            "required" => 'Status publish wajib diisi.',
+            "in_list" => 'Status publish tidak valid.'
         ]
     ];
     protected $skipValidation       = false;

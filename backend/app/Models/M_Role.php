@@ -3,22 +3,22 @@
 use CodeIgniter\Model;
 
 
-class M_Role extends Model{
+class M_role extends Model{
   protected $table = "role";
   protected $primaryKey = "id";
   protected $useAutoIncrement = true;
   protected $returnType = "array";
   protected $useSoftDeletes = false;
   protected $protectFields = true;
-  protected $allowedFields = ["nama_role", "deskripsi", "login_destinasi", "dibuat_pada"];
+  protected $allowedFields = ["nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at"];
   protected $allowEmptyInserts = false;
   protected $updateOnlyChanged = true;
   protected $casts = [];
   protected $castHandlers = [];
   protected $useTimestamps = true;
   protected $dateFormat = "datetime";
-  protected $createdField = "dibuat_pada";
-  protected $updatedField = "";
+  protected $createdField = "created_at";
+  protected $updatedField = "updated_at";
   protected $deletedField = "";
   protected $validationRules = [
     'nama_role' => 'required|alpha_numeric_space|min_length[3]|max_length[120]',

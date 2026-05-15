@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_User extends Model
+class M_user extends Model
 {
     protected $table            = 'user';
     protected $primaryKey       = 'id';
@@ -12,7 +12,7 @@ class M_User extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['role_id', 'username', 'email', 'password', 'dibuat_pada'];
+    protected $allowedFields    = ['role_id', 'siswa_id', 'username', 'email', 'password', 'last_login_at', 'is_active', 'created_at', 'updated_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -23,16 +23,19 @@ class M_User extends Model
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'dibuat_pada';
-    protected $updatedField  = '';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     protected $deletedField  = '';
 
     // Validation
     protected $validationRules      = [
         "role_id" => 'required|integer',
+        "siswa_id" => 'permit_empty|integer',
         "username" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
         "email" => 'required|valid_email|is_unique[user.email]|max_length[120]',
         "password" => 'required|min_length[6]|max_length[120]',
+        "last_login_at" => 'permit_empty|valid_date',
+        "is_active" => 'required|in_list[1,2]',
     ];
     protected $validationMessages   = [
         "email" => [

@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_Detail_siswa extends Model
+class M_data_orang_tua extends Model
 {
-    protected $table            = 'detail_siswa';
+    protected $table            = 'data_orang_tua';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['siswa_id', 'nama_ayah', 'pekerjaan_ayah', 'pendidikan_ayah', 'penghasilan_ayah', 'pendidikan_terakhir', 'nama_ibu', 'pekerjaan_ibu', 'penghasilan_ibu', 'pendidikan_terakhir', 'no_telp_aktif', 'dibuat_pada'];
+    protected $allowedFields    = ['siswa_id', 'nama_ayah', 'pekerjaan_ayah', 'penghasilan_ayah',  'pendidikan_ayah', 'nama_ibu', 'pekerjaan_ibu', 'penghasilan_ibu', 'pendidikan_ibu', 'no_telp_aktif', 'created_at', 'updated_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -23,8 +23,8 @@ class M_Detail_siswa extends Model
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'dibuat_pada';
-    protected $updatedField  = '';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     protected $deletedField  = '';
 
     // Validation
@@ -32,11 +32,12 @@ class M_Detail_siswa extends Model
         "siswa_id" => 'required|integer',
         "nama_ayah" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
         "pekerjaan_ayah" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
-        "pendidikan_ayah" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
         "penghasilan_ayah" => 'required|alpha_numeric_space|integer|min_length[3]|max_length[20]',
+        "pendidikan_ayah" => 'required|alpha_numeric_space|integer|min_length[3]|max_length[20]',
         "nama_ibu" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
         "pekerjaan_ibu" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
         "penghasilan_ibu" => 'required|alpha_numeric_space|integer|min_length[3]|max_length[20]',
+        "pendidikan_ibu" => 'required|alpha_numeric_space|integer|min_length[3]|max_length[20]',
         "no_telp_aktif" => 'required|alpha_numeric_space|integer|min_length[3]|max_length[30]',
     ];
     protected $validationMessages   = [
@@ -80,6 +81,11 @@ class M_Detail_siswa extends Model
             "integer" => 'Penghasilan ibu harus berupa angka.',
             "min_length" => 'Penghasilan ibu minimal 3 karakter.',
             "max_length" => 'Penghasilan ibu maksimal 20 karakter.'
+        ],
+        "pendidikan_ibu" => [
+            "required" => 'Pendidikan ibu wajib diisi.',
+            "min_length" => 'Pendidikan ibu minimal 3 karakter.',
+            "max_length" => 'Pendidikan ibu maksimal 120 karakter.'
         ],
         "no_telp_aktif" => [
             "required" => 'No. telp aktif wajib diisi.',
