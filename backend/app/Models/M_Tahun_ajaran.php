@@ -57,4 +57,27 @@ class M_tahun_ajaran extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+    public function getAllTahunAjaran(){
+        $this->select("tahun_ajaran as ta.*");
+        return $this->findAll();
+    }
+
+    public function getTahunAjaranById(int $id){
+        $this->select("tahun_ajaran as ta.*");
+        return $this->where("ta.id", $id)->first();
+    }
+
+    public function insertTahunAjaran(array $data){
+        $this->insert($data);
+    }
+
+    public function updateTahunAjaran(int $id, array $data){
+        $this->update($id, $data);
+    }
+
+    public function deleteTahunAjaran(int $id){
+        $this->delete($id);
+    }
 }
