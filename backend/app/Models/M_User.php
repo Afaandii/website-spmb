@@ -70,4 +70,22 @@ class M_user extends Model
         $this->join('role', 'role.id = user.role_id');
         return $this->findAll();
     }
+
+    public function getUserById(int $id){
+        $this->select("user as u.*", "role.nama_role");
+        $this->join("role as r", "r.id = u.role_id");
+        return $this->where("u.id", $id)->first();
+    }
+
+    public function insertUser(array $data){
+        $this->insert($data);
+    }
+
+    public function updateUser(int $id, array $data){
+        $this->update($id, $data);
+    }
+
+    public function deleteUser(int $id){
+        return $this->delete($id);
+    }
 }
