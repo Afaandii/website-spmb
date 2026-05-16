@@ -107,4 +107,28 @@ class M_data_orang_tua extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getAllDataOrangTua(){
+        $this->select('data_orang_tua.*, siswa.nama_siswa');
+        $this->join('siswa', 'data_orang_tua.siswa_id = siswa.id');
+        return $this->findAll();
+    }
+
+    public function getDataOrangTuaById(int $id){
+        $this->select('data_orang_tua.*, siswa.nama_siswa');
+        $this->join('siswa', 'data_orang_tua.siswa_id = siswa.id');
+        return $this->where('data_orang_tua.id', $id)->first();
+    }
+
+    public function insertDataOrangTua(array $data){
+        $this->insert($data);
+    }
+
+    public function updateDataOrangTua(int $id, array $data){
+        $this->update($id, $data);
+    }
+
+    public function deleteDataOrangTua(int $id){
+        $this->delete($id);
+    }
 }

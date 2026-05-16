@@ -68,4 +68,26 @@ class M_sekolah_asal extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getAllSekolahAsal(){
+        $this->select("sekolah_asal as sa.*");
+        return $this->findAll();
+    }
+
+    public function getSekolahAsalById(int $id){
+        $this->select("sekolah_asal as sa.*");
+        return $this->where("sa.id", $id)->first();
+    }
+
+    public function insertSekolahAsal(array $data){
+        $this->insert($data);
+    }
+
+    public function updateSekolahAsal(int $id, array $data){
+        $this->update($id, $data);
+    }
+
+    public function deleteSekolahAsal(int $id){
+        $this->delete($id);
+    }
 }

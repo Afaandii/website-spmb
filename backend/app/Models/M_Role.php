@@ -44,8 +44,26 @@ class M_role extends Model{
   protected $afterFind = [];
   protected $beforeDelete = [];
   protected $afterDelete = [];
+
+  public function getAllRole(){
+    return $this->findAll();
+  }
+
+  public function getRoleById(int $id){
+    return $this->find($id);
+  }
+
+  public function createRole(array $data){
+    return $this->insert($data);
+  }
+
+  public function updateRole(int $id, array $data){
+    return $this->update($id, $data);
+  }
+
+  public function deleteRole(int $id){
+    return $this->delete($id);
+  }
 }
-
-
 
 ?>

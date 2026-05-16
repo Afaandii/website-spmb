@@ -74,4 +74,32 @@ class M_seleksi extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getAllSeleksi(){
+        $this->select("seleksi as s.*, pendaftaran as p.*, siswa as sw.*, tahun_ajaran as ta.*");
+        $this->join("pendaftaran as p", "p.id = s.pendaftaran_id");
+        $this->join("siswa as sw", "sw.id = p.siswa_id");
+        $this->join("tahun_ajaran as ta", "ta.id = p.tahun_ajaran_id");
+        return $this->findAll();
+    }
+
+    public function getSeleksiById(int $id){
+        $this->select("seleksi as s.*, pendaftaran as p.*, siswa as sw.*, tahun_ajaran as ta.*");
+        $this->join("pendaftaran as p", "p.id = s.pendaftaran_id");
+        $this->join("siswa as sw", "sw.id = p.siswa_id");
+        $this->join("tahun_ajaran as ta", "ta.id = p.tahun_ajaran_id");
+        return $this->where("s.id", $id)->first();
+    }
+
+    public function insertSeleksi(array $data){
+        $this->insert($data);
+    }
+
+    public function updateSeleksi(int $id, array $data){
+        $this->update($id, $data);
+    }
+
+    public function deleteSeleksi(int $id){
+        $this->delete($id);
+    }
 }
