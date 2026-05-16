@@ -86,6 +86,6 @@ class M_user extends Model
     }
 
     public function deleteUser(int $id){
-        return $this->delete($id);
+         $this->delete($id);
     }
 }

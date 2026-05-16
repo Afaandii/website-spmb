@@ -66,4 +66,26 @@ class M_siswa extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getAllSiswa(){
+        $this->select("siswa as s.*");
+        return $this->findAll();
+    }
+
+    public function getSiswaById(int $id){
+        $this->select("siswa as s.*");
+        return $this->where("s.id", $id)->first();
+    }
+
+    public function insertSiswa(array $data){
+        $this->insert($data);
+    }
+
+    public function updateSiswa(int $id, array $data){
+        $this->update($id, $data);
+    }
+
+    public function deleteSiswa(int $id){
+        $this->delete($id);
+    }
 }

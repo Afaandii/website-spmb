@@ -89,4 +89,32 @@ class M_pengumuman extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getAllPengumuman(){
+        $this->select("pengumuman as p.*, jalur_pendaftaran as jp.*, tahun_ajaran as ta.*, users as u.*");
+        $this->join("jalur_pendaftaran as jp", "jp.id = p.jalur_id");
+        $this->join("tahun_ajaran as ta", "ta.id = p.tahun_ajaran_id");
+        $this->join("users as u", "u.id = p.dibuat_oleh");
+        return $this->findAll();
+    }
+
+    public function getPengumumanById(int $id){
+        $this->select("pengumuman as p.*, jalur_pendaftaran as jp.*, tahun_ajaran as ta.*, users as u.*");
+        $this->join("jalur_pendaftaran as jp", "jp.id = p.jalur_id");
+        $this->join("tahun_ajaran as ta", "ta.id = p.tahun_ajaran_id");
+        $this->join("users as u", "u.id = p.dibuat_oleh");
+        return $this->where("p.id", $id)->first();
+    }
+
+    public function insertPengumuman(array $data){
+        $this->insert($data);
+    }
+
+    public function updatePengumuman(int $id, array $data){
+        $this->update($id, $data);
+    }
+
+    public function deletePengumuman(int $id){
+        $this->delete($id);
+    }
 }
