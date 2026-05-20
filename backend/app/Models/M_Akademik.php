@@ -12,7 +12,14 @@ class M_akademik extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['pendaftaran_id', 'tahun_ajaran_id', 'semester', 'nilai_rata_rata', 'created_at', 'updated_at'];
+    protected $allowedFields    = [
+        'pendaftaran_id', 
+        'tahun_ajaran_id', 
+        'semester', 
+        'nilai_rata_rata', 
+        'created_at', 
+        'updated_at'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -54,19 +61,6 @@ class M_akademik extends Model
             "less_than_equal_to" => 'Nilai rata-rata tidak boleh lebih dari 100.'
         ]
     ];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 
     public function getAllAkademik(){
         $this->select("akademik as ak.*, pendaftaran.kode_registrasi, tahun_ajaran.tahun");

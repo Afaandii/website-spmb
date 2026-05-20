@@ -12,7 +12,20 @@ class M_prestasi extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["pendaftaran_id", "nama_prestasi", "jenis_prestasi", "tingkat_lomba", "keterangan_prestasi", "skor_tambahan", "sertifikat_path", "diverifikasi_oleh", "status_validasi", "tanggal_validasi", "created_at", "updated_at"];
+    protected $allowedFields    = [
+        "pendaftaran_id", 
+        "nama_prestasi", 
+        "jenis_prestasi", 
+        "tingkat_lomba", 
+        "keterangan_prestasi", 
+        "skor_tambahan", 
+        "sertifikat_path", 
+        "diverifikasi_oleh", 
+        "status_validasi", 
+        "tanggal_validasi", 
+        "created_at", 
+        "updated_at"
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -40,20 +53,6 @@ class M_prestasi extends Model
         "status_validasi" => 'permit_empty|in_list[belum diverifikasi,valid,tidak valid]',
         "tanggal_validasi" => 'permit_empty|valid_date'
     ];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 
     public function getAllPrestasi(){
         $this->select('prestasi.*, pendaftaran.siswa_id');

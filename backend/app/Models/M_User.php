@@ -12,7 +12,17 @@ class M_user extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['role_id', 'siswa_id', 'username', 'email', 'password', 'last_login_at', 'is_active', 'created_at', 'updated_at'];
+    protected $allowedFields    = [
+        'role_id', 
+        'siswa_id', 
+        'username', 
+        'email', 
+        'password', 
+        'last_login_at', 
+        'is_active', 
+        'created_at', 
+        'updated_at'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -42,19 +52,6 @@ class M_user extends Model
             "is_unique" => 'Email sudah digunakan sebelumnya, mohon gunakan email lain.',
         ],
     ];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = ['hashPassword'];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = ['hashPassword'];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 
 
     public function hashPassword(array $data)
