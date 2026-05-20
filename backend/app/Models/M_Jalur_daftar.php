@@ -12,7 +12,17 @@ class M_jalur_daftar extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nama_jalur', 'tipe_seleksi', 'kuota', 'metode_perankingan', 'tanggal_mulai', 'tanggal_selesai', 'is_active', 'created_at', 'updated_at'];
+    protected $allowedFields    = [
+        'nama_jalur', 
+        'tipe_seleksi', 
+        'kuota', 
+        'metode_perankingan', 
+        'tanggal_mulai', 
+        'tanggal_selesai', 
+        'is_active', 
+        'created_at', 
+        'updated_at'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -69,19 +79,6 @@ class M_jalur_daftar extends Model
             'in_list' => 'Status aktif tidak valid.'
         ]
     ];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 
     public function getAllJalurDaftar(){
         return $this->findAll();

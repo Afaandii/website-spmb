@@ -12,7 +12,20 @@ class M_data_orang_tua extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['siswa_id', 'nama_ayah', 'pekerjaan_ayah', 'penghasilan_ayah',  'pendidikan_ayah', 'nama_ibu', 'pekerjaan_ibu', 'penghasilan_ibu', 'pendidikan_ibu', 'no_telp_aktif', 'created_at', 'updated_at'];
+    protected $allowedFields    = [
+        'siswa_id', 
+        'nama_ayah', 
+        'pekerjaan_ayah', 
+        'penghasilan_ayah',  
+        'pendidikan_ayah', 
+        'nama_ibu', 
+        'pekerjaan_ibu', 
+        'penghasilan_ibu', 
+        'pendidikan_ibu', 
+        'no_telp_aktif', 
+        'created_at', 
+        'updated_at'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -94,19 +107,6 @@ class M_data_orang_tua extends Model
             "max_length" => 'No. telp aktif maksimal 30 karakter.'
         ],
     ];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 
     public function getAllDataOrangTua(){
         $this->select('data_orang_tua.*, siswa.nama_siswa');

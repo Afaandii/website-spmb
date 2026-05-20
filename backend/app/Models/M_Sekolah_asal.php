@@ -12,7 +12,14 @@ class M_sekolah_asal extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['npsn', 'nama_sekolah', 'jenjang_sekolah', 'alamat_sekolah', 'created_at', 'updated_at'];
+    protected $allowedFields    = [
+     'npsn',
+     'nama_sekolah', 
+     'jenjang_sekolah',
+     'alamat_sekolah',
+     'created_at',
+     'updated_at'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -55,19 +62,6 @@ class M_sekolah_asal extends Model
             'in_list' => 'Jenjang sekolah tidak valid.'
         ]
     ];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 
     public function getAllSekolahAsal(){
         $this->select("sekolah_asal as sa.*");

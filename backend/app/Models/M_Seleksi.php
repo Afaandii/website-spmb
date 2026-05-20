@@ -12,7 +12,15 @@ class M_seleksi extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["pendaftaran_id", "nilai_akhir", "rangking", "jarak_meter", "status_seleksi", "created_at", "updated_at"];
+    protected $allowedFields    = [
+        "pendaftaran_id",
+        "nilai_akhir",
+        "rangking",
+        "jarak_meter",
+        "status_seleksi",
+        "created_at",
+        "updated_at"
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -61,19 +69,6 @@ class M_seleksi extends Model
             "greater_than_equal_to" => 'Jarak meter tidak boleh kurang dari 0.'
         ]
     ];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 
     public function getAllSeleksi(){
         $this->select("seleksi as s.*, pendaftaran as p.*, siswa as sw.*, tahun_ajaran as ta.*");

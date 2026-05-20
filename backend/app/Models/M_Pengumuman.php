@@ -12,7 +12,20 @@ class M_pengumuman extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['jalur_id', 'dibuat_oleh', 'tahun_ajaran_id', 'judul', 'slug', 'content', 'kategori', 'thumbnail', 'tanggal_publish', 'status_publish', 'created_at', 'updated_at'];
+    protected $allowedFields    = [
+        'jalur_id', 
+        'dibuat_oleh', 
+        'tahun_ajaran_id', 
+        'judul', 
+        'slug', 
+        'content', 
+        'kategori', 
+        'thumbnail', 
+        'tanggal_publish', 
+        'status_publish', 
+        'created_at', 
+        'updated_at'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -32,7 +45,7 @@ class M_pengumuman extends Model
         "jalur_id" => 'required|integer',
         "dibuat_oleh" => 'required|integer',
         "tahun_ajaran_id" => 'required|integer',
-        "title" => 'required|alpha_numeric_space|min_length[3]|max_length[255]',
+        "judul" => 'required|alpha_numeric_space|min_length[3]|max_length[255]',
         "slug" => 'required|alpha_numeric_dash|min_length[3]|max_length[255]|is_unique[pengumuman.slug]',
         "content" => 'required|alpha_numeric_space|min_length[3]',
         "kategori" => 'required|in_list[umum,khusus]',
@@ -51,7 +64,7 @@ class M_pengumuman extends Model
             "required" => 'ID tahun ajaran wajib diisi.',
             "integer" => 'ID tahun ajaran harus berupa angka bulat.'
         ],
-        "title" => [
+        "judul" => [
             "required" => 'Judul pengumuman wajib diisi.',
             "min_length" => 'Judul pengumuman minimal 3 karakter.',
             "max_length" => 'Judul pengumuman maksimal 255 karakter.'
@@ -63,9 +76,9 @@ class M_pengumuman extends Model
             "max_length" => 'Slug pengumuman maksimal 255 karakter.',
             "is_unique" => 'Slug pengumuman sudah digunakan sebelumnya, mohon gunakan slug lain.'
         ],
-        "deskripsi" => [
-            "required" => 'Deskripsi pengumuman wajib diisi.',
-            "min_length" => 'Deskripsi pengumuman minimal 3 karakter.'
+        "content" => [
+            "required" => 'Isi pengumuman wajib diisi.',
+            "min_length" => 'Isi pengumuman minimal 3 karakter.'
         ],
         "kategori" => [
             "required" => 'Kategori pengumuman wajib diisi.',
@@ -76,19 +89,6 @@ class M_pengumuman extends Model
             "in_list" => 'Status publish tidak valid.'
         ]
     ];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 
     public function getAllPengumuman(){
         $this->select("pengumuman as p.*, jalur_pendaftaran as jp.*, tahun_ajaran as ta.*, users as u.*");

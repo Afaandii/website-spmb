@@ -12,7 +12,17 @@ class M_dokumen extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["pendaftaran_id", "jenis_dokumen", "file_path", "status_verifikasi", "keterangan_dokumen", "mimes_type", "ukuran_file", "created_at","updated_at"];
+    protected $allowedFields    = [
+        "pendaftaran_id", 
+        "jenis_dokumen", 
+        "file_path", 
+        "status_verifikasi", 
+        "keterangan_dokumen", 
+        "mimes_type", 
+        "ukuran_file", 
+        "created_at",
+        "updated_at"
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -67,19 +77,6 @@ class M_dokumen extends Model
             "integer" => 'Ukuran file harus berupa angka bulat.'
         ]
     ];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 
     public function getAllDokumen(){
         $this->select('dokumen.*, pendaftaran.siswa_id');

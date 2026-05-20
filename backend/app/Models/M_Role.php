@@ -10,7 +10,13 @@ class M_role extends Model{
   protected $returnType = "array";
   protected $useSoftDeletes = false;
   protected $protectFields = true;
-  protected $allowedFields = ["nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at"];
+  protected $allowedFields = [
+    "nama_role", 
+    "deskripsi", 
+    "login_destinasi",
+    "created_at", 
+    "updated_at"
+  ];
   protected $allowEmptyInserts = false;
   protected $updateOnlyChanged = true;
   protected $casts = [];
@@ -33,17 +39,6 @@ class M_role extends Model{
       'max_length' => 'Nama role maksimal 120 karakter.',
     ],
   ];
-  protected $skipValidation = false;
-  protected $cleanValidationRules = true;
-  protected $allowCallbacks = true;
-  protected $beforeInsert = [];
-  protected $afterInsert = [];
-  protected $beforeUpdate = [];
-  protected $afterUpdate = [];
-  protected $beforeFind = [];
-  protected $afterFind = [];
-  protected $beforeDelete = [];
-  protected $afterDelete = [];
 
   public function getAllRole(){
     return $this->findAll();

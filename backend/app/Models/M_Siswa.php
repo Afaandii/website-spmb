@@ -12,7 +12,22 @@ class M_siswa extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nik', 'nisn', 'npsn', 'nama_lengkap', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'agama', 'alamat', 'no_telp', 'latitude', 'longitude', 'created_at', 'updated_at'];
+    protected $allowedFields    = [
+        'nik', 
+        'nisn', 
+        'npsn', 
+        'nama_lengkap', 
+        'tempat_lahir', 
+        'tanggal_lahir', 
+        'jenis_kelamin', 
+        'agama', 
+        'alamat', 
+        'no_telp', 
+        'latitude', 
+        'longitude', 
+        'created_at', 
+        'updated_at'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -53,19 +68,6 @@ class M_siswa extends Model
             "is_unique" => 'NPSN sudah digunakan sebelumnya, mohon gunakan NPSN lain.',
         ],
     ];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 
     public function getAllSiswa(){
         $this->select("siswa as s.*");
