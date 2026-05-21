@@ -34,7 +34,12 @@ class Akademik extends Migration
                 'constraint' => '5,2',
                 'null' => true,
             ],
-            "dibuat_pada" => [
+            "created_at" => [
+                'type' => 'timestamp',
+                'null' => true,
+                'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),
+            ],
+            "updated_at" => [
                 'type' => 'timestamp',
                 'null' => true,
                 'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),

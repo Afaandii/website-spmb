@@ -27,16 +27,21 @@ class Seleksi extends Migration
                 'type' => 'INT',
                 'null' => true,
             ],
-            "status_akhir" => [
-                'type' => 'varchar',
-                'constraint' => 255,
-                'null' => true,
-            ],
             "jarak_meter" => [
                 'type' => 'INT',
                 'null' => true,
             ],
-            "dibuat_pada" => [
+            "status_seleksi" => [
+                'type' => 'varchar',
+                'constraint' => 255,
+                'null' => true,
+            ],
+            "created_at" => [
+                'type' => 'timestamp',
+                'null' => true,
+                'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),
+            ],
+            "updated_at" => [
                 'type' => 'timestamp',
                 'null' => true,
                 'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),

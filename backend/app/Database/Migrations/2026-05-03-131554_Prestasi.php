@@ -46,7 +46,26 @@ class Prestasi extends Migration
                 'type' => 'TEXT',
                 'null' => true,
             ],
-            "dibuat_pada" => [
+            "diverifikasi_oleh" => [
+                'type' => 'varchar',
+                'constraint' => 255,
+                 'null' => true,
+            ],
+            "status_validasi" => [
+                'type' => 'varchar',
+                'constraint' => 255,
+                'null' => true,
+            ],
+            "tanggal_validasi" => [
+                'type' => 'date',
+                'null' => true,
+            ],
+            "created_at" => [
+                'type' => 'timestamp',
+                'null' => true,
+                'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),
+            ],
+            "updated_at" => [
                 'type' => 'timestamp',
                 'null' => true,
                 'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),

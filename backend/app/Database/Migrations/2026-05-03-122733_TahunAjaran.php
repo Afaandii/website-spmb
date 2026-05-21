@@ -20,11 +20,21 @@ class TahunAjaran extends Migration
                 'constraint' => 255,
                 'null' => true,
             ],
-            'dibuat_pada' => [
+            'status' => [
+                'type' => 'varchar',
+                'constraint' => 255,
+                'null' => true,
+            ],
+            'created_at' => [
                 'type' => 'timestamp',
                 'null' => true,
                 'default' => new RawSql('CURRENT_TIMESTAMP'),
-            ]
+            ],
+            'updated_at' => [
+                'type' => 'timestamp',
+                'null' => true,
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('tahun_ajaran');
