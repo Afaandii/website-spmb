@@ -30,11 +30,16 @@ class Role extends Migration
                 'constraint' => 255,
                 'null' => true,
             ],
-            'dibuat_pada' => [
+            'created_at' => [
                 'type' => 'timestamp',
                 'default' => new RawSql('CURRENT_TIMESTAMP'),
                 'null' => true,
-            ]
+            ],
+            'updated_at' => [
+                'type' => 'timestamp',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+                'null' => true,
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('role');
