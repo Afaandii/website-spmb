@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-class DetailSiswa extends BaseController
+class DataOrangTua extends BaseController
 {
     public function index()
     {
