@@ -30,16 +30,33 @@ class JalurDaftar extends Migration
                 'unsigned' => true,
                 'null' => true,
             ],
-            'deskripsi' => [
+            'metode_perankingan' => [
                 'type' => 'varchar',
                 'constraint' => 255,
                 'null' => true,
             ],
-            'dibuat_pada' => [
+            'tanggal_mulai' => [
+                'type' => 'date',
+                'null' => true,
+            ],
+            'tanggal_selesai' => [
+                'type' => 'date',
+                'null' => true,
+            ],
+            'is_active' => [
+                'type' => 'boolean',
+                'default' => true,
+            ],
+            'created_at' => [
                 'type' => 'timestamp',
                 'null' => true,
                 'default' => new RawSql('CURRENT_TIMESTAMP'),
-            ]
+            ],
+            'updated_at' => [
+                'type' => 'timestamp',
+                'null' => true,
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('jalur_daftar');

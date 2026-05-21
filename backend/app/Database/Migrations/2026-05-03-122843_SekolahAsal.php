@@ -14,11 +14,6 @@ class SekolahAsal extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            "siswa_id" => [
-                'type' => 'INT',
-                'unsigned' => true,
-                'null' => false,
-            ],
             'npsn' => [
                 'type' => 'varchar',
                 'constraint' => 255,
@@ -30,24 +25,28 @@ class SekolahAsal extends Migration
                 'constraint' => 255,
                 'null' => true,
             ],
+            'jenjang_sekolah' => [
+                'type' => 'varchar',
+                'constraint' => 255,
+                'null' => true,
+            ],
             'alamat_sekolah' => [
                 'type' => 'varchar',
                 'constraint' => 255,
                 'null' => true,
             ],
-            "tingkat_sekolah" => [
-                'type' => 'varchar',
-                'constraint' => 255,
-                'null' => true,
-            ],
-            "dibuat_pada" => [
+            "created_at" => [
                 'type' => 'timestamp',
                 'null' => true,
                 'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),
-            ]
+            ],
+            'updated_at' => [
+                'type' => 'timestamp',
+                'null' => true,
+                'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),
+            ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('siswa_id', 'siswa', 'id', 'CASCADE', 'RESTRICT');
         $this->forge->createTable('sekolah_asal');
     }
 

@@ -29,7 +29,7 @@ class Pengumuman extends Migration
                 'unsigned' => true,
                 'null' => false,
             ],
-            "title" => [
+            "judul" => [
                 'type' => 'varchar',
                 'constraint' => 255,
                 'null' => true,
@@ -39,13 +39,21 @@ class Pengumuman extends Migration
                 'constraint' => 255,
                 'null' => true,
             ],
-            "deskripsi" => [
+            "content" => [
                 'type' => 'TEXT',
                 'null' => true,
             ],
-            "tipe_pengumuman" => [
+            "kategori" => [
                 'type' => 'varchar',
                 'constraint' => 255,
+                'null' => true,
+            ],
+            'thumbnail' => [
+                'type' => 'TEXT',
+                'null' => true,
+            ],
+            "tanggal_publish" => [
+                'type' => 'date',
                 'null' => true,
             ],
             "status_pengumuman" => [
@@ -53,10 +61,16 @@ class Pengumuman extends Migration
                 'constraint' => 255,
                 'null' => true,
             ],
-            "tanggal_publish" => [
-                'type' => 'date',
+            "created_at" => [
+                'type' => 'timestamp',
                 'null' => true,
-            ]
+                'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),
+            ],
+            "updated_at" => [
+                'type' => 'timestamp',
+                'null' => true,
+                'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('jalur_id', 'jalur_daftar', 'id', 'CASCADE', 'RESTRICT');

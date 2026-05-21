@@ -5,7 +5,7 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use Codeigniter\Database\RawSql;
 
-class DetailSiswa extends Migration
+class DataOrangTua extends Migration
 {
     public function up()
     {
@@ -65,7 +65,12 @@ class DetailSiswa extends Migration
                 'unsigned' => true,
                 'null' => false,
             ],
-            "dibuat_pada" => [
+            "created_at" => [
+                'type' => 'timestamp',
+                'null' => true,
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            "updated_at" => [
                 'type' => 'timestamp',
                 'null' => true,
                 'default' => new RawSql('CURRENT_TIMESTAMP'),
@@ -73,11 +78,11 @@ class DetailSiswa extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('siswa_id', 'siswa', 'id', 'CASCADE', 'RESTRICT');
-        $this->forge->createTable('detail_siswa');
+        $this->forge->createTable('data_orang_tua');
     }
 
     public function down()
     {
-        $this->forge->dropTable('detail_siswa');
+        $this->forge->dropTable('data_orang_tua');
     }
 }

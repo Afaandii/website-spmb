@@ -19,6 +19,10 @@ class User extends Migration
                 'type' => 'INT',
                 'unsigned' => true,
             ],
+            'siswa_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
+            ],
             'username' => [
                 'type' => 'varchar',
                 'constraint' => 255,
@@ -35,14 +39,28 @@ class User extends Migration
                 'constraint' => 255,
                 'null' => true,
             ],
-            'dibuat_pada' => [
+            'last_login_at' => [
+                'type' => 'timestamp',
+                'null' => true,
+            ],
+            'is_active' => [
+                'type' => 'boolean',
+                'default' => true,
+            ],
+            'created_at' => [
                 'type' => 'timestamp',
                 'default' => new RawSql('CURRENT_TIMESTAMP'),
                 "null" => true,
-            ]
+            ],
+            'updated_at' => [
+                'type' => 'timestamp',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+                "null" => true,
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('role_id', 'role', 'id', 'CASCADE', 'RESTRICT');
+        $this->forge->addForeignKey('siswa_id', 'siswa', 'id', 'CASCADE', 'RESTRICT');
         $this->forge->createTable('user');
     }
 

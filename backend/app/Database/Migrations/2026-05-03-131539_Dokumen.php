@@ -37,7 +37,22 @@ class Dokumen extends Migration
                 'type' => 'TEXT',
                 'null' => true,
             ],
-            "dibuat_pada" => [
+            "mimes_type" => [
+                'type' => 'varchar',
+                'constraint' => 255,
+                'null' => true,
+            ],
+            "ukuran_file" => [
+                'type' => 'INT',
+                'unsigned' => true,
+                'null' => true,
+            ],
+            "created_at" => [
+                'type' => 'timestamp',
+                'null' => true,
+                'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),
+            ],
+            "updated_at" => [
                 'type' => 'timestamp',
                 'null' => true,
                 'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),

@@ -71,12 +71,17 @@ class Siswa extends Migration
                 'constraint' => '10,8',
                 'null' => true,
             ],
-            "longlatitude" => [
+            "longitude" => [
                 'type' => 'decimal',
                 'constraint' => '10,8',
                 'null' => true,
             ],
-            "dibuat_pada" => [
+            "created_at" => [
+                'type' => 'timestamp',
+                'null' => true,
+                'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),
+            ],
+            "updated_at" => [
                 'type' => 'timestamp',
                 'null' => true,
                 'default' => new \CodeIgniter\Database\RawSql('CURRENT_TIMESTAMP'),
