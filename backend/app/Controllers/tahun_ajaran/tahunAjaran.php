@@ -12,7 +12,7 @@ class TahunAjaran extends BaseController
     /**
      * @var M_tahun_ajaran
      */
-    protected $model;
+    private $model;
     protected $format = 'json';
 
     public function __construct()
