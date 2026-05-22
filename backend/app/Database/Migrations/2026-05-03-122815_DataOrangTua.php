@@ -3,7 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-use Codeigniter\Database\RawSql;
+use CodeIgniter\Database\RawSql;
 
 class DataOrangTua extends Migration
 {
@@ -62,7 +62,7 @@ class DataOrangTua extends Migration
             ],
             "no_telp_aktif" => [
                 'type' => 'INT',
-                'unsigned' => true,
+                'unsigned' => false,
                 'null' => false,
             ],
             "created_at" => [

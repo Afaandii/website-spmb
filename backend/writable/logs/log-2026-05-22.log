@@ -1,0 +1,989 @@
+ERROR - 2026-05-22 11:36:38 --> pg_query(): Query failed: ERROR:  relation "role" already exists
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "role" (
+	"id" SERIAL NOT NULL,
+	"nama_role" varchar(255) NULL,
+	"deskripsi" varchar(255) NULL,
+	"login_destinasi" varchar(255) NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_role" PRIMARY KEY("id")
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "role" (
+	"id" SERIAL NOT NULL,
+	"nama_role" varchar(255) NULL,
+	"deskripsi" varchar(255) NULL,
+	"login_destinasi" varchar(255) NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_role" PRIMARY KEY("id")
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "role" (
+	"id" SERIAL NOT NULL,
+	"nama_role" varchar(255) NULL,
+	"deskripsi" varchar(255) NULL,
+	"login_destinasi" varchar(255) NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_role" PRIMARY KEY("id")
+)')
+ 4 APPPATH\Database\Migrations\2026-05-02-131846_Role.php(45): CodeIgniter\Database\Forge->createTable('role')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\Role->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([...])
+11 SYSTEMPATH\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', [...])
+12 SYSTEMPATH\Commands\Database\MigrateRefresh.php(91): CodeIgniter\CLI\BaseCommand->call('migrate', [...])
+13 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\MigrateRefresh->{closure:CodeIgniter\Commands\Database\MigrateRefresh::run():89}()
+14 SYSTEMPATH\Commands\Database\MigrateRefresh.php(89): CodeIgniter\Commands\Database\MigrateRefresh->withSignalsBlocked(Object(Closure))
+15 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run([...])
+16 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', [])
+17 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+18 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+19 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 11:40:37 --> pg_query(): Query failed: ERROR:  relation "siswa" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-02-131847_User.php(64): CodeIgniter\Database\Forge->createTable('user')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\User->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 11:47:28 --> pg_query(): Query failed: ERROR:  relation "siswa" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-02-131847_User.php(64): CodeIgniter\Database\Forge->createTable('user')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\User->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 11:48:29 --> pg_query(): Query failed: ERROR:  relation "siswa" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-02-131847_User.php(64): CodeIgniter\Database\Forge->createTable('user')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\User->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 11:49:10 --> pg_query(): Query failed: ERROR:  relation "sekolah_asal" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "pendaftaran" (
+	"id" SERIAL NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"sekolah_asal_id" INT NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"kode_registrasi" varchar(255) NOT NULL UNIQUE,
+	"status_daftar" varchar(255) NULL,
+	"tanggal_daftar" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_pendaftaran" PRIMARY KEY("id"),
+	CONSTRAINT "pendaftaran_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_sekolah_asal_id_foreign" FOREIGN KEY ("sekolah_asal_id") REFERENCES "sekolah_asal"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "pendaftaran" (
+	"id" SERIAL NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"sekolah_asal_id" INT NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"kode_registrasi" varchar(255) NOT NULL UNIQUE,
+	"status_daftar" varchar(255) NULL,
+	"tanggal_daftar" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_pendaftaran" PRIMARY KEY("id"),
+	CONSTRAINT "pendaftaran_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_sekolah_asal_id_foreign" FOREIGN KEY ("sekolah_asal_id") REFERENCES "sekolah_asal"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "pendaftaran" (
+	"id" SERIAL NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"sekolah_asal_id" INT NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"kode_registrasi" varchar(255) NOT NULL UNIQUE,
+	"status_daftar" varchar(255) NULL,
+	"tanggal_daftar" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_pendaftaran" PRIMARY KEY("id"),
+	CONSTRAINT "pendaftaran_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_sekolah_asal_id_foreign" FOREIGN KEY ("sekolah_asal_id") REFERENCES "sekolah_asal"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-122831_Pendaftaran.php(69): CodeIgniter\Database\Forge->createTable('pendaftaran')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\Pendaftaran->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([...])
+11 SYSTEMPATH\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', [...])
+12 SYSTEMPATH\Commands\Database\MigrateRefresh.php(91): CodeIgniter\CLI\BaseCommand->call('migrate', [...])
+13 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\MigrateRefresh->{closure:CodeIgniter\Commands\Database\MigrateRefresh::run():89}()
+14 SYSTEMPATH\Commands\Database\MigrateRefresh.php(89): CodeIgniter\Commands\Database\MigrateRefresh->withSignalsBlocked(Object(Closure))
+15 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run([...])
+16 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', [])
+17 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+18 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+19 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 11:50:06 --> pg_query(): Query failed: ERROR:  relation "user" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "pengumuman" (
+	"id" SERIAL NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"dibuat_oleh" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"judul" varchar(255) NULL,
+	"slug" varchar(255) NULL,
+	"content" TEXT NULL,
+	"kategori" varchar(255) NULL,
+	"thumbnail" TEXT NULL,
+	"tanggal_publish" date NULL,
+	"status_pengumuman" varchar(255) NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_pengumuman" PRIMARY KEY("id"),
+	CONSTRAINT "pengumuman_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pengumuman_dibuat_oleh_foreign" FOREIGN KEY ("dibuat_oleh") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pengumuman_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "pengumuman" (
+	"id" SERIAL NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"dibuat_oleh" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"judul" varchar(255) NULL,
+	"slug" varchar(255) NULL,
+	"content" TEXT NULL,
+	"kategori" varchar(255) NULL,
+	"thumbnail" TEXT NULL,
+	"tanggal_publish" date NULL,
+	"status_pengumuman" varchar(255) NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_pengumuman" PRIMARY KEY("id"),
+	CONSTRAINT "pengumuman_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pengumuman_dibuat_oleh_foreign" FOREIGN KEY ("dibuat_oleh") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pengumuman_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "pengumuman" (
+	"id" SERIAL NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"dibuat_oleh" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"judul" varchar(255) NULL,
+	"slug" varchar(255) NULL,
+	"content" TEXT NULL,
+	"kategori" varchar(255) NULL,
+	"thumbnail" TEXT NULL,
+	"tanggal_publish" date NULL,
+	"status_pengumuman" varchar(255) NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_pengumuman" PRIMARY KEY("id"),
+	CONSTRAINT "pengumuman_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pengumuman_dibuat_oleh_foreign" FOREIGN KEY ("dibuat_oleh") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pengumuman_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-122936_Pengumuman.php(79): CodeIgniter\Database\Forge->createTable('pengumuman')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\Pengumuman->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([...])
+11 SYSTEMPATH\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', [...])
+12 SYSTEMPATH\Commands\Database\MigrateRefresh.php(91): CodeIgniter\CLI\BaseCommand->call('migrate', [...])
+13 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\MigrateRefresh->{closure:CodeIgniter\Commands\Database\MigrateRefresh::run():89}()
+14 SYSTEMPATH\Commands\Database\MigrateRefresh.php(89): CodeIgniter\Commands\Database\MigrateRefresh->withSignalsBlocked(Object(Closure))
+15 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run([...])
+16 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', [])
+17 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+18 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+19 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 11:51:10 --> pg_query(): Query failed: ERROR:  relation "role" already exists
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "role" (
+	"id" SERIAL NOT NULL,
+	"nama_role" varchar(255) NULL,
+	"deskripsi" varchar(255) NULL,
+	"login_destinasi" varchar(255) NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_role" PRIMARY KEY("id")
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "role" (
+	"id" SERIAL NOT NULL,
+	"nama_role" varchar(255) NULL,
+	"deskripsi" varchar(255) NULL,
+	"login_destinasi" varchar(255) NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_role" PRIMARY KEY("id")
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "role" (
+	"id" SERIAL NOT NULL,
+	"nama_role" varchar(255) NULL,
+	"deskripsi" varchar(255) NULL,
+	"login_destinasi" varchar(255) NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_role" PRIMARY KEY("id")
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-131846_Role.php(45): CodeIgniter\Database\Forge->createTable('role')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\Role->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([...])
+11 SYSTEMPATH\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', [...])
+12 SYSTEMPATH\Commands\Database\MigrateRefresh.php(91): CodeIgniter\CLI\BaseCommand->call('migrate', [...])
+13 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\MigrateRefresh->{closure:CodeIgniter\Commands\Database\MigrateRefresh::run():89}()
+14 SYSTEMPATH\Commands\Database\MigrateRefresh.php(89): CodeIgniter\Commands\Database\MigrateRefresh->withSignalsBlocked(Object(Closure))
+15 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run([...])
+16 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', [])
+17 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+18 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+19 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 11:51:42 --> pg_query(): Query failed: ERROR:  relation "role" already exists
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "role" (
+	"id" SERIAL NOT NULL,
+	"nama_role" varchar(255) NULL,
+	"deskripsi" varchar(255) NULL,
+	"login_destinasi" varchar(255) NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_role" PRIMARY KEY("id")
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "role" (
+	"id" SERIAL NOT NULL,
+	"nama_role" varchar(255) NULL,
+	"deskripsi" varchar(255) NULL,
+	"login_destinasi" varchar(255) NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_role" PRIMARY KEY("id")
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "role" (
+	"id" SERIAL NOT NULL,
+	"nama_role" varchar(255) NULL,
+	"deskripsi" varchar(255) NULL,
+	"login_destinasi" varchar(255) NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_role" PRIMARY KEY("id")
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-121846_Role.php(45): CodeIgniter\Database\Forge->createTable('role')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\Role->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([...])
+11 SYSTEMPATH\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', [...])
+12 SYSTEMPATH\Commands\Database\MigrateRefresh.php(91): CodeIgniter\CLI\BaseCommand->call('migrate', [...])
+13 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\MigrateRefresh->{closure:CodeIgniter\Commands\Database\MigrateRefresh::run():89}()
+14 SYSTEMPATH\Commands\Database\MigrateRefresh.php(89): CodeIgniter\Commands\Database\MigrateRefresh->withSignalsBlocked(Object(Closure))
+15 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run([...])
+16 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', [])
+17 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+18 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+19 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 11:53:58 --> pg_query(): Query failed: ERROR:  relation "pendaftaran" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "dokumen" (
+	"id" SERIAL NOT NULL,
+	"pendaftaran_id" INT NOT NULL,
+	"jenis_dokumen" varchar(255) NULL,
+	"file_path" TEXT NULL,
+	"status_verifikasi" varchar(255) NULL,
+	"keterangan_dokumen" TEXT NULL,
+	"mimes_type" varchar(255) NULL,
+	"ukuran_file" INT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_dokumen" PRIMARY KEY("id"),
+	CONSTRAINT "dokumen_pendaftaran_id_foreign" FOREIGN KEY ("pendaftaran_id") REFERENCES "pendaftaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "dokumen" (
+	"id" SERIAL NOT NULL,
+	"pendaftaran_id" INT NOT NULL,
+	"jenis_dokumen" varchar(255) NULL,
+	"file_path" TEXT NULL,
+	"status_verifikasi" varchar(255) NULL,
+	"keterangan_dokumen" TEXT NULL,
+	"mimes_type" varchar(255) NULL,
+	"ukuran_file" INT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_dokumen" PRIMARY KEY("id"),
+	CONSTRAINT "dokumen_pendaftaran_id_foreign" FOREIGN KEY ("pendaftaran_id") REFERENCES "pendaftaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "dokumen" (
+	"id" SERIAL NOT NULL,
+	"pendaftaran_id" INT NOT NULL,
+	"jenis_dokumen" varchar(255) NULL,
+	"file_path" TEXT NULL,
+	"status_verifikasi" varchar(255) NULL,
+	"keterangan_dokumen" TEXT NULL,
+	"mimes_type" varchar(255) NULL,
+	"ukuran_file" INT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_dokumen" PRIMARY KEY("id"),
+	CONSTRAINT "dokumen_pendaftaran_id_foreign" FOREIGN KEY ("pendaftaran_id") REFERENCES "pendaftaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-131539_Dokumen.php(63): CodeIgniter\Database\Forge->createTable('dokumen')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\Dokumen->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 11:56:01 --> pg_query(): Query failed: ERROR:  relation "siswa" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "pendaftaran" (
+	"id" SERIAL NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"sekolah_asal_id" INT NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"kode_registrasi" varchar(255) NOT NULL UNIQUE,
+	"status_daftar" varchar(255) NULL,
+	"tanggal_daftar" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_pendaftaran" PRIMARY KEY("id"),
+	CONSTRAINT "pendaftaran_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_sekolah_asal_id_foreign" FOREIGN KEY ("sekolah_asal_id") REFERENCES "sekolah_asal"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "pendaftaran" (
+	"id" SERIAL NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"sekolah_asal_id" INT NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"kode_registrasi" varchar(255) NOT NULL UNIQUE,
+	"status_daftar" varchar(255) NULL,
+	"tanggal_daftar" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_pendaftaran" PRIMARY KEY("id"),
+	CONSTRAINT "pendaftaran_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_sekolah_asal_id_foreign" FOREIGN KEY ("sekolah_asal_id") REFERENCES "sekolah_asal"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "pendaftaran" (
+	"id" SERIAL NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"sekolah_asal_id" INT NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"kode_registrasi" varchar(255) NOT NULL UNIQUE,
+	"status_daftar" varchar(255) NULL,
+	"tanggal_daftar" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_pendaftaran" PRIMARY KEY("id"),
+	CONSTRAINT "pendaftaran_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_sekolah_asal_id_foreign" FOREIGN KEY ("sekolah_asal_id") REFERENCES "sekolah_asal"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-122821_Pendaftaran.php(69): CodeIgniter\Database\Forge->createTable('pendaftaran')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\Pendaftaran->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([...])
+11 SYSTEMPATH\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', [...])
+12 SYSTEMPATH\Commands\Database\MigrateRefresh.php(91): CodeIgniter\CLI\BaseCommand->call('migrate', [...])
+13 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\MigrateRefresh->{closure:CodeIgniter\Commands\Database\MigrateRefresh::run():89}()
+14 SYSTEMPATH\Commands\Database\MigrateRefresh.php(89): CodeIgniter\Commands\Database\MigrateRefresh->withSignalsBlocked(Object(Closure))
+15 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run([...])
+16 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', [])
+17 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+18 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+19 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 11:59:37 --> pg_query(): Query failed: ERROR:  relation "siswa" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "pendaftaran" (
+	"id" SERIAL NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"sekolah_asal_id" INT NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"kode_registrasi" varchar(255) NOT NULL UNIQUE,
+	"status_daftar" varchar(255) NULL,
+	"tanggal_daftar" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_pendaftaran" PRIMARY KEY("id"),
+	CONSTRAINT "pendaftaran_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_sekolah_asal_id_foreign" FOREIGN KEY ("sekolah_asal_id") REFERENCES "sekolah_asal"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "pendaftaran" (
+	"id" SERIAL NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"sekolah_asal_id" INT NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"kode_registrasi" varchar(255) NOT NULL UNIQUE,
+	"status_daftar" varchar(255) NULL,
+	"tanggal_daftar" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_pendaftaran" PRIMARY KEY("id"),
+	CONSTRAINT "pendaftaran_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_sekolah_asal_id_foreign" FOREIGN KEY ("sekolah_asal_id") REFERENCES "sekolah_asal"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "pendaftaran" (
+	"id" SERIAL NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"sekolah_asal_id" INT NOT NULL,
+	"jalur_id" INT NOT NULL,
+	"tahun_ajaran_id" INT NOT NULL,
+	"kode_registrasi" varchar(255) NOT NULL UNIQUE,
+	"status_daftar" varchar(255) NULL,
+	"tanggal_daftar" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_pendaftaran" PRIMARY KEY("id"),
+	CONSTRAINT "pendaftaran_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_sekolah_asal_id_foreign" FOREIGN KEY ("sekolah_asal_id") REFERENCES "sekolah_asal"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_jalur_id_foreign" FOREIGN KEY ("jalur_id") REFERENCES "jalur_daftar"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "pendaftaran_tahun_ajaran_id_foreign" FOREIGN KEY ("tahun_ajaran_id") REFERENCES "tahun_ajaran"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-122823_Pendaftaran.php(69): CodeIgniter\Database\Forge->createTable('pendaftaran')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\Pendaftaran->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 12:00:52 --> pg_query(): Query failed: ERROR:  relation "role" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-121847_User.php(64): CodeIgniter\Database\Forge->createTable('user')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\User->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 12:01:43 --> pg_query(): Query failed: ERROR:  relation "role" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-122715_User.php(64): CodeIgniter\Database\Forge->createTable('user')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\User->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 12:02:15 --> pg_query(): Query failed: ERROR:  relation "siswa" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-122715_User.php(64): CodeIgniter\Database\Forge->createTable('user')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\User->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 12:03:55 --> pg_query(): Query failed: ERROR:  relation "role" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-122715_User.php(64): CodeIgniter\Database\Forge->createTable('user')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\User->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 12:04:55 --> pg_query(): Query failed: ERROR:  relation "siswa" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-122715_User.php(64): CodeIgniter\Database\Forge->createTable('user')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\User->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-22 12:06:28 --> pg_query(): Query failed: ERROR:  relation "siswa" does not exist
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 3 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE "user" (
+	"id" SERIAL NOT NULL,
+	"role_id" INT NOT NULL,
+	"siswa_id" INT NOT NULL,
+	"username" varchar(255) NULL,
+	"email" varchar(255) NULL UNIQUE,
+	"password" varchar(255) NULL,
+	"last_login_at" timestamp NULL,
+	"is_active" boolean DEFAULT TRUE NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT "pk_user" PRIMARY KEY("id"),
+	CONSTRAINT "user_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "role"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "user_siswa_id_foreign" FOREIGN KEY ("siswa_id") REFERENCES "siswa"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+)')
+ 4 APPPATH\Database\Migrations\2026-05-03-122715_User.php(64): CodeIgniter\Database\Forge->createTable('user')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\User->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::{closure:CodeIgniter\Commands\Database\Migrate::run():88}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
