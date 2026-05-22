@@ -17,24 +17,21 @@ class Siswa extends Migration
             "nik" => [
                 'type' => 'varchar',
                 'constraint' => 255,
-                'unique' => true,
                 'null' => true,
             ],
             "nisn" => [
                 'type' => 'varchar',
                 'constraint' => 255,
-                'unique' => true,
                 'null' => true,
             ],
             "npsn" => [
                 'type' => 'varchar',
                 'constraint' => 255,
-                'unique' => true,
                 'null' => true,
             ],
             "nama_lengkap" => [
                 'type'  => 'varchar',
-                'contraint' => 255,
+                'constraint' => 255,
                 'null' => true,
             ],
             "tempat_lahir" => [
@@ -63,7 +60,7 @@ class Siswa extends Migration
             ],
             "no_telp" => [
                 'type' => 'INT',
-                'unsigned' => true,
+                'unsigned' => false,
                 'null' => false,
             ],
             "latitude" => [
@@ -88,6 +85,9 @@ class Siswa extends Migration
             ]
         ]);
         $this->forge->addKey('id', true);
+        $this->forge->addUniqueKey('nik');
+        $this->forge->addUniqueKey('nisn');
+        $this->forge->addUniqueKey('npsn');
         $this->forge->createTable('siswa');
     }
 
