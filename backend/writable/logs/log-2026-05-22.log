@@ -987,3 +987,127 @@ in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
 12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
 13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
 14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+CRITICAL - 2026-05-22 12:54:08 --> CodeIgniter\Router\Exceptions\RouterException: The namespace delimiter is a backslash (\), not a slash (/). Route handler: "\App\Controllers\role/Role::index"
+[Method: GET, Route: api/v1/role]
+in SYSTEMPATH\Router\Router.php on line 523.
+ 1 SYSTEMPATH\Router\Router.php(523): CodeIgniter\Router\Exceptions\RouterException::forInvalidControllerName('\\App\\Controllers\\role/Role::index')
+ 2 SYSTEMPATH\Router\Router.php(225): CodeIgniter\Router\Router->checkRoutes('api/v1/role')
+ 3 SYSTEMPATH\CodeIgniter.php(829): CodeIgniter\Router\Router->handle('api/v1/role')
+ 4 SYSTEMPATH\CodeIgniter.php(441): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
+CRITICAL - 2026-05-22 12:55:17 --> ErrorException: Type of App\Models\M_role::$casts must be array (as in class CodeIgniter\BaseModel)
+[Method: GET, Route: api/v1/role]
+in APPPATH\Models\M_Role.php on line 6.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-05-22 12:55:50 --> ErrorException: Type of App\Models\M_role::$casts must be array (as in class CodeIgniter\BaseModel)
+[Method: GET, Route: api/v1/role]
+in APPPATH\Models\M_Role.php on line 6.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-05-22 12:56:34 --> ErrorException: Type of App\Models\M_role::$casts must be array (as in class CodeIgniter\BaseModel)
+[Method: GET, Route: api/v1/role]
+in APPPATH\Models\M_Role.php on line 6.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-05-22 12:57:23 --> ErrorException: Type of App\Models\M_role::$allowEmptyInserts must be bool (as in class CodeIgniter\BaseModel)
+[Method: GET, Route: api/v1/role]
+in APPPATH\Models\M_Role.php on line 6.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2026-05-22 13:40:12 --> pg_query(): Query failed: ERROR:  duplicate key value violates unique constraint &quot;pk_role&quot;
+DETAIL:  Key (id)=(1) already exists.
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('INSERT INTO "role" ("nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at") VALUES (\'test\', \'test\', \'test\', \'2026-05-22 13:40:10\', \'2026-05-22 13:40:10\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO "role" ("nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at") VALUES (\'test\', \'test\', \'test\', \'2026-05-22 13:40:10\', \'2026-05-22 13:40:10\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO "role" ("nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at") VALUES (:nama_role:, :deskripsi:, :login_destinasi:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(355): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(668): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\role\Role.php(53): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\role\Role->store()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\role\Role))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
+CRITICAL - 2026-05-22 13:40:12 --> CodeIgniter\Database\Exceptions\DatabaseException: pg_query(): Query failed: ERROR:  duplicate key value violates unique constraint &quot;pk_role&quot;
+DETAIL:  Key (id)=(1) already exists.
+[Method: POST, Route: api/v1/role]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO "role" ("nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at") VALUES (:nama_role:, :deskripsi:, :login_destinasi:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(355): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(668): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\role\Role.php(53): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\role\Role->store()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\role\Role))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
+CRITICAL - 2026-05-22 13:40:12 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: pg_query(): Query failed: ERROR:  duplicate key value violates unique constraint &quot;pk_role&quot;
+DETAIL:  Key (id)=(1) already exists.
+in SYSTEMPATH\Database\Postgre\Connection.php on line 212.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('INSERT INTO "role" ("nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at") VALUES (\'test\', \'test\', \'test\', \'2026-05-22 13:40:10\', \'2026-05-22 13:40:10\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO "role" ("nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at") VALUES (\'test\', \'test\', \'test\', \'2026-05-22 13:40:10\', \'2026-05-22 13:40:10\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO "role" ("nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at") VALUES (:nama_role:, :deskripsi:, :login_destinasi:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(355): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(668): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\role\Role.php(53): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\role\Role->store()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\role\Role))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
+CRITICAL - 2026-05-22 13:40:12 --> [Caused by] ErrorException: pg_query(): Query failed: ERROR:  duplicate key value violates unique constraint &quot;pk_role&quot;
+DETAIL:  Key (id)=(1) already exists.
+in SYSTEMPATH\Database\Postgre\Connection.php on line 200.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'pg_query(): Query failed: ERROR:  duplicate key value violates unique constraint &quot;pk_role&quot;
+DETAIL:  Key (id)=(1) already exists.', 'C:\\repo-github\\website-spmb\\backend\\system\\Database\\Postgre\\Connection.php', 200)
+ 2 SYSTEMPATH\Database\Postgre\Connection.php(200): pg_query(Object(PgSql\Connection), 'INSERT INTO "role" ("nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at") VALUES (\'test\', \'test\', \'test\', \'2026-05-22 13:40:10\', \'2026-05-22 13:40:10\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\Postgre\Connection->execute('INSERT INTO "role" ("nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at") VALUES (\'test\', \'test\', \'test\', \'2026-05-22 13:40:10\', \'2026-05-22 13:40:10\')')
+ 4 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO "role" ("nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at") VALUES (\'test\', \'test\', \'test\', \'2026-05-22 13:40:10\', \'2026-05-22 13:40:10\')')
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO "role" ("nama_role", "deskripsi", "login_destinasi", "created_at", "updated_at") VALUES (:nama_role:, :deskripsi:, :login_destinasi:, :created_at:, :updated_at:)', [...], false)
+ 6 SYSTEMPATH\Model.php(355): CodeIgniter\Database\BaseBuilder->insert()
+ 7 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 8 SYSTEMPATH\Model.php(668): CodeIgniter\BaseModel->insert([...], true)
+ 9 APPPATH\Controllers\role\Role.php(53): CodeIgniter\Model->insert([...])
+10 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\role\Role->store()
+11 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\role\Role))
+12 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
+CRITICAL - 2026-05-22 13:51:47 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: PUT, Route: api/v1/role/2]
+in SYSTEMPATH\BaseModel.php on line 1057.
+ 1 SYSTEMPATH\BaseModel.php(1057): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(709): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\role\Role.php(75): CodeIgniter\Model->update(2, [...])
+ 4 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\role\Role->update(2)
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\role\Role))
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
+CRITICAL - 2026-05-22 13:51:56 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: PUT, Route: api/v1/role/2]
+in SYSTEMPATH\BaseModel.php on line 1057.
+ 1 SYSTEMPATH\BaseModel.php(1057): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(709): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\role\Role.php(75): CodeIgniter\Model->update(2, [...])
+ 4 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\role\Role->update(2)
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\role\Role))
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
