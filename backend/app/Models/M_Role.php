@@ -17,10 +17,6 @@ class M_role extends Model{
     "created_at", 
     "updated_at"
   ];
-  protected $allowEmptyInserts = false;
-  protected $updateOnlyChanged = true;
-  protected $casts = [];
-  protected $castHandlers = [];
   protected $useTimestamps = true;
   protected $dateFormat = "datetime";
   protected $createdField = "created_at";
@@ -39,26 +35,6 @@ class M_role extends Model{
       'max_length' => 'Nama role maksimal 120 karakter.',
     ],
   ];
-
-  public function getAllRole(){
-    return $this->findAll();
-  }
-
-  public function getRoleById(int $id){
-    return $this->find($id);
-  }
-
-  public function createRole(array $data){
-    return $this->insert($data);
-  }
-
-  public function updateRole(int $id, array $data){
-    return $this->update($id, $data);
-  }
-
-  public function deleteRole(int $id){
-    return $this->delete($id);
-  }
 }
 
 ?>

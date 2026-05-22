@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\role;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\M_role;
@@ -55,6 +55,7 @@ class Role extends BaseController{
     'deskripsi' => $data['deskripsi'],
     'login_destinasi' => $data['login_destinasi'],
     'created_at' => date('Y-m-d H:i:s'),
+    'updated_at' => date('Y-m-d H:i:s'),
    ]);
 
     return $this->respondCreated([
