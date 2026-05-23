@@ -20,49 +20,65 @@ class Role extends BaseController{
   }
 
   public function index(){
-    $data = $this->model->findAll();
-    
+    $data = $this->model->db->query("SELECT * FROM role")->getResult();
+
     return $this->respond([
       'data' => $data,
       'status' => 200,
       'message' => 'Berhasil mengambil data role!'
-    ]);
+    ], 200);
   }
 
   public function show(int $id){
-    $data = $this->model->find($id);
+    if(!$this->model->find($id)){
+      return $this->respond([
+        'error' => $this->model->errors() ? $this->model->errors() : 'Id role tidak ditemukan!',
+        'status' => 403,
+        'message' => 'Id role tidak ditemukan!'
+      ], 403);
+    }
+
+    $data = $this->model->db->query("SELECT * FROM role WHERE id = ?", [$id])->getRow();
 
     if($data){
       return $this->respond([
         'data' => $data,
         'status' => 200,
         'message' => 'Berhasil mengambil data role!'
-      ]);
+      ], 200);
     } else {
       return $this->respond([
         'data' => null,
         'status' => 403,
         'message' => 'Data role tidak ditemukan!'
-      ]);
+      ], 403);
     }
   }
 
   public function store(){
-   $data = $this->request->getJSON(true);
+   $request = $this->request->getVar();
 
-   $this->model->insert([
-    'nama_role' => $data['nama_role'],
-    'deskripsi' => $data['deskripsi'],
-    'login_destinasi' => $data['login_destinasi'],
-    'created_at' => date('Y-m-d H:i:s'),
-    'updated_at' => date('Y-m-d H:i:s'),
-   ]);
+   $dataStore = [
+      'nama_role' => $request['nama_role'],
+      'deskripsi' => $request['deskripsi'],
+      'login_destinasi' => $request['login_destinasi'],
+      'created_at' => date('Y-m-d H:i:s'),
+      'updated_at' => date('Y-m-d H:i:s'),
+   ];
+
+   if(!$this->model->insert($dataStore)){
+      return $this->respond([
+        'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menyimpan data ke database!',
+        'status' => 400,
+        'message' => 'Terjadi kesalahan!, Gagal menambahkan data role!'
+      ], 400);
+   }
 
     return $this->respondCreated([
       'error' => null,
       'status' => 201,
       'message' => 'Berhasil menambahkan data role!'
-    ]);
+    ], 201);
   }
 
   public function update(int $id){
@@ -70,15 +86,28 @@ class Role extends BaseController{
       return $this->failNotFound('Data role tidak ditemukan!');
     }
     
-    $data = $this->request->getJSON(true);
+    $request = $this->request->getRawInput();
 
-    $this->model->update($id, $data);
+    $dataUpdate = [
+      'nama_role' => $request['nama_role'],
+      'deskripsi' => $request['deskripsi'],
+      'login_destinasi' => $request['login_destinasi'],
+      'updated_at' => date('Y-m-d H:i:s'),
+    ];
+
+    if(!$this->model->update($id, $dataUpdate)){
+      return $this->respond([
+        'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menyimpan data ke database!',
+        'status' => 400,
+        'message' => 'Terjadi kesalahan!, Gagal memperbarui data role!'
+      ], 400);
+    }
 
     return $this->respondUpdated([
       'error' => null,
       'status' => 200,
       'message' => 'Berhasil memperbarui data role!'
-    ]);
+    ], 200);
   }
 
   public function delete(int $id){
@@ -86,13 +115,19 @@ class Role extends BaseController{
       return $this->failNotFound('Data role tidak ditemukan!');
     }
 
-    $this->model->delete($id);
+    if(!$this->model->db->query("DELETE FROM role WHERE id = ?", [$id])){
+      return $this->respond([
+        'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menghapus data dari database!',
+        'status' => 400,
+        'message' => 'Terjadi kesalahan!, Gagal menghapus data role!'
+      ], 400);
+    }
 
     return $this->respondDeleted([
       'error' => null,
       'status' => 200,
       'message' => 'Berhasil menghapus data role!'
-    ]);
+    ], 200);
   }
 }
 
