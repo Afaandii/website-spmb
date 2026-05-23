@@ -23,45 +23,58 @@ class SekolahAsal extends BaseController
     
     public function index()
     {
-        $data = $this->model->findAll();
+        $data = $this->model->db->query("SELECT * FROM sekolah_asal")->getResult();
 
         return $this->respond([
             'data' => $data,
             'status' => 200,
             'message' => 'Berhasil mengambil data sekolah asal!'
-        ]);
+        ], 200);
     }
 
     public function show(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id sekolah asal tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id sekolah asal tidak ditemukan!'
-            ]);
+            ], 403);
         }
         
-        $data = $this->model->find($id);
+        $data = $this->model->db->query("SELECT * FROM sekolah_asal WHERE id = ?", [$id])->getRow();
         
         if($data){
             return $this->respond([
                 'data' => $data,
                 'status' => 200,
                 'message' => 'Berhasil mengambil data sekolah asal!'
-            ]);
+            ], 200);
         } else {
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Data sekolah asal tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Data sekolah asal tidak ditemukan!'
-            ]);
+            ], 403);
         }
     }
 
     public function store(){
-        $data = $this->request->getJSON(true);
+        $request = $this->request->getVar();
 
-        $this->model->insert($data);
+        $dataStore = [
+            'npsn' => $request['npsn'],
+            'nama_sekolah' => $request['nama_sekolah'],
+            'jenjang_sekolah' => $request['jenjang_sekolah'],
+            'alamat' => $request['alamat'],
+        ];
+
+        if(!$this->model->insert($dataStore)){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menambahkan data ke database!',
+                'status' => 400,
+                'message' => 'Terjadi kesalahan!, Gagal menambahkan data sekolah asal!'
+            ], 400);
+        }
 
         return $this->respondCreated([
             'error' => null,
@@ -73,63 +86,83 @@ class SekolahAsal extends BaseController
     public function edit(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id sekolah asal tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id sekolah asal tidak ditemukan!'
-            ]);
+            ], 403);
         }
         
-        $data = $this->model->find($id);
+        $data = $this->model->db->query("SELECT * FROM sekolah_asal WHERE id = ?", [$id])->getRow();
 
         if($data){
             return $this->respond([
                 'data' => $data,
                 'status' => 200,
                 'message' => 'Berhasil mengambil data sekolah asal!'
-            ]);
+            ], 200);
         } else {
             return $this->respond([
                 'data' => null,
                 'status' => 403,
                 'message' => 'Data sekolah asal tidak ditemukan!'
-            ]);
+            ], 403);
         }
     }
 
     public function update(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id sekolah asal tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id sekolah asal tidak ditemukan!'
-            ]);
+            ], 403);
         }
 
-        $data = $this->request->getJSON(true);
-        $this->model->update($data, ['id' => $id]);
+        $request = $this->request->getRawInput();
+
+        $dataUpdate = [
+            'npsn' => $request['npsn'],
+            'nama_sekolah' => $request['nama_sekolah'],
+            'jenjang_sekolah' => $request['jenjang_sekolah'],
+            'alamat' => $request['alamat'],
+        ];
+
+        if(!$this->model->update($id, $dataUpdate)){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal memperbarui data ke database!',
+                'status' => 400,
+                'message' => 'Terjadi kesalahan!, Gagal memperbarui data sekolah asal!'
+            ], 400);
+        }
 
         return $this->respond([
             'data' => null,
             'status' => 200,
             'message' => 'Berhasil mengupdate data sekolah asal!'
-        ]);
+        ], 200);
     }
 
     public function delete(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id sekolah asal tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id sekolah asal tidak ditemukan!'
-            ]);
+            ], 403);
         }
 
-        $this->model->delete(['id' => $id]);
+        if(!$this->model->db->query("DELETE FROM sekolah_asal WHERE id = ?", [$id])){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menghapus data dari database!',
+                'status' => 400,
+                'message' => 'Terjadi kesalahan!, Gagal menghapus data sekolah asal!'
+            ], 400);
+        }
 
         return $this->respond([
             'data' => null,
             'status' => 200,
             'message' => 'Berhasil menghapus data sekolah asal!'
-        ]);
+        ],200);
     }
 }
