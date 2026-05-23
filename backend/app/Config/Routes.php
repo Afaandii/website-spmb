@@ -87,7 +87,12 @@ $routes->group('api', function($routes) {
     $routes->put('data-orang-tua/(:num)', 'data_orang_tua\DataOrangTua::update/$1');
     $routes->delete('data-orang-tua/(:num)', 'data_orang_tua\DataOrangTua::delete/$1');
 
-    
+    // Akademik Routing
+    $routes->get('akademik', 'akademik\Akademik::index');
+    $routes->get('akademik/(:num)', 'akademik\Akademik::show/$1');
+    $routes->post('akademik', 'akademik\Akademik::store');
+    $routes->put('akademik/(:num)', 'akademik\Akademik::update/$1');
+    $routes->delete('akademik/(:num)', 'akademik\Akademik::delete/$1');
   });
 });
 ?>
