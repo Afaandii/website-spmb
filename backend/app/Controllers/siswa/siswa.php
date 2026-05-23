@@ -18,92 +18,165 @@ class Siswa extends BaseController{
   }
 
   public function index(){
-    $data = $this->model->findAll();
+    $data = $this->model->db->query("SELECT * FROM siswa")->getResult();
     
     return $this->respond([
       'data' => $data,
       'status' => 200,
       'message' => 'Berhasil mengambil data siswa!'
-    ]);
+    ], 200);
   }
 
   public function show(int $id){
-    $data = $this->model->find($id);
+    if(!$this->model->find($id)){
+      return $this->respond([
+        'error' => $this->model->errors() ? $this->model->errors() : 'Id siswa tidak ditemukan!',
+        'status' => 403,
+        'message' => 'Id siswa tidak ditemukan!'
+      ], 403);
+    }
+
+    $data = $this->model->db->query("SELECT * FROM siswa WHERE id = ?", [$id])->getRow();
 
     if($data){
       return $this->respond([
         'data' => $data,
         'status' => 200,
         'message' => 'Berhasil mengambil data siswa!'
-      ]);
+      ], 200);
     } else {
       return $this->respond([
         'data' => null,
         'status' => 403,
         'message' => 'Data siswa tidak ditemukan!'
-      ]);
+      ], 403);
     }
   }
 
   public function store(){
-   $data = $this->request->getJSON(true);
+   $request = $this->request->getVar();
 
-   $this->model->insert($data);
+   $dataInsert = [
+     'nik' => $request['nik'],
+     'nisn' => $request['nisn'],
+     'npsn' => $request['npsn'],
+     'nama_lengkap' => $request['nama_lengkap'],
+     'tempat_lahir' => $request['tempat_lahir'],
+     'tanggal_lahir' => $request['tanggal_lahir'],
+     'jenis_kelamin' => $request['jenis_kelamin'],
+     'agama' => $request['agama'],
+     'alamat' => $request['alamat'],
+     'no_telp' => $request['no_telp'],
+     'latitude' => $request['latitude'],
+     'longitude' => $request['longitude'],
+     'created_at' => date('Y-m-d H:i:s'),
+     'updated_at' => date('Y-m-d H:i:s'),
+   ];
+
+   if(!$this->model->insert($dataInsert)){
+     return $this->respond([
+       'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menambahkan data ke database!',
+       'status' => 400,
+       'message' => 'Terjadi kesalahan saat menambahkan data siswa!, coba cek kembali datanya!'
+     ], 400);
+   }
 
     return $this->respondCreated([
       'error' => null,
       'status' => 201,
       'message' => 'Berhasil menambahkan data siswa!'
-    ]);
+    ], 201);
   }
 
   public function edit(int $id){
-    $data = $this->model->find($id);
+    if(!$this->model->find($id)){
+      return $this->respond([
+        'error' => $this->model->errors() ? $this->model->errors() : 'Id siswa tidak ditemukan!',
+        'status' => 403,
+        'message' => 'Id siswa tidak ditemukan!'
+      ], 403);
+    }
+
+    $data = $this->model->db->query("SELECT * FROM siswa WHERE id = ?", [$id])->getRow();
 
     if($data){
       return $this->respond([
         'data' => $data,
         'status' => 200,
         'message' => 'Berhasil mengambil data siswa!'
-      ]);
+      ], 200);
     } else {
       return $this->respond([
         'data' => null,
         'status' => 403,
         'message' => 'Data siswa tidak ditemukan!'
-      ]);
+      ], 403);
     }
   }
 
   public function update(int $id){
-    $data = $this->request->getJSON(true);
+    if(!$this->model->find($id)){
+      return $this->respond([
+        'error' => $this->model->errors() ? $this->model->errors() : 'Id siswa tidak ditemukan!',
+        'status' => 403,
+        'message' => 'Id siswa tidak ditemukan!'
+      ], 403);
+    }
+    $request = $this->request->getRawInput();
 
-    $this->model->update($id, $data);
+    $dataUpdate = [
+      'nik' => $request['nik'],
+      'nisn' => $request['nisn'],
+      'npsn' => $request['npsn'],
+      'nama_lengkap' => $request['nama_lengkap'],
+      'tempat_lahir' => $request['tempat_lahir'],
+      'tanggal_lahir' => $request['tanggal_lahir'],
+      'jenis_kelamin' => $request['jenis_kelamin'],
+      'agama' => $request['agama'],
+      'alamat' => $request['alamat'],
+      'no_telp' => $request['no_telp'],
+      'latitude' => $request['latitude'],
+      'longitude' => $request['longitude'],
+      'updated_at' => date('Y-m-d H:i:s'),
+    ];
+
+    if(!$this->model->update($id, $dataUpdate)){
+      return $this->respond([
+        'error' => $this->model->errors() ? $this->model->errors() : 'Gagal memperbarui data ke database!',
+        'status' => 400,
+        'message' => 'Terjadi kesalahan saat memperbarui data siswa!, coba cek kembali datanya!'
+      ], 400);
+    }
 
     return $this->respond([
       'error' => null,
       'status' => 200,
       'message' => 'Berhasil mengubah data siswa!'
-    ]);
+    ], 200);
   }
 
   public function delete(int $id){
-    $data = $this->model->find($id);
-
-    if($data){
-      $this->model->delete($id);
+    if(!$this->model->find($id)){
       return $this->respond([
-        'error' => null,
-        'status' => 200,
-        'message' => 'Berhasil menghapus data siswa!'
-      ]);
-    } else {
-      return $this->respond([
-        'data' => null,
+        'error' => $this->model->errors() ? $this->model->errors() : 'Id siswa tidak ditemukan!',
         'status' => 403,
-        'message' => 'Data siswa tidak ditemukan!'
-      ]);
+        'message' => 'Id siswa tidak ditemukan!'
+      ], 403);
     }
+
+    if(!$this->model->db->query("DELETE FROM siswa WHERE id = ?", [$id])){
+      return $this->respond([
+        'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menghapus data dari database!',
+        'status' => 400,
+        'message' => 'Terjadi kesalahan!, Gagal menghapus data siswa!'
+      ], 400);
+    }
+
+    return $this->respondDeleted([
+      'error' => null,
+      'status' => 200,
+      'message' => 'Berhasil menghapus data siswa!'
+    ], 200);
   }
 }
 
