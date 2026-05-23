@@ -38,6 +38,20 @@ $routes->group('api', function($routes) {
     $routes->put('seleksi/(:num)', 'seleksi\Seleksi::update/$1');
     $routes->delete('seleksi/(:num)', 'seleksi\Seleksi::delete/$1');
 
+    // Sekolah Asal Routing
+    $routes->get('sekolah-asal', 'sekolah_asal\SekolahAsal::index');
+    $routes->get('sekolah-asal/(:num)', 'sekolah_asal\SekolahAsal::show/$1');
+    $routes->post('sekolah-asal', 'sekolah_asal\SekolahAsal::store');
+    $routes->put('sekolah-asal/(:num)', 'sekolah_asal\SekolahAsal::update/$1');
+    $routes->delete('sekolah-asal/(:num)', 'sekolah_asal\SekolahAsal::delete/$1');
+
+    // Prestasi Routing
+    $routes->get('prestasi', 'prestasi\Prestasi::index');
+    $routes->get('prestasi/(:num)', 'prestasi\Prestasi::show/$1');
+    $routes->post('prestasi', 'prestasi\Prestasi::store');
+    $routes->put('prestasi/(:num)', 'prestasi\Prestasi::update/$1');
+    $routes->delete('prestasi/(:num)', 'prestasi\Prestasi::delete/$1');
+
     
   });
 });
