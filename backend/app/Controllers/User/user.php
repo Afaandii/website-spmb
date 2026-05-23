@@ -22,91 +22,119 @@ class User extends BaseController
 
     public function index()
     {
-        $data = $this->model->findAll();
+        $data = $this->model->db->query("SELECT * FROM user")->getResult();
 
         return $this->respond([
             'data' => $data,
             'status' => 200,
             'message' => 'Berhasil mengambil data user!'
-        ]);
+        ], 200);
     }
 
     public function show(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id user tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id user tidak ditemukan!'
-            ]);
+            ], 403);
         }
         
-        $data = $this->model->find($id);
+        $data = $this->model->db->query("SELECT * FROM user WHERE id = ?", [$id])->getRow();
         
         if($data){
             return $this->respond([
                 'data' => $data,
                 'status' => 200,
                 'message' => 'Berhasil mengambil data user!'
-            ]);
+            ], 200);
         } else {
             return $this->respond([
                 'data' => null,
                 'status' => 403,
                 'message' => 'Data user tidak ditemukan!'
-            ]);
+            ], 403);
         }
     }
 
     public function store(){
-        $data = $this->request->getJSON(true);
+        $request = $this->request->getVar();
 
-        $this->model->insert($data);
+        $dataInsert = [
+            'role_id'  => $request['role_id'],
+            'siswa_id' => $request['siswa_id'],
+            'username' => $request['username'],
+            'email' => $request['email'],
+            'password' => $request['password']
+        ];
+        
+        if(!$this->model->insert($dataInsert)){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menambahkan data ke database!',
+                'status' => 400,
+                'message' => 'Gagal menambahkan data user!'
+            ], 400);
+        }
 
         return $this->respondCreated([
             'error' => null,
             'status' => 201,
             'message' => 'Berhasil menambahkan data user!'
-        ]);
+        ], 201);
     }
 
     public function edit(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id user tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id user tidak ditemukan!'
-            ]);
+            ], 403);
         }
 
-        $data = $this->model->find($id);
+        $data = $this->model->db->query("SELECT * FROM user WHERE id = ?", [$id])->getRow();
 
         if($data){
             return $this->respond([
                 'data' => $data,
                 'status' => 200,
                 'message' => 'Berhasil mengambil data user!'
-            ]);
+            ], 200);
         } else {
             return $this->respond([
                 'data' => null,
                 'status' => 403,
                 'message' => 'Data user tidak ditemukan!'
-            ]);
+            ], 403);
         }
     }
 
     public function update(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id user tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id user tidak ditemukan!'
-            ]);
+            ], 403);
         }
 
-        $data = $this->request->getJSON(true);
+        $request = $this->request->getRawInput();
 
-        $this->model->update($id, $data);
+        $dataUpdate = [
+            'role_id'  => $request['role_id'],
+            'siswa_id' => $request['siswa_id'],
+            'username' => $request['username'],
+            'email' => $request['email'],
+            'password' => $request['password']
+        ];
+
+        if(!$this->model->update($id, $dataUpdate)){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal memperbarui data ke database!',
+                'status' => 400,
+                'message' => 'Gagal memperbarui data user!'
+            ], 400);
+        }
 
         return $this->respondUpdated([
             'error' => null,
@@ -118,18 +146,24 @@ class User extends BaseController
     public function delete(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id user tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id user tidak ditemukan!'
-            ]);
+            ], 403);
         }
 
-        $this->model->delete($id);
+        if(!$this->model->db->query("DELETE FROM user WHERE id = ?", [$id])){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menghapus data dari database!',
+                'status' => 400,
+                'message' => 'Terjadi kesalahan!, Gagal menghapus data user!'
+            ], 400);
+        }
 
         return $this->respondDeleted([
             'error' => null,
             'status' => 200,
             'message' => 'Berhasil menghapus data user!'
-        ]);
+        ], 200);
     }
 }

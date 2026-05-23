@@ -22,46 +22,58 @@ class TahunAjaran extends BaseController
 
     public function index()
     {
-        $data = $this->model->findAll();
+        $data = $this->model->db->query("SELECT * FROM tahun_ajaran")->getResult();
 
         return $this->respond([
             'data' => $data,
             'status' => 200,
             'message' => 'Berhasil mengambil data tahun ajaran!'
-        ]);
+        ], 200);
     }
 
     public function show(int $id){
         if(!$this->model->find($id)){
             return $this->failNotFound('Data tahun ajaran tidak ditemukan!');
         }
-        $data = $this->model->find($id);
+        
+        $data = $this->model->db->query("SELECT * FROM tahun_ajaran WHERE id = ?", [$id])->getRow();
 
         if($data){
             return $this->respond([
                 'data' => $data,
                 'status' => 200,
                 'message' => 'Berhasil mengambil data tahun ajaran!'
-            ]);
+            ], 200);
         } else {
             return $this->respond([
                 'data' => null,
                 'status' => 403,
                 'message' => 'Data tahun ajaran tidak ditemukan!'
-            ]);
+            ], 403);
         }
     }
 
     public function store(){
-        $data = $this->request->getJSON(true);
+        $request = $this->request->getVar();
 
-        $this->model->insert($data);
+        $dataInsert = [
+            'tahun_ajaran' => $request['tahun_ajaran'],
+            'status' => $request['status'],
+        ];
 
-        return $this->respondCreated([
-            'error' => null,
-            'status' => 201,
-            'message' => 'Berhasil menambahkan data tahun ajaran!'
-        ]);
+        if(!$this->model->insert($dataInsert)){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menambahkan data ke database!',
+                'status' => 400,
+                'message' => 'Terjadi kesalahan saat menambahkan data tahun ajaran!, coba cek kembali datanya!'
+            ], 400);
+        } else {
+            return $this->respondCreated([
+                'error' => null,
+                'status' => 201,
+                'message' => 'Berhasil menambahkan data tahun ajaran!'
+            ], 201);
+        }
     }
 
     public function edit(int $id){
@@ -69,20 +81,20 @@ class TahunAjaran extends BaseController
             return $this->failNotFound('Data tahun ajaran tidak ditemukan!');
         }
         
-        $data = $this->model->find($id);
+        $data = $this->model->db->query("SELECT * FROM tahun_ajaran WHERE id = ?", [$id])->getRow();
 
         if($data){
             return $this->respond([
                 'data' => $data,
                 'status' => 200,
                 'message' => 'Berhasil mengambil data tahun ajaran!'
-            ]);
+            ], 200);
         } else {
             return $this->respond([
                 'data' => null,
                 'status' => 403,
                 'message' => 'Data tahun ajaran tidak ditemukan!'
-            ]);
+            ], 403);
         }
     }
 
@@ -91,15 +103,26 @@ class TahunAjaran extends BaseController
             return $this->failNotFound('Data tahun ajaran tidak ditemukan!');
         }
 
-        $data = $this->request->getJSON(true);
+        $request = $this->request->getRawInput();
 
-        $this->model->update($id, $data);
+        $dataUpdate = [
+            'tahun_ajaran' => $request['tahun_ajaran'],
+            'status' => $request['status'],
+        ];
+
+        if(!$this->model->update($id, $dataUpdate)){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal memperbarui data ke database!',
+                'status' => 400,
+                'message' => 'Terjadi kesalahan saat memperbarui data tahun ajaran!, coba cek kembali datanya!'
+            ], 400);
+        }
 
         return $this->respondUpdated([
             'error' => null,
             'status' => 200,
             'message' => 'Berhasil memperbarui data tahun ajaran!'
-        ]);
+        ], 200);
     }
 
     public function delete(int $id){
@@ -107,12 +130,18 @@ class TahunAjaran extends BaseController
             return $this->failNotFound('Data tahun ajaran tidak ditemukan!');
         }
 
-        $this->model->delete($id);
+        if(!$this->model->db->query("DELETE FROM tahun_ajaran WHERE id = ?", [$id])){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menghapus data dari database!',
+                'status' => 400,
+                'message' => 'Terjadi kesalahan saat menghapus data tahun ajaran!'
+            ], 400);
+        }
 
         return $this->respondDeleted([
             'error' => null,
             'status' => 200,
             'message' => 'Berhasil menghapus data tahun ajaran!'
-        ]);
+        ], 200);
     }
 }
