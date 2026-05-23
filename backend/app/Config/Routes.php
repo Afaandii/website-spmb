@@ -52,6 +52,41 @@ $routes->group('api', function($routes) {
     $routes->put('prestasi/(:num)', 'prestasi\Prestasi::update/$1');
     $routes->delete('prestasi/(:num)', 'prestasi\Prestasi::delete/$1');
 
+    // Pengumuman Routing
+    $routes->get('pengumuman', 'pengumuman\Pengumuman::index');
+    $routes->get('pengumuman/(:num)', 'pengumuman\Pengumuman::show/$1');
+    $routes->post('pengumuman', 'pengumuman\Pengumuman::store');
+    $routes->put('pengumuman/(:num)', 'pengumuman\Pengumuman::update/$1');
+    $routes->delete('pengumuman/(:num)', 'pengumuman\Pengumuman::delete/$1');
+
+    // Jalur Daftar Routing
+    $routes->get('jalur-daftar', 'jalur_daftar\JalurDaftar::index');
+    $routes->get('jalur-daftar/(:num)', 'jalur_daftar\JalurDaftar::show/$1');
+    $routes->post('jalur-daftar', 'jalur_daftar\JalurDaftar::store');
+    $routes->put('jalur-daftar/(:num)', 'jalur_daftar\JalurDaftar::update/$1');
+    $routes->delete('jalur-daftar/(:num)', 'jalur_daftar\JalurDaftar::delete/$1');
+
+    // Pendaftaran Routing
+    $routes->get('pendaftaran', 'pendaftaran\Pendaftaran::index');
+    $routes->get('pendaftaran/(:num)', 'pendaftaran\Pendaftaran::show/$1');
+    $routes->post('pendaftaran', 'pendaftaran\Pendaftaran::store');
+    $routes->put('pendaftaran/(:num)', 'pendaftaran\Pendaftaran::update/$1');
+    $routes->delete('pendaftaran/(:num)', 'pendaftaran\Pendaftaran::delete/$1');
+
+    // Dokumen Routing
+    $routes->get('dokumen', 'dokumen\Dokumen::index');
+    $routes->get('dokumen/(:num)', 'dokumen\Dokumen::show/$1');
+    $routes->post('dokumen', 'dokumen\Dokumen::store');
+    $routes->put('dokumen/(:num)', 'dokumen\Dokumen::update/$1');
+    $routes->delete('dokumen/(:num)', 'dokumen\Dokumen::delete/$1');
+
+    // Data Orang Tua Routing
+    $routes->get('data-orang-tua', 'data_orang_tua\DataOrangTua::index');
+    $routes->get('data-orang-tua/(:num)', 'data_orang_tua\DataOrangTua::show/$1');
+    $routes->post('data-orang-tua', 'data_orang_tua\DataOrangTua::store');
+    $routes->put('data-orang-tua/(:num)', 'data_orang_tua\DataOrangTua::update/$1');
+    $routes->delete('data-orang-tua/(:num)', 'data_orang_tua\DataOrangTua::delete/$1');
+
     
   });
 });
