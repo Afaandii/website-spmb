@@ -22,128 +22,154 @@ class Pendaftaran extends BaseController
 
     public function index()
     {
-        $data = $this->model->findAll();
+        $data = $this->model->db->query("SELECT * FROM pendaftaran")->getResult();
 
         return $this->respond([
             'data' => $data,
             'status' => 200,
             'message' => 'Berhasil mengambil data pendaftaran!'
-        ]);
+        ], 200);
     }
 
     public function show(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id pendaftaran tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id pendaftaran tidak ditemukan!'
-            ]);
+            ], 403);
         }
         
-        $data = $this->model->find($id);
+        $data = $this->model->db->query("SELECT * FROM pendaftaran WHERE id = ?", [$id])->getRow();
         
         if($data){
             return $this->respond([
                 'data' => $data,
                 'status' => 200,
                 'message' => 'Berhasil mengambil data pendaftaran!'
-            ]);
+            ], 200);
         } else {
             return $this->respond([
                 'data' => null,
                 'status' => 403,
                 'message' => 'Data pendaftaran tidak ditemukan!'
-            ]);
+            ], 403);
         }
     }
 
     public function store(){
-        $data = $this->request->getPost();
+        $request = $this->request->getVar();
 
-        if(!$data){
-            return $this->respond([
-                'data' => null,
-                'status' => 403,
-                'message' => 'Data pendaftaran tidak ditemukan!'
-            ]);
-        }
+        $dataStore = [
+            'siswa_id' => $request['siswa_id'],
+            'sekolah_asal_id' => $request['sekolah_asal_id'],
+            'jalur_id' => $request['jalur_id'],
+            'tahun_ajaran_id' => $request['tahun_ajaran_id'],
+            'kode_registrasi' => $request['kode_registrasi'],
+            'status_daftar' => $request['status_daftar'],
+            'tanggal_daftar' => $request['tanggal_daftar'],
+            'created_at' => date('Y-m-d H:i:s'),
+        ];
 
-        $save = $this->model->save($data);
-
-        if($save){
+        if(!$this->model->insert($dataStore)){
             return $this->respond([
-                'data' => null,
-                'status' => 200,
-                'message' => 'Berhasil menyimpan data pendaftaran!'
-            ]);
-        } else {
-            return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menyimpan data pendaftaran!',
                 'status' => 403,
                 'message' => 'Gagal menyimpan data pendaftaran!'
-            ]);
+            ], 403);
         }
-    }
 
+        return $this->respondCreated([
+            'data' => null,
+            'status' => 201,
+            'message' => 'Berhasil menyimpan data pendaftaran!'
+        ], 201);
+    }
+    
     public function edit(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id pendaftaran tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id pendaftaran tidak ditemukan!'
-            ]);
+            ], 403);
         }
-
-        $data = $this->request->getPost();
-
-        if(!$data){
+        
+        $data = $this->model->db->query("SELECT * FROM pendaftaran WHERE id = ?", [$id])->getRow();
+        
+        if($data){
             return $this->respond([
-                'data' => null,
-                'status' => 403,
-                'message' => 'Data pendaftaran tidak ditemukan!'
-            ]);
-        }
-
-        $update = $this->model->update($id, $data);
-
-        if($update){
-            return $this->respond([
-                'data' => null,
+                'data' => $data,
                 'status' => 200,
-                'message' => 'Berhasil mengubah data pendaftaran!'
-            ]);
+                'message' => 'Berhasil mengambil data pendaftaran!'
+            ], 200);
         } else {
             return $this->respond([
                 'data' => null,
                 'status' => 403,
-                'message' => 'Gagal mengubah data pendaftaran!'
-            ]);
+                'message' => 'Data pendaftaran tidak ditemukan!'
+            ], 403);
         }
+    }
+
+    public function update(int $id){
+        if(!$this->model->find($id)){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id pendaftaran tidak ditemukan!',
+                'status' => 403,
+                'message' => 'Id pendaftaran tidak ditemukan!'
+            ], 403);
+        }
+
+        $request = $this->request->getRawInput();
+
+        $dataUpdate = [
+            'siswa_id' => $request['siswa_id'],
+            'sekolah_asal_id' => $request['sekolah_asal_id'],
+            'jalur_id' => $request['jalur_id'],
+            'tahun_ajaran_id' => $request['tahun_ajaran_id'],
+            'kode_registrasi' => $request['kode_registrasi'],
+            'status_daftar' => $request['status_daftar'],
+            'tanggal_daftar' => $request['tanggal_daftar'],
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+
+        if(!$this->model->update($id, $dataUpdate)){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal mengubah data pendaftaran!',
+                'status' => 403,
+                'message' => 'Gagal mengubah data pendaftaran!'
+            ], 403);
+        }
+
+        return $this->respondUpdated([
+            'data' => null,
+            'status' => 200,
+            'message' => 'Berhasil mengubah data pendaftaran!'
+        ], 200);
     }
 
     public function delete(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id pendaftaran tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id pendaftaran tidak ditemukan!'
-            ]);
+            ], 403);
         }
 
-        $delete = $this->model->delete($id);
-
-        if($delete){
+        if(!$this->model->delete($id)){
             return $this->respond([
-                'data' => null,
-                'status' => 200,
-                'message' => 'Berhasil menghapus data pendaftaran!'
-            ]);
-        } else {
-            return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menghapus data pendaftaran!',
                 'status' => 403,
                 'message' => 'Gagal menghapus data pendaftaran!'
-            ]);
+            ], 403);
         }
+
+        return $this->respondDeleted([
+            'data' => null,
+            'status' => 200,
+            'message' => 'Berhasil menghapus data pendaftaran!'
+        ], 200);
     }
 }

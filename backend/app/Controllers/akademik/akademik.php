@@ -22,132 +22,140 @@ class Akademik extends BaseController
 
     public function index()
     {
-        $data = $this->model->findAll();
+        $data = $this->model->db->query("SELECT * FROM akademik")->getResult();
 
         return $this->respond([
             'data' => $data,
             'status' => 200,
             'message' => 'Berhasil mengambil data akademik!'
-        ]);
+        ], 200);
     }
 
     public function show(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id akademik tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id akademik tidak ditemukan!'
-            ]);
+            ], 403);
         }
         
-        $data = $this->model->find($id);
+        $data = $this->model->db->query("SELECT * FROM akademik WHERE id = ?", [$id])->getRow();
         
         if($data){
             return $this->respond([
                 'data' => $data,
                 'status' => 200,
                 'message' => 'Berhasil mengambil data akademik!'
-            ]);
+            ], 200);
         } else {
             return $this->respond([
                 'data' => null,
                 'status' => 403,
                 'message' => 'Data akademik tidak ditemukan!'
-            ]);
+            ], 403);
         }
     }
 
     public function store(){
-        $data = $this->request->getPost();
+        $request = $this->request->getVar();
 
-        if($this->model->insert($data)){
+        $dataUpdate = [
+            'pendaftaran_id' => $request['pendaftaran_id'],
+            'tahun_ajaran_id' => $request['tahun_ajaran_id'],
+            'semester' => $request['semester'],
+            'nilai_rata_rata' => $request['nilai_rata_rata'],
+            'created_at' => date('Y-m-d H:i:s'),
+        ];
+
+        if(!$this->model->insert($dataUpdate)){
             return $this->respond([
-                'data' => null,
-                'status' => 200,
-                'message' => 'Berhasil menambahkan data akademik!'
-            ]);
-        } else {
-            return $this->respond([
-                'data' => null,
-                'status' => 403,
-                'message' => 'Gagal menambahkan data akademik!'
-            ]);
+                'error' => $this->model->errors() ? $this->model->errors() : 'Terjadi kesalahan!, Gagal menyimpan data akademik',
+                'status' => 400,
+                'message' => 'Terjadi kesalahan!, Gagal menyimpan data akademik'
+            ], 400);
         }
+
+        return $this->respondCreated([
+            'error' => null,
+            'status' => 201,
+            'message' => 'Berhasil menyimpan data akademik'
+        ], 201);
     }
 
     public function edit(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id akademik tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id akademik tidak ditemukan!'
-            ]);
+            ], 403);
         }
         
-        $data = $this->model->find($id);
+        $data = $this->model->db->query("SELECT * FROM akademik WHERE id = ?", [$id])->getRow();
         
         if($data){
             return $this->respond([
                 'data' => $data,
                 'status' => 200,
                 'message' => 'Berhasil mengambil data akademik!'
-            ]);
+            ], 200);
         } else {
             return $this->respond([
                 'data' => null,
                 'status' => 403,
                 'message' => 'Data akademik tidak ditemukan!'
-            ]);
+            ], 403);
         }
     }
 
     public function update(int $id){
-        $data = $this->request->getPost();
+        $request = $this->request->getRawInput();
 
-        if(!$this->model->find($id)){
+        $dataUpdate = [
+            'pendaftaran_id' => $request['pendaftaran_id'],
+            'tahun_ajaran_id' => $request['tahun_ajaran_id'],
+            'semester' => $request['semester'],
+            'nilai_rata_rata' => $request['nilai_rata_rata'],
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+
+        if(!$this->model->update($id, $dataUpdate)){
             return $this->respond([
-                'data' => null,
-                'status' => 403,
-                'message' => 'Id akademik tidak ditemukan!'
-            ]);
+                'error' => $this->model->errors() ? $this->model->errors() : "Terjadi kesalahan!, Gagal memeperbarui data akademik",
+                'status' => 400,
+                'message' => 'Terjadi kesalahan!, Gagal memperbarui data akademik'
+            ], 400);
         }
 
-        if($this->model->update($id, $data)){
-            return $this->respond([
-                'data' => null,
-                'status' => 200,
-                'message' => 'Berhasil mengubah data akademik!'
-            ]);
-        } else {
-            return $this->respond([
-                'data' => null,
-                'status' => 403,
-                'message' => 'Gagal mengubah data akademik!'
-            ]);
-        }
+        return $this->respondUpdated([
+            'error' => null,
+            'status' => 200,
+            'message' => 'Berhasil memperbarui data akademik!'
+        ], 200);
     }
 
     public function delete(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() :  'Id akademik tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id akademik tidak ditemukan!'
-            ]);
+            ], 403);
         }
 
-        if($this->model->delete($id)){
+        if(!$this->model->db->query("DELETE FROM akademik WHERE id = ?", [$id])){
             return $this->respond([
-                'data' => null,
-                'status' => 200,
-                'message' => 'Berhasil menghapus data akademik!'
-            ]);
-        } else {
-            return $this->respond([
-                'data' => null,
-                'status' => 403,
-                'message' => 'Gagal menghapus data akademik!'
-            ]);
+                'error' => $this->model->errors() ? $this->model->errors() : 'Terjadi kesalahan!, Gagal menghapus data akademik!',
+                'status' => 400,
+                'message' => 'Terjadi kesalahan!, Gagal menghapus data akademik!'
+            ], 400);
         }
+
+        return $this->respondDeleted([
+            'error' => null,
+            'status' => 200,
+            'message' => 'Berhasil menghapus data akademik!'
+        ], 200);
     }
 }

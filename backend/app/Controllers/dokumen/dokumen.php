@@ -22,106 +22,154 @@ class Dokumen extends BaseController
     
     public function index()
     {
-        $data = $this->model->findAll();
+        $data = $this->model->db->query("SELECT * FROM dokumen")->getResult();
         
         return $this->respond([
             'data' => $data,
             'status' => 200,
             'message' => 'Berhasil mengambil data dokumen!'
-        ]);
+        ], 200);
     }
 
     public function show(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id dokumen tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id dokumen tidak ditemukan!'
-            ]);
+            ], 403);
         }
         
-        $data = $this->model->find($id);
+        $data = $this->model->db->query("SELECT * FROM dokumen WHERE id = ?", [$id])->getRow();
         
         if($data){
             return $this->respond([
                 'data' => $data,
                 'status' => 200,
                 'message' => 'Berhasil mengambil data dokumen!'
-            ]);
+            ], 200);
         } else {
             return $this->respond([
                 'data' => null,
                 'status' => 403,
                 'message' => 'Data dokumen tidak ditemukan!'
-            ]);
+            ], 403);
         }
     }
 
     public function store(){
-        $data = $this->request->getPost();
+        $request = $this->request->getVar();
 
-        if($this->model->insert($data)){
+        $dataStore = [
+            'pendaftaran_id' => $request['pendaftaran_id'],
+            'jenis_dokumen' => $request['jenis_dokumen'],
+            'file_path' => $request['file_path'],
+            'status_verifikasi' => $request['status_verifikasi'],
+            'keterangan_dokumen' => $request['keterangan_dokumen'],
+            'mimes_type' => $request['mimes_type'],
+            'ukuran_file' => $request['ukuran_file'],
+            'created_at' => date('Y-m-d H:i:s'),
+        ];
+
+        if(!$this->model->insert($dataStore)){
             return $this->respond([
-                'data' => null,
-                'status' => 200,
-                'message' => 'Berhasil menambahkan data dokumen!'
-            ]);
-        } else {
-            return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menyimpan data dokumen!',
                 'status' => 403,
-                'message' => 'Gagal menambahkan data dokumen!'
-            ]);
+                'message' => 'Gagal menyimpan data dokumen!'
+            ], 403);
         }
+
+        return $this->respond([
+            'data' => null,
+            'status' => 201,
+            'message' => 'Berhasil menyimpan data dokumen!'
+        ], 201);
     }
 
     public function edit(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id dokumen tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id dokumen tidak ditemukan!'
-            ]);
+            ], 403);
         }
+        
+        $data = $this->model->db->query("SELECT * FROM dokumen WHERE id = ?", [$id])->getRow();
 
-        $data = $this->request->getPost();
-
-        if($this->model->update($id, $data)){
+        if($data){
             return $this->respond([
-                'data' => null,
+                'data' => $data,
                 'status' => 200,
-                'message' => 'Berhasil mengubah data dokumen!'
-            ]);
+                'message' => 'Berhasil mengambil data dokumen!'
+            ], 200);
         } else {
             return $this->respond([
                 'data' => null,
                 'status' => 403,
-                'message' => 'Gagal mengubah data dokumen!'
-            ]);
+                'message' => 'Data dokumen tidak ditemukan!'
+            ], 403);
         }
+    }
+
+    public function update(int $id){
+        if(!$this->model->find($id)){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id dokumen tidak ditemukan!',
+                'status' => 403,
+                'message' => 'Id dokumen tidak ditemukan!'
+            ], 403);
+        }
+
+        $request = $this->request->getRawInput();
+
+        $dataUpdate = [
+            'pendaftaran_id' => $request['pendaftaran_id'],
+            'jenis_dokumen' => $request['jenis_dokumen'],
+            'file_path' => $request['file_path'],
+            'status_verifikasi' => $request['status_verifikasi'],
+            'keterangan_dokumen' => $request['keterangan_dokumen'],
+            'mimes_type' => $request['mimes_type'],
+            'ukuran_file' => $request['ukuran_file'],
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+
+        if(!$this->model->update($id, $dataUpdate)){
+            return $this->respond([
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal mengupdate data dokumen!',
+                'status' => 403,
+                'message' => 'Gagal mengupdate data dokumen!'
+            ], 403);
+        }
+
+        return $this->respond([
+            'data' => null,
+            'status' => 200,
+            'message' => 'Berhasil mengupdate data dokumen!'
+        ], 200);
     }
 
     public function delete(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Id dokumen tidak ditemukan!',
                 'status' => 403,
                 'message' => 'Id dokumen tidak ditemukan!'
-            ]);
+            ], 403);
         }
 
-        if($this->model->delete($id)){
+        if(!$this->model->db->query("DELETE FROM dokumen WHERE id = ?", [$id])){
             return $this->respond([
-                'data' => null,
-                'status' => 200,
-                'message' => 'Berhasil menghapus data dokumen!'
-            ]);
-        } else {
-            return $this->respond([
-                'data' => null,
+                'error' => $this->model->errors() ? $this->model->errors() : 'Gagal menghapus data dokumen!',
                 'status' => 403,
                 'message' => 'Gagal menghapus data dokumen!'
-            ]);
+            ], 403);
         }
+
+        return $this->respond([
+            'data' => null,
+            'status' => 200,
+            'message' => 'Berhasil menghapus data dokumen!'
+        ], 200);
     }
 }
