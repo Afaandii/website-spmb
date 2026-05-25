@@ -61,30 +61,4 @@ class M_akademik extends Model
             "less_than_equal_to" => 'Nilai rata-rata tidak boleh lebih dari 100.'
         ]
     ];
-
-    public function getAllAkademik(){
-        $this->select("akademik as ak.*, pendaftaran.kode_registrasi, tahun_ajaran.tahun");
-        $this->join("pendaftaran", "pendaftaran.id = akademik.pendaftaran_id");
-        $this->join("tahun_ajaran", "tahun_ajaran.id = akademik.tahun_ajaran_id");
-        return $this->findAll();
-    }
-
-    public function getAkademikById(int $id){
-        $this->select("akademik as ak.*, pendaftaran.kode_registrasi, tahun_ajaran.tahun");
-        $this->join("pendaftaran", "pendaftaran.id = akademik.pendaftaran_id");
-        $this->join("tahun_ajaran", "tahun_ajaran.id = akademik.tahun_ajaran_id");
-        return $this->where("ak.id", $id)->first();
-    }
-
-    public function insertAkademik(array $data){
-        $this->insert($data);
-    }
-
-    public function updateAkademik(int $id, array $data){
-        $this->update($id, $data);
-    }
-
-    public function deleteAkademik(int $id){
-        $this->delete($id);
-    }
 }
