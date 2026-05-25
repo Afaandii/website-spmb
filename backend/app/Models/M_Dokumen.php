@@ -77,34 +77,4 @@ class M_dokumen extends Model
             "integer" => 'Ukuran file harus berupa angka bulat.'
         ]
     ];
-
-    public function getAllDokumen(){
-        $this->select('dokumen.*, pendaftaran.siswa_id');
-        $this->join('pendaftaran', 'dokumen.pendaftaran_id = pendaftaran.id');
-        return $this->findAll();
-    }
-
-    public function getDokumenById(int $id){
-        $this->select('dokumen.*, pendaftaran.siswa_id');
-        $this->join('pendaftaran', 'dokumen.pendaftaran_id = pendaftaran.id');
-        return $this->find($id);
-    }
-
-    public function getDokumenBySiswaId(int $siswa_id){
-        $this->select('dokumen.*, pendaftaran.siswa_id');
-        $this->join('pendaftaran', 'dokumen.pendaftaran_id = pendaftaran.id');
-        return $this->where('pendaftaran.siswa_id', $siswa_id)->findAll();
-    }
-
-    public function insertDokumen(array $data){
-        $this->insert($data);
-    }
-
-    public function updateDokumen(int $id, array $data){
-        $this->update($id, $data);
-    }
-
-     public function deleteDokumen(int $id){
-         $this->delete($id);
-     }
 }
