@@ -79,24 +79,4 @@ class M_jalur_daftar extends Model
             'in_list' => 'Status aktif tidak valid.'
         ]
     ];
-
-    public function getAllJalurDaftar(){
-        return $this->findAll();
-    }
-
-    public function getJalurDaftarById(int $id){
-        return $this->where('id', $id)->first();
-    }
-
-    public function insertJalurDaftar(array $data){
-        $this->insert($data);
-    }
-
-    public function updateJalurDaftar(int $id, array $data){
-        $this->update($id, $data);
-    }
-
-    public function deleteJalurDaftar(int $id){
-        $this->delete($id);
-    }
 }
