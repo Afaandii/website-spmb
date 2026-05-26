@@ -68,34 +68,4 @@ class M_pendaftaran extends Model
             'in_list' => 'Status pendaftaran tidak valid.'
         ]
     ];
-
-    public function getAllPendaftaran(){
-        $this->select("pendaftaran as p.*, s.nama_siswa, sa.nama_sekolah, j.nama_jalur, ta.tahun_ajaran");
-        $this->join("siswa as s", "s.id = p.siswa_id");
-        $this->join("sekolah_asal as sa", "sa.id = p.sekolah_asal_id");
-        $this->join("jalur_pendaftaran as j", "j.id = p.jalur_id");
-        $this->join("tahun_ajaran as ta", "ta.id = p.tahun_ajaran_id");
-        return $this->findAll();
-    }
-
-    public function getPendaftaranById(int $id){
-        $this->select("pendaftaran as p.*, s.nama_siswa, sa.nama_sekolah, j.nama_jalur, ta.tahun_ajaran");
-        $this->join("siswa as s", "s.id = p.siswa_id");
-        $this->join("sekolah_asal as sa", "sa.id = p.sekolah_asal_id");
-        $this->join("jalur_pendaftaran as j", "j.id = p.jalur_id");
-        $this->join("tahun_ajaran as ta", "ta.id = p.tahun_ajaran_id");
-        return $this->where("p.id", $id)->first();
-    }
-
-    public function insertPendaftaran(array $data){
-        $this->insert($data);
-    }
-
-    public function updatePendaftaran(int $id, array $data){
-        $this->update($id, $data);
-    }
-
-    public function deletePendaftaran(int $id){
-        $this->delete($id);
-    }
 }
