@@ -54,33 +54,4 @@ class M_prestasi extends Model
         "tanggal_validasi" => 'permit_empty|valid_date'
     ];
 
-    public function getAllPrestasi(){
-        $this->select('prestasi.*, pendaftaran.siswa_id');
-        $this->join('pendaftaran', 'prestasi.pendaftaran_id = pendaftaran.id');
-        return $this->findAll();
-    }
-
-    public function getPrestasiById(int $id){
-        $this->select('prestasi.*, pendaftaran.siswa_id');
-        $this->join('pendaftaran', 'prestasi.pendaftaran_id = pendaftaran.id');
-        return $this->find($id);
-    }
-
-    public function getPrestasiBySiswaId(int $siswa_id){
-        $this->select('prestasi.*, pendaftaran.siswa_id');
-        $this->join('pendaftaran', 'prestasi.pendaftaran_id = pendaftaran.id');
-        return $this->where('pendaftaran.siswa_id', $siswa_id)->findAll();
-    }
-
-    public function insertPrestasi(array $data){
-        $this->insert($data);
-    }
-
-    public function updatePrestasi(int $id, array $data){
-        $this->update($id, $data);
-    }
-
-     public function deletePrestasi(int $id){
-         $this->delete($id);
-     }
 }
