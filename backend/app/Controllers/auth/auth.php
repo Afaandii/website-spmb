@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait; 
+use Firebase\JWT\JWT;
 use App\Models\M_user;
 
 class Auth extends BaseController{
@@ -28,14 +29,33 @@ class Auth extends BaseController{
 
     if($user){
       if(password_verify($password, $user['password'])){
+        $key = getenv('JWT_SECRET');
+        $time = time();
+        $expire = $time + getenv('JWT_TIME_TO_LIVE');
+
+        $payload = [
+          'iat' => $time,
+          'exp' => $expire,
+          'uid' => $user['id'],
+          'username' => $user['username']
+        ];
+
+        $token = JWT::encode($payload, $key, 'HS256');
+
+        $this->model->update($user['username'], [
+          'token' => $token,
+        ]);
+
         return $this->respond([
           'data' => $user,
+          'token' => $token,
           'status' => 200,
           'message' => 'Login berhasil!'
         ], 200);
       } else {
         return $this->respond([
           'error' => 'Password salah!',
+          'token' => null,
           'status' => 403,
           'message' => 'Password salah!'
         ], 403);
@@ -43,6 +63,7 @@ class Auth extends BaseController{
     } else {
       return $this->respond([
         'error' => 'Username tidak ditemukan!',
+        'token' => null,
         'status' => 403,
         'message' => 'Username tidak ditemukan!'
       ], 403);
