@@ -125,3 +125,70 @@ in APPPATH\Controllers\role\Role.php on line 92.
  6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
  8 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
+CRITICAL - 2026-06-06 16:06:30 --> ErrorException: Undefined array key "siswa_id"
+[Method: POST, Route: api/v1/user]
+in APPPATH\Controllers\User\user.php on line 65.
+ 1 APPPATH\Controllers\User\user.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "siswa_id"', 'C:\\repo-github\\website-spmb\\backend\\app\\Controllers\\User\\user.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\User\User->store()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User\User))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
+CRITICAL - 2026-06-06 16:09:23 --> ErrorException: Undefined array key "role_id"
+[Method: PUT, Route: api/v1/user/1]
+in APPPATH\Controllers\User\user.php on line 125.
+ 1 APPPATH\Controllers\User\user.php(125): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "role_id"', 'C:\\repo-github\\website-spmb\\backend\\app\\Controllers\\User\\user.php', 125)
+ 2 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\User\User->update(1)
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User\User))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
+CRITICAL - 2026-06-06 16:11:13 --> CodeIgniter\HTTP\Exceptions\HTTPException: Failed to parse JSON string. Error: Syntax error
+[Method: PUT, Route: api/v1/user/1]
+in SYSTEMPATH\HTTP\IncomingRequest.php on line 406.
+ 1 SYSTEMPATH\HTTP\IncomingRequest.php(406): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidJSON('Syntax error')
+ 2 APPPATH\Controllers\User\user.php(122): CodeIgniter\HTTP\IncomingRequest->getJSON(true)
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\User\User->update(1)
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User\User))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
+CRITICAL - 2026-06-06 16:29:11 --> TypeError: App\Models\M_user::hashPassword(): Argument #1 ($data) must be of type array, string given, called in C:\repo-github\website-spmb\backend\app\Controllers\User\user.php on line 129
+[Method: PUT, Route: api/v1/user/1]
+in APPPATH\Models\M_User.php on line 56.
+ 1 APPPATH\Controllers\User\user.php(129): App\Models\M_user->hashPassword('password')
+ 2 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\User\User->update(1)
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User\User))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
+CRITICAL - 2026-06-06 16:31:27 --> TypeError: App\Models\M_user::hashPassword(): Argument #1 ($data) must be of type array, string given, called in C:\repo-github\website-spmb\backend\app\Controllers\User\user.php on line 129
+[Method: PUT, Route: api/v1/user/1]
+in APPPATH\Models\M_User.php on line 56.
+ 1 APPPATH\Controllers\User\user.php(129): App\Models\M_user->hashPassword('password')
+ 2 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\User\User->update(1)
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User\User))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
+CRITICAL - 2026-06-06 16:32:13 --> TypeError: App\Models\M_user::hashPassword(): Argument #1 ($data) must be of type array, string given, called in C:\repo-github\website-spmb\backend\app\Controllers\User\user.php on line 129
+[Method: PUT, Route: api/v1/user/1]
+in APPPATH\Models\M_User.php on line 56.
+ 1 APPPATH\Controllers\User\user.php(129): App\Models\M_user->hashPassword('password')
+ 2 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\User\User->update(1)
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User\User))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\repo-github\\website-spmb\\backend\\public\\index.php')
