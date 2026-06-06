@@ -25,7 +25,7 @@ class M_role extends Model{
   protected $validationRules = [
     'nama_role' => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
     'deskripsi' => 'permit_empty|max_length[255]',
-    'login_destinasi' => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
+    'login_destinasi' => 'required|min_length[3]|max_length[120]',
   ];
   protected $validationMessages = [
     'nama_role' => [
