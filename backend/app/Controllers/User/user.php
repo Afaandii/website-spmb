@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
@@ -62,10 +62,11 @@ class User extends BaseController
 
         $dataInsert = [
             'role_id'  => $request['role_id'],
-            'siswa_id' => $request['siswa_id'],
+            // 'siswa_id' => $request['siswa_id'],
             'username' => $request['username'],
             'email' => $request['email'],
-            'password' => $request['password']
+            'password' => $this->model->hashPassword($request['password']),
+            'is_active' => $request['is_active'],
         ];
         
         if(!$this->model->insert($dataInsert)){
@@ -121,11 +122,12 @@ class User extends BaseController
         $request = $this->request->getRawInput();
 
         $dataUpdate = [
-            'role_id'  => $request['role_id'],
-            'siswa_id' => $request['siswa_id'],
+            'role_id'  => $request['role_id'] ,
+            'siswa_id' => $request['siswa_id'] ?? null,
             'username' => $request['username'],
             'email' => $request['email'],
-            'password' => $request['password']
+            'password' => $this->model->hashPassword($request['password']),
+            'is_active' => $request['is_active'],
         ];
 
         if(!$this->model->update($id, $dataUpdate)){

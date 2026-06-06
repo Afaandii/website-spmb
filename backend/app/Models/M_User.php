@@ -53,11 +53,11 @@ class M_user extends Model
         ],
     ];
 
-    public function hashPassword(array $data)
+    public function hashPassword(string $password)
     {
-        if (isset($data['data']['password'])) {
-            $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
+        if (isset($password)) {
+            $data =  password_hash($password, PASSWORD_DEFAULT);
         }
-        return $data;
+        return $data ?? null;
     }
 }
