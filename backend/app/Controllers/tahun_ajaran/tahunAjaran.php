@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\tahun_ajaran;
 
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
@@ -57,7 +57,7 @@ class TahunAjaran extends BaseController
         $request = $this->request->getVar();
 
         $dataInsert = [
-            'tahun_ajaran' => $request['tahun_ajaran'],
+            'tahun' => $request['tahun'],
             'status' => $request['status'],
         ];
 
@@ -106,7 +106,7 @@ class TahunAjaran extends BaseController
         $request = $this->request->getRawInput();
 
         $dataUpdate = [
-            'tahun_ajaran' => $request['tahun_ajaran'],
+            'tahun' => $request['tahun'],
             'status' => $request['status'],
         ];
 

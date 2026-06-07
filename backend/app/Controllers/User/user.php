@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\User;
+namespace App\Controllers\user;
 
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
@@ -22,7 +22,7 @@ class User extends BaseController
 
     public function index()
     {
-        $data = $this->model->db->query("SELECT * FROM user")->getResult();
+        $data = $this->model->db->query("SELECT * FROM users")->getResult();
 
         return $this->respond([
             'data' => $data,
@@ -40,7 +40,7 @@ class User extends BaseController
             ], 403);
         }
         
-        $data = $this->model->db->query("SELECT * FROM user WHERE id = ?", [$id])->getRow();
+        $data = $this->model->db->query("SELECT * FROM users WHERE id = ?", [$id])->getRow();
         
         if($data){
             return $this->respond([
