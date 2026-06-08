@@ -31,6 +31,13 @@ $routes->group('api', function($routes) {
     $routes->put('tahun-ajaran/(:num)', 'tahun_ajaran\TahunAjaran::update/$1');
     $routes->delete('tahun-ajaran/(:num)', 'tahun_ajaran\TahunAjaran::delete/$1');
 
+    // Siswa Routing
+    $routes->get('siswa', 'siswa\Siswa::index');
+    $routes->get('siswa/(:num)', 'siswa\Siswa::show/$1');
+    $routes->post('siswa', 'siswa\Siswa::store');
+    $routes->put('siswa/(:num)', 'siswa\Siswa::update/$1');
+    $routes->delete('siswa/(:num)', 'siswa\Siswa::delete/$1');
+
     // Seleksi Routing
     $routes->get('seleksi', 'seleksi\Seleksi::index');
     $routes->get('seleksi/(:num)', 'seleksi\Seleksi::show/$1');

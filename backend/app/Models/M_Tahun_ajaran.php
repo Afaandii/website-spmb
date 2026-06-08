@@ -34,8 +34,8 @@ class M_tahun_ajaran extends Model
 
     // Validation
     protected $validationRules      = [
-        'tahun' => 'required|numeric|exact_length[4]|is_unique[tahun_ajaran.tahun]',
-        'status' => 'required|in_list[aktif,non aktif]'
+        'tahun' => 'required|numeric|exact_length[4]',
+        'status' => 'required|in_list[active, deactive]',
     ];
     protected $validationMessages   = [
         'tahun' => [
