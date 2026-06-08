@@ -44,9 +44,9 @@ class M_siswa extends Model
 
     // Validation
     protected $validationRules      = [
-        "nik" => 'required|alpha_numeric_space|is_unique[siswa.nik]|max_length[32]',
-        "nisn" => 'required|alpha_numeric_space|is_unique[siswa.nisn]|max_length[32]',
-        "npsn" => 'required|alpha_numeric_space|is_unique[siswa.npsn]|max_length[32]',
+        "nik" => 'required|alpha_numeric_space',
+        "nisn" => 'required|alpha_numeric_space',
+        "npsn" => 'required|alpha_numeric_space',
         "nama_lengkap" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
         "tempat_lahir" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
         "tanggal_lahir" => 'required|valid_date',
@@ -57,16 +57,4 @@ class M_siswa extends Model
         "latitude" => 'required|numeric',
         "longitude" => 'required|numeric',
     ];
-    protected $validationMessages   = [
-        "nik" => [
-            "is_unique" => 'NIK sudah digunakan sebelumnya, mohon gunakan NIK lain.',
-        ],
-        "nisn" => [
-            "is_unique" => 'NISN sudah digunakan sebelumnya, mohon gunakan NISN lain.',
-        ],
-        "npsn" => [
-            "is_unique" => 'NPSN sudah digunakan sebelumnya, mohon gunakan NPSN lain.',
-        ],
-    ];
-
 }

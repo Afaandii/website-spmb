@@ -3,6 +3,7 @@
 use App\Controllers\BaseController;
 use App\Models\M_siswa;
 use CodeIgniter\API\ResponseTrait;
+use Config\Services;
 
 class Siswa extends BaseController{
   use ResponseTrait;
@@ -55,6 +56,32 @@ class Siswa extends BaseController{
 
   public function store(){
    $request = $this->request->getVar();
+
+   $validation = Services::validation();
+
+   $validation->setRules([
+      'nik' => 'is_unique[siswa.nik]',
+      'nisn' => 'is_unique[siswa.nisn]',
+      'npsn' => 'is_unique[siswa.npsn]',
+   ], [
+      'nik' => [
+        'is_unique' => 'NIK sudah digunakan sebelumnya, mohon gunakan NIK lain.'
+      ],
+      'nisn' => [
+        'is_unique' => 'NISN sudah digunakan sebelumnya, mohon gunakan NISN lain.'
+      ],
+      'npsn' => [
+        'is_unique' => 'NPSN sudah digunakan sebelumnya, mohon gunakan NPSN lain.'
+      ],
+   ]);
+
+   if(!$validation->run($request)) {
+     return $this->respond([
+       'error' => $validation->getErrors(),
+       'status' => 400,
+       'message' => 'Terjadi kesalahan saat menambahkan data siswa!, data harus unique!'
+     ], 400);
+   }
 
    $dataInsert = [
      'nik' => $request['nik'],

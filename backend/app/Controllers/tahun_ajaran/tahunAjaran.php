@@ -5,6 +5,7 @@ namespace App\Controllers\tahun_ajaran;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\M_tahun_ajaran;
+use Config\Services;
 
 class TahunAjaran extends BaseController
 {
@@ -55,6 +56,24 @@ class TahunAjaran extends BaseController
 
     public function store(){
         $request = $this->request->getVar();
+
+        $validation = Services::validation();
+
+        $validation->setRules([
+            'tahun' => 'is_unique[tahun_ajaran.tahun]'   
+        ], [
+            'tahun' => [
+                'is_unique' => 'Tahun sudah digunakan, mohon gunakan tahun lain!'
+            ]
+        ]);
+
+        if(!$validation->run($request)) {
+            return $this->respond([
+                'error' => $validation->getErrors(),
+                'status' => 400,
+                'message' => 'Terjadi kesalahan saat menambahkan data tahun ajaran!, data tahun ajaran harus unique!'
+            ], 400);
+        }
 
         $dataInsert = [
             'tahun' => $request['tahun'],
