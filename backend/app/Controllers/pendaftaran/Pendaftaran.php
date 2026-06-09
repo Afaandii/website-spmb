@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\pendaftaran;
 
 use App\Controllers\BaseController;
 use App\Models\M_pendaftaran;

@@ -50,10 +50,10 @@ class M_siswa extends Model
         "nama_lengkap" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
         "tempat_lahir" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
         "tanggal_lahir" => 'required|valid_date',
-        "jenis_kelamin" => 'required|in_list[Laki-laki,Perempuan]',
+        "jenis_kelamin" => 'required|in_list[laki-laki,perempuan]',
         "agama" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
         "alamat" => 'required|alpha_numeric_space|min_length[3]|max_length[255]',
-        "no_telp" => 'required|alpha_numeric_space|integer|min_length[3]|max_length[20]',
+        "no_telp" => 'required|integer|max_length[12]',
         "latitude" => 'required|numeric',
         "longitude" => 'required|numeric',
     ];
