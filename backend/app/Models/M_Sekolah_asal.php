@@ -36,17 +36,16 @@ class M_sekolah_asal extends Model
 
     // Validation
     protected $validationRules      = [
-        'npsn' => 'required|numeric|exact_length[10]|is_unique[sekolah_asal.npsn]',
-        'nama_sekolah' => 'required|alpha_numeric_space|max_length[100]',
+        'npsn' => 'required|numeric|exact_length[10]',
+        'nama_sekolah' => 'required|max_length[100]',
         'alamat_sekolah' => 'required|max_length[255]',
-        'jenjang_sekolah' => 'required|in_list[SD,SMP,SMA]'
+        'jenjang_sekolah' => 'required|in_list[SD,MI,SMP,MTS,SMA,SMK,MA]',
     ];
     protected $validationMessages   = [
         'npsn' => [
             'required' => 'NPSN wajib diisi.',
             'numeric' => 'NPSN harus berupa angka.',
             'exact_length' => 'NPSN harus terdiri dari 10 karakter.',
-            'is_unique' => 'NPSN sudah digunakan, mohon gunakan NPSN lain.'
         ],
         'nama_sekolah' => [
             'required' => 'Nama sekolah wajib diisi.',

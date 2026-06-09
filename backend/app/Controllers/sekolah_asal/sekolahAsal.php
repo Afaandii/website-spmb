@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\sekolah_asal;
 
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\M_sekolah_asal;
+use Config\Services;
 
 class SekolahAsal extends BaseController
 {
@@ -65,8 +66,26 @@ class SekolahAsal extends BaseController
             'npsn' => $request['npsn'],
             'nama_sekolah' => $request['nama_sekolah'],
             'jenjang_sekolah' => $request['jenjang_sekolah'],
-            'alamat' => $request['alamat'],
+            'alamat_sekolah' => $request['alamat_sekolah'],
         ];
+
+        $validation = Services::validation();
+
+        $validation->setRules([
+            'npsn' => 'is_unique[sekolah_asal.npsn]',
+        ], [
+            'npsn' => [
+                'is_unique' => 'NPSN sudah terdaftar di database!'
+            ],
+        ]);
+
+        if(!$validation->run($request)) {
+            return $this->respond([
+                'error' => $validation->getErrors(),
+                'status' => 400,
+                'message' => 'terjadi kesalahan!, data npsn harus unique!'
+            ], 400);
+        }
 
         if(!$this->model->insert($dataStore)){
             return $this->respond([
@@ -124,8 +143,26 @@ class SekolahAsal extends BaseController
             'npsn' => $request['npsn'],
             'nama_sekolah' => $request['nama_sekolah'],
             'jenjang_sekolah' => $request['jenjang_sekolah'],
-            'alamat' => $request['alamat'],
+            'alamat_sekolah' => $request['alamat_sekolah'],
         ];
+
+        $validation = Services::validation();
+
+        $validation->setRules([
+            'npsn' => "is_unique[sekolah_asal.npsn,id,{$id}]",
+        ], [
+            'npsn' => [
+                'is_unique' => 'NPSN sudah terdaftar di database!'
+            ],
+        ]);
+
+        if(!$validation->run($request)) {
+            return $this->respond([
+                'error' => $validation->getErrors(),
+                'status' => 400,
+                'message' => 'NPSN sudah digunakan, mohon gunakan NPSN lain!'
+            ], 400);
+        }
 
         if(!$this->model->update($id, $dataUpdate)){
             return $this->respond([

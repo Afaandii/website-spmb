@@ -15,18 +15,18 @@ class Siswa extends Migration
                 'auto_increment' => true,
             ],
             "nik" => [
-                'type' => 'varchar',
-                'constraint' => 255,
+                'type' => 'INT',
+                'unsigned' => true,
                 'null' => true,
             ],
             "nisn" => [
-                'type' => 'varchar',
-                'constraint' => 255,
+                'type' => 'INT',
+                'unsigned' => true,
                 'null' => true,
             ],
             "npsn" => [
-                'type' => 'varchar',
-                'constraint' => 255,
+                'type' => 'INT',
+                'unsigned' => true,
                 'null' => true,
             ],
             "nama_lengkap" => [
@@ -65,12 +65,12 @@ class Siswa extends Migration
             ],
             "latitude" => [
                 'type' => 'decimal',
-                'constraint' => '10,8',
+                'constraint' => '9,6',
                 'null' => true,
             ],
             "longitude" => [
                 'type' => 'decimal',
-                'constraint' => '10,8',
+                'constraint' => '9,6',
                 'null' => true,
             ],
             "created_at" => [

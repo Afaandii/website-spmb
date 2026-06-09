@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Controllers\siswa;
+
 use App\Controllers\BaseController;
 use App\Models\M_siswa;
 use CodeIgniter\API\ResponseTrait;
