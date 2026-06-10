@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\jalur_daftar;
 
 use App\Controllers\BaseController;
 use App\Models\M_jalur_daftar;
@@ -69,7 +69,6 @@ class JalurDaftar extends BaseController
             'tanggal_mulai' => $request['tanggal_mulai'],
             'tanggal_selesai' => $request['tanggal_selesai'],
             'is_active' => $request['is_active'],
-            'created_at' => date('Y-m-d H:i:s'),
         ];
 
         if(!$this->model->insert($dataStore)){
