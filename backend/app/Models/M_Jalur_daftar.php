@@ -24,12 +24,6 @@ class M_jalur_daftar extends Model
         'updated_at'
     ];
 
-    protected bool $allowEmptyInserts = false;
-    protected bool $updateOnlyChanged = true;
-
-    protected array $casts = [];
-    protected array $castHandlers = [];
-
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
@@ -44,7 +38,7 @@ class M_jalur_daftar extends Model
         'kuota' => 'required|integer',
         'metode_perankingan' => 'required|max_length[100]',
         'tanggal_mulai' => 'required|valid_date',
-        'tanggal_selesai' => 'required|valid_date|greater_than[tanggal_mulai]',
+        'tanggal_selesai' => 'required|valid_date',
         'is_active' => 'required|in_list[1,2]'
     ];
     protected $validationMessages   = [
@@ -72,7 +66,6 @@ class M_jalur_daftar extends Model
         'tanggal_selesai' => [
             'required' => 'Tanggal selesai wajib diisi.',
             'valid_date' => 'Tanggal selesai tidak valid.',
-            'greater_than' => 'Tanggal selesai harus setelah tanggal mulai.'
         ],
         'is_active' => [
             'required' => 'Status aktif wajib diisi.',

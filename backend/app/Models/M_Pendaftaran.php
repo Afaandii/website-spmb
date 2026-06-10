@@ -24,12 +24,6 @@ class M_pendaftaran extends Model
         'updated_at'
     ];
 
-    protected bool $allowEmptyInserts = false;
-    protected bool $updateOnlyChanged = true;
-
-    protected array $casts = [];
-    protected array $castHandlers = [];
-
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
@@ -42,7 +36,7 @@ class M_pendaftaran extends Model
         'siswa_id' => 'required|integer',
         'jalur_id' => 'required|integer',
         'tahun_ajaran_id' => 'required|integer',
-        'kode_registrasi' => 'required|alpha_numeric_space|max_length[50]',
+        'kode_registrasi' => 'required|alpha_numeric_space|max_length[100]',
         'status_daftar' => 'required|in_list[proses,diterima,ditolak]'
     ];
     protected $validationMessages   = [
@@ -61,7 +55,7 @@ class M_pendaftaran extends Model
         'kode_registrasi' => [
             'required' => 'Kode registrasi wajib diisi.',
             'alpha_numeric_space' => 'Kode registrasi hanya boleh berisi huruf, angka, dan spasi.',
-            'max_length' => 'Kode registrasi tidak boleh lebih dari 50 karakter.'
+            'max_length' => 'Kode registrasi tidak boleh lebih dari 100 karakter.'
         ],
         'status_daftar' => [
             'required' => 'Status pendaftaran wajib diisi.',
