@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\data_orang_tua;
 
 use App\Controllers\BaseController;
-use App\Models\M_dokumen;
+use App\Models\M_data_orang_tua;
 use CodeIgniter\API\ResponseTrait;
 
 class DataOrangTua extends BaseController
@@ -11,13 +11,13 @@ class DataOrangTua extends BaseController
     use ResponseTrait;
 
     /**
-     * @var M_dokumen
+     * @var M_data_orang_tua
      */
     private $model;
 
     public function __construct()
     {
-        $this->model = new M_dokumen();
+        $this->model = new M_data_orang_tua();
     }
 
     public function index()
@@ -71,7 +71,6 @@ class DataOrangTua extends BaseController
             'penghasilan_ibu' => $request['penghasilan_ibu'],
             'pendidikan_terakhir_ibu' => $request['pendidikan_terakhir_ibu'],
             'no_telp_aktif' => $request['no_telp_aktif'],
-            'created_at' => date('Y-m-d H:i:s'),
         ];
 
         if(!$this->model->insert($dataStore)){
@@ -115,7 +114,7 @@ class DataOrangTua extends BaseController
         }
     }
 
-    public function updated(int $id){
+    public function update(int $id){
         if(!$this->model->find($id)){
             return $this->respond([
                 'error' => $this->model->errors() ? $this->model->errors() : 'Id data orang tua tidak ditemukan!',
@@ -137,7 +136,6 @@ class DataOrangTua extends BaseController
             'penghasilan_ibu' => $request['penghasilan_ibu'],
             'pendidikan_terakhir_ibu' => $request['pendidikan_terakhir_ibu'],
             'no_telp_aktif' => $request['no_telp_aktif'],
-            'updated_at' => date('Y-m-d H:i:s'),
         ];
 
         if(!$this->model->update($id, $dataUpdate)){

@@ -24,12 +24,6 @@ class M_dokumen extends Model
         "updated_at"
     ];
 
-    protected bool $allowEmptyInserts = false;
-    protected bool $updateOnlyChanged = true;
-
-    protected array $casts = [];
-    protected array $castHandlers = [];
-
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
@@ -43,9 +37,9 @@ class M_dokumen extends Model
         "jenis_dokumen" => 'required|in_list[ijazah,skhu,akte_kelahiran,foto]',
         "file_path" => 'required|string|max_length[255]',
         "status_verifikasi" => 'required|in_list[belum diverifikasi,terverifikasi,ditolak]',
-        "keterangan_dokumen" => 'permitted|string|max_length[255]',
-        "mimes_type" => 'permitted|string|max_length[255]',
-        "ukuran_file" => 'permitted|integer'
+        "keterangan_dokumen" => 'string|max_length[255]',
+        "mimes_type" => 'string|max_length[255]',
+        "ukuran_file" => 'integer'
     ];
     protected $validationMessages   = [
         "pendaftaran_id" => [
