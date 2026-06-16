@@ -34,7 +34,7 @@ class M_dokumen extends Model
     // Validation
     protected $validationRules      = [
         "pendaftaran_id" => 'required|integer',
-        "jenis_dokumen" => 'required|in_list[ijazah,skhu,akte_kelahiran,foto]',
+        "jenis_dokumen" => 'required|in_list[ijazah,sktm,akte_kelahiran]',
         "file_path" => 'required|string|max_length[255]',
         "status_verifikasi" => 'required|in_list[belum diverifikasi,terverifikasi,ditolak]',
         "keterangan_dokumen" => 'string|max_length[255]',

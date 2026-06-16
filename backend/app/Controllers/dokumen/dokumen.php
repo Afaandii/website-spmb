@@ -68,7 +68,6 @@ class Dokumen extends BaseController
             'keterangan_dokumen' => $request['keterangan_dokumen'],
             'mimes_type' => $request['mimes_type'],
             'ukuran_file' => $request['ukuran_file'],
-            'created_at' => date('Y-m-d H:i:s'),
         ];
 
         if(!$this->model->insert($dataStore)){
@@ -131,7 +130,6 @@ class Dokumen extends BaseController
             'keterangan_dokumen' => $request['keterangan_dokumen'],
             'mimes_type' => $request['mimes_type'],
             'ukuran_file' => $request['ukuran_file'],
-            'updated_at' => date('Y-m-d H:i:s'),
         ];
 
         if(!$this->model->update($id, $dataUpdate)){
