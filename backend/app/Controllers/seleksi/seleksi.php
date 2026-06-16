@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\seleksi;
 
 use App\Controllers\BaseController;
 use App\Models\M_seleksi;
@@ -63,7 +63,7 @@ class Seleksi extends BaseController
         $dataStore = [
             'pendaftaran_id' => $request['pendaftaran_id'],
             'nilai_akhir' => $request['nilai_akhir'],
-            'ranking' => $request['ranking'],
+            'rangking' => $request['rangking'],
             'jarak_meter' => $request['jarak_meter'],
             'status_seleksi' => $request['status_seleksi'],
         ];
@@ -123,7 +123,7 @@ class Seleksi extends BaseController
         $dataUpdate = [
             'pendaftaran_id' => $request['pendaftaran_id'],
             'nilai_akhir' => $request['nilai_akhir'],
-            'ranking' => $request['ranking'],
+            'rangking' => $request['rangking'],
             'jarak_meter' => $request['jarak_meter'],
             'status_seleksi' => $request['status_seleksi'],
         ];

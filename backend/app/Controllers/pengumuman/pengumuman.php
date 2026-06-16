@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\pengumuman;
 
 use App\Controllers\BaseController;
 use App\Models\M_pengumuman;
