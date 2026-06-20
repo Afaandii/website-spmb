@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import {
   LayoutDashboard,
   Users,
@@ -6,29 +6,35 @@ import {
   FileText,
   MessageSquare,
   LogOut,
-  GraduationCap
-} from "lucide-react"
+  GraduationCap,
+} from "lucide-react";
 
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 
-// Sample navigation data
+// Grouped navigation data
 const data = {
-  navMain: [
+  general: [
     {
       title: "Dashboard",
       url: "/admin",
       icon: LayoutDashboard,
       isActive: true,
     },
+  ],
+  management: [
     {
       title: "Pendaftar",
       url: "/admin/pendaftar",
@@ -39,6 +45,8 @@ const data = {
       url: "/admin/pengumuman",
       icon: MessageSquare,
     },
+  ],
+  other: [
     {
       title: "Laporan",
       url: "/admin/laporan",
@@ -50,54 +58,97 @@ const data = {
       icon: Settings,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar className="border-r border-slate-200 bg-white" {...props}>
-      <SidebarHeader className="bg-white">
-        <div className="flex items-center gap-2 px-4 py-2">
-          <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-blue-600 text-white">
+    <Sidebar variant="inset" {...props}>
+      <SidebarHeader>
+        <div className="flex items-center gap-2 px-2 py-2">
+          <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <GraduationCap className="size-5" />
           </div>
           <div className="flex flex-col gap-0.5 leading-none">
-            <span className="font-semibold text-slate-900">PPDB Online</span>
-            <span className="text-xs text-slate-500">Admin Panel</span>
+            <span className="font-semibold text-lg">PPDB Online</span>
+            <span className="text-xs text-muted-foreground">Admin Panel</span>
           </div>
         </div>
       </SidebarHeader>
-      <SidebarContent className="bg-white">
-        <SidebarMenu>
-          {data.navMain.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton 
-                asChild 
-                isActive={item.isActive} 
-                tooltip={item.title}
-                className={`data-[active=true]:bg-blue-50 data-[active=true]:text-blue-700 data-[active=true]:font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors`}
-              >
-                <a href={item.url}>
-                  <item.icon className="h-4 w-4" />
-                  <span>{item.title}</span>
-                </a>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
+      <SidebarContent>
+        {/* General Group */}
+        <SidebarGroup>
+          <SidebarGroupLabel>General</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {data.general.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={item.isActive}
+                    tooltip={item.title}
+                  >
+                    <a href={item.url}>
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Management Group */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Management</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {data.management.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild tooltip={item.title}>
+                    <a href={item.url}>
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Other Group */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Other</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {data.other.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild tooltip={item.title}>
+                    <a href={item.url}>
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="bg-white">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Keluar">
-              <a href="/login" className="text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors">
-                <LogOut className="h-4 w-4" />
-                <span>Keluar</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+      <SidebarFooter className="p-4">
+        <Button
+          variant="outline"
+          className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground border-destructive/20"
+          asChild
+        >
+          <a href="/login">
+            <LogOut className="mr-2 h-4 w-4" />
+            Keluar
+          </a>
+        </Button>
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

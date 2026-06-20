@@ -36,10 +36,10 @@ const data = [
 
 export function OverviewChart() {
   return (
-    <Card className="col-span-1 md:col-span-4 bg-white border-slate-200 rounded-xl shadow-sm">
+    <Card className="col-span-1 md:col-span-4">
       <CardHeader>
-        <CardTitle className="text-slate-900">Statistik Pendaftaran</CardTitle>
-        <CardDescription className="text-slate-500">
+        <CardTitle>Statistik Pendaftaran</CardTitle>
+        <CardDescription>
           Jumlah pendaftar baru per hari dalam minggu ini.
         </CardDescription>
       </CardHeader>
@@ -49,25 +49,27 @@ export function OverviewChart() {
             <BarChart data={data}>
               <XAxis
                 dataKey="name"
-                stroke="#64748b"
+                stroke="currentColor"
+                className="text-muted-foreground"
                 fontSize={12}
                 tickLine={false}
                 axisLine={false}
               />
               <YAxis
-                stroke="#64748b"
+                stroke="currentColor"
+                className="text-muted-foreground"
                 fontSize={12}
                 tickLine={false}
                 axisLine={false}
                 tickFormatter={(value) => `${value}`}
               />
               <Tooltip 
-                cursor={{ fill: '#f1f5f9' }}
-                contentStyle={{ borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' }}
+                cursor={{ fill: 'hsl(var(--muted))' }}
+                contentStyle={{ borderRadius: '8px', border: '1px solid hsl(var(--border))', backgroundColor: 'hsl(var(--background))', color: 'hsl(var(--foreground))', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' }}
               />
               <Bar
                 dataKey="total"
-                fill="#3b82f6"
+                fill="hsl(var(--primary))"
                 radius={[4, 4, 0, 0]}
               />
             </BarChart>

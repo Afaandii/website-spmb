@@ -50,50 +50,45 @@ const recentRegistrations = [
 
 export function RecentRegistrations() {
   return (
-    <Card className="col-span-1 md:col-span-3 bg-white border-slate-200 rounded-xl shadow-sm">
+    <Card className="col-span-1 md:col-span-3">
       <CardHeader>
-        <CardTitle className="text-slate-900">Pendaftar Terbaru</CardTitle>
-        <CardDescription className="text-slate-500">
+        <CardTitle>Pendaftar Terbaru</CardTitle>
+        <CardDescription>
           Data 5 pendaftar terakhir yang masuk ke sistem.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <Table>
-          <TableHeader className="bg-slate-50 rounded-t-lg">
-            <TableRow className="border-slate-200 hover:bg-slate-50">
-              <TableHead className="text-slate-600 font-medium">Pendaftar</TableHead>
-              <TableHead className="text-slate-600 font-medium">Asal Sekolah</TableHead>
-              <TableHead className="hidden md:table-cell text-slate-600 font-medium">Tanggal</TableHead>
-              <TableHead className="text-right text-slate-600 font-medium">Status</TableHead>
+          <TableHeader className="bg-muted/50 rounded-t-lg">
+            <TableRow className="border-border hover:bg-muted/50">
+              <TableHead className="font-medium">Pendaftar</TableHead>
+              <TableHead className="font-medium">Asal Sekolah</TableHead>
+              <TableHead className="hidden md:table-cell font-medium">Tanggal</TableHead>
+              <TableHead className="text-right font-medium">Status</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {recentRegistrations.map((registration) => (
-              <TableRow key={registration.id} className="border-slate-200 hover:bg-slate-50 transition-colors">
+              <TableRow key={registration.id} className="border-border hover:bg-muted/50 transition-colors">
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <Avatar className="h-8 w-8 hidden sm:flex">
                       <AvatarImage src={`https://avatar.vercel.sh/${registration.name}.png`} alt={registration.name} />
-                      <AvatarFallback className="bg-blue-100 text-blue-700">{registration.name.substring(0, 2).toUpperCase()}</AvatarFallback>
+                      <AvatarFallback className="bg-primary/10 text-primary">{registration.name.substring(0, 2).toUpperCase()}</AvatarFallback>
                     </Avatar>
                     <div>
-                      <div className="font-medium text-slate-900">{registration.name}</div>
-                      <div className="text-xs text-slate-500">{registration.id}</div>
+                      <div className="font-medium">{registration.name}</div>
+                      <div className="text-xs text-muted-foreground">{registration.id}</div>
                     </div>
                   </div>
                 </TableCell>
-                <TableCell className="text-slate-700">{registration.school}</TableCell>
-                <TableCell className="hidden md:table-cell text-slate-700">{registration.date}</TableCell>
+                <TableCell>{registration.school}</TableCell>
+                <TableCell className="hidden md:table-cell text-muted-foreground">{registration.date}</TableCell>
                 <TableCell className="text-right">
                   <Badge 
                     variant={
                       registration.status === "Terverifikasi" ? "default" :
                       registration.status === "Menunggu" ? "secondary" : "destructive"
-                    }
-                    className={
-                      registration.status === "Terverifikasi" ? "bg-green-100 text-green-700 hover:bg-green-200 border-green-200 shadow-none font-medium" :
-                      registration.status === "Menunggu" ? "bg-amber-100 text-amber-700 hover:bg-amber-200 border-amber-200 shadow-none font-medium" :
-                      "bg-red-100 text-red-700 hover:bg-red-200 border-red-200 shadow-none font-medium"
                     }
                   >
                     {registration.status}
