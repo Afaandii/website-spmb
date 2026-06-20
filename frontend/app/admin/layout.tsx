@@ -12,7 +12,7 @@ export default function AdminLayout({
     <TooltipProvider>
       <SidebarProvider>
         <AppSidebar />
-        <div className="flex flex-1 flex-col overflow-hidden bg-slate-50 text-slate-900">
+        <div className="flex flex-1 flex-col overflow-hidden bg-background text-foreground">
           <Header />
           <main className="flex-1 overflow-y-auto overflow-x-hidden pt-4 pb-8 px-4 md:px-8">
             {children}
