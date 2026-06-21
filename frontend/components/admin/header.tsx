@@ -43,11 +43,11 @@ export function Header() {
 
       <div className="flex items-center gap-4">
         <div className="relative hidden md:flex">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Search className="absolute left-2.5 top-2 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Cari..."
-            className="w-64 rounded-full bg-muted/50 pl-8 focus-visible:ring-primary"
+            placeholder="Search"
+            className="w-64 rounded-md bg-muted/50 pl-8 focus-visible:ring-primary"
           />
         </div>
         <ThemeToggle />
