@@ -5,7 +5,6 @@ import {
   Settings,
   FileText,
   MessageSquare,
-  LogOut,
   GraduationCap,
 } from "lucide-react";
 
@@ -23,6 +22,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import { MdLogout } from "react-icons/md";
 
 // Grouped navigation data
 const data = {
@@ -137,14 +137,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="p-4">
-        <Button
-          variant="outline"
-          className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground border-destructive/20"
-          asChild
-        >
-          <a href="/login">
-            <LogOut className="mr-2 h-4 w-4" />
-            Keluar
+        <Button variant="destructive" className="py-5 text-white" asChild>
+          <a href="/logout">
+            Logout <MdLogout />
           </a>
         </Button>
       </SidebarFooter>
