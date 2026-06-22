@@ -118,8 +118,6 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
-
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -130,4 +128,28 @@
   html {
     @apply font-sans;
   }
+}
+
+/* Sidebar Scrollbar - Shadcn Admin Style */
+[data-sidebar="content"] {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(240 5% 35%) transparent;
+}
+
+/* Chrome, Edge, Safari */
+[data-sidebar="content"]::-webkit-scrollbar {
+  width: 6px;
+}
+
+[data-sidebar="content"]::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-sidebar="content"]::-webkit-scrollbar-thumb {
+  background: hsl(240 5% 35%);
+  border-radius: 9999px;
+}
+
+[data-sidebar="content"]::-webkit-scrollbar-thumb:hover {
+  background: hsl(240 5% 45%);
 }

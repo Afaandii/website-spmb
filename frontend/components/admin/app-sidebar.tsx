@@ -1,10 +1,19 @@
 import * as React from "react";
 import {
   LayoutDashboard,
+  Calendar,
+  Route,
+  BookOpen,
+  Building,
   Users,
-  Settings,
-  FileText,
-  MessageSquare,
+  Contact,
+  Award,
+  Files,
+  ClipboardList,
+  ListChecks,
+  Megaphone,
+  UserCog,
+  LogOut,
   GraduationCap,
 } from "lucide-react";
 
@@ -22,7 +31,6 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { MdLogout } from "react-icons/md";
 
 // Grouped navigation data
 const data = {
@@ -34,28 +42,72 @@ const data = {
       isActive: true,
     },
   ],
-  management: [
+  dataMaster: [
     {
-      title: "Pendaftar",
-      url: "/admin/pendaftar",
+      title: "Tahun Ajaran",
+      url: "/admin/tahun-ajaran",
+      icon: Calendar,
+    },
+    {
+      title: "Jalur Daftar",
+      url: "/admin/jalur-daftar",
+      icon: Route,
+    },
+    {
+      title: "Akademik",
+      url: "/admin/akademik",
+      icon: BookOpen,
+    },
+    {
+      title: "Sekolah Asal",
+      url: "/admin/sekolah-asal",
+      icon: Building,
+    },
+  ],
+  dataSiswa: [
+    {
+      title: "Siswa",
+      url: "/admin/siswa",
       icon: Users,
+    },
+    {
+      title: "Data Orang Tua",
+      url: "/admin/data-orang-tua",
+      icon: Contact,
+    },
+    {
+      title: "Prestasi",
+      url: "/admin/prestasi",
+      icon: Award,
+    },
+    {
+      title: "Dokumen",
+      url: "/admin/dokumen",
+      icon: Files,
+    },
+  ],
+  prosesPpdb: [
+    {
+      title: "Pendaftaran",
+      url: "/admin/pendaftaran",
+      icon: ClipboardList,
+    },
+    {
+      title: "Seleksi",
+      url: "/admin/seleksi",
+      icon: ListChecks,
     },
     {
       title: "Pengumuman",
       url: "/admin/pengumuman",
-      icon: MessageSquare,
+      icon: Megaphone,
     },
   ],
-  other: [
+  pengaturan: [
     {
-      title: "Laporan",
-      url: "/admin/laporan",
-      icon: FileText,
-    },
-    {
-      title: "Pengaturan",
-      url: "/admin/pengaturan",
-      icon: Settings,
+      title: "Users",
+      url: "/admin/users",
+      icon: UserCog,
     },
   ],
 };
@@ -64,7 +116,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
-        <div className="flex items-center gap-2 px-2 py-2">
+        <div className="flex items-center gap-2 px-4 py-2">
           <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <GraduationCap className="size-5" />
           </div>
@@ -98,12 +150,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Management Group */}
+        {/* Data Master Group */}
         <SidebarGroup>
-          <SidebarGroupLabel>Management</SidebarGroupLabel>
+          <SidebarGroupLabel>Master</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {data.management.map((item) => (
+              {data.dataMaster.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild tooltip={item.title}>
                     <a href={item.url}>
@@ -117,12 +169,50 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Other Group */}
+        {/* Data Siswa & Berkas Group */}
         <SidebarGroup>
-          <SidebarGroupLabel>Other</SidebarGroupLabel>
+          <SidebarGroupLabel>Siswa & Berkas</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {data.other.map((item) => (
+              {data.dataSiswa.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild tooltip={item.title}>
+                    <a href={item.url}>
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Proses PPDB Group */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Proses</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {data.prosesPpdb.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild tooltip={item.title}>
+                    <a href={item.url}>
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Pengaturan Group */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Pengaturan</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {data.pengaturan.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild tooltip={item.title}>
                     <a href={item.url}>
@@ -137,9 +227,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="p-4">
-        <Button variant="destructive" className="py-5 text-white" asChild>
-          <a href="/logout">
-            Logout <MdLogout />
+        <Button
+          variant="outline"
+          className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground border-destructive/20"
+          asChild
+        >
+          <a href="/login">
+            <LogOut className="mr-2 h-4 w-4" />
+            Keluar
           </a>
         </Button>
       </SidebarFooter>
