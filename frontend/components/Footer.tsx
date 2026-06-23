@@ -1,7 +1,16 @@
 "use client";
 
 import React from "react";
-import { FaGraduationCap, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaTwitter, FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+import {
+  FaGraduationCap,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaTwitter,
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+} from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -19,19 +28,37 @@ export default function Footer() {
             </span>
           </div>
           <p className="text-sm leading-relaxed text-slate-600 max-w-sm font-medium">
-            Portal resmi Layanan Penerimaan Peserta Didik Baru (PPDB) Online terintegrasi, transparan, dan akuntabel. Melayani pendaftaran jenjang SD, SMP, SMA, dan SMK.
+            Portal resmi Layanan Penerimaan Peserta Didik Baru (PPDB) Online
+            terintegrasi, transparan, dan akuntabel. Melayani pendaftaran
+            jenjang SD, SMP, SMA, dan SMK.
           </p>
           <div className="flex items-center gap-3">
-            <a href="#" className="p-2.5 rounded-xl bg-white hover:bg-blue-600 hover:text-white transition-all text-slate-500 duration-200 border border-slate-200 shadow-xs" aria-label="Twitter">
+            <a
+              href="#"
+              className="p-2.5 rounded-xl bg-white hover:bg-blue-600 hover:text-white transition-all text-slate-500 duration-200 border border-slate-200 shadow-xs"
+              aria-label="Twitter"
+            >
               <FaTwitter size={16} />
             </a>
-            <a href="#" className="p-2.5 rounded-xl bg-white hover:bg-blue-600 hover:text-white transition-all text-slate-500 duration-200 border border-slate-200 shadow-xs" aria-label="Facebook">
+            <a
+              href="#"
+              className="p-2.5 rounded-xl bg-white hover:bg-blue-600 hover:text-white transition-all text-slate-500 duration-200 border border-slate-200 shadow-xs"
+              aria-label="Facebook"
+            >
               <FaFacebookF size={16} />
             </a>
-            <a href="#" className="p-2.5 rounded-xl bg-white hover:bg-blue-600 hover:text-white transition-all text-slate-500 duration-200 border border-slate-200 shadow-xs" aria-label="Instagram">
+            <a
+              href="#"
+              className="p-2.5 rounded-xl bg-white hover:bg-blue-600 hover:text-white transition-all text-slate-500 duration-200 border border-slate-200 shadow-xs"
+              aria-label="Instagram"
+            >
               <FaInstagram size={16} />
             </a>
-            <a href="#" className="p-2.5 rounded-xl bg-white hover:bg-blue-600 hover:text-white transition-all text-slate-500 duration-200 border border-slate-200 shadow-xs" aria-label="Youtube">
+            <a
+              href="#"
+              className="p-2.5 rounded-xl bg-white hover:bg-blue-600 hover:text-white transition-all text-slate-500 duration-200 border border-slate-200 shadow-xs"
+              aria-label="Youtube"
+            >
               <FaYoutube size={16} />
             </a>
           </div>
@@ -44,22 +71,34 @@ export default function Footer() {
           </h4>
           <ul className="space-y-3 text-sm font-semibold">
             <li>
-              <a href="#alur" className="hover:text-blue-600 transition-colors duration-200">
+              <a
+                href="#alur"
+                className="hover:text-blue-600 transition-colors duration-200"
+              >
                 Alur Pendaftaran
               </a>
             </li>
             <li>
-              <a href="#jalur" className="hover:text-blue-600 transition-colors duration-200">
+              <a
+                href="#jalur"
+                className="hover:text-blue-600 transition-colors duration-200"
+              >
                 Jalur Seleksi
               </a>
             </li>
             <li>
-              <a href="#jadwal" className="hover:text-blue-600 transition-colors duration-200">
+              <a
+                href="#jadwal"
+                className="hover:text-blue-600 transition-colors duration-200"
+              >
                 Jadwal Kegiatan
               </a>
             </li>
             <li>
-              <a href="#faq" className="hover:text-blue-600 transition-colors duration-200">
+              <a
+                href="#faq"
+                className="hover:text-blue-600 transition-colors duration-200"
+              >
                 Tanya Jawab (FAQ)
               </a>
             </li>
@@ -73,18 +112,21 @@ export default function Footer() {
           </h4>
           <ul className="space-y-3.5 text-sm font-medium">
             <li className="flex gap-3 items-start">
-              <FaMapMarkerAlt className="text-blue-600 mt-1 flex-shrink-0" size={16} />
+              <FaMapMarkerAlt
+                className="text-blue-600 mt-1 shrink-0"
+                size={16}
+              />
               <span>
                 Dinas Pendidikan & Kebudayaan <br />
                 Jl. Jenderal Sudirman No. 10, Jakarta Selatan, 12190
               </span>
             </li>
             <li className="flex gap-3 items-center">
-              <FaPhoneAlt className="text-blue-600 flex-shrink-0" size={15} />
+              <FaPhoneAlt className="text-blue-600 shrink-0" size={15} />
               <span>(021) 1234-5678 / 0812-3456-7890</span>
             </li>
             <li className="flex gap-3 items-center">
-              <FaEnvelope className="text-blue-600 flex-shrink-0" size={15} />
+              <FaEnvelope className="text-blue-600 shrink-0" size={15} />
               <span>ppdb@kemendikbud.go.id</span>
             </li>
           </ul>
@@ -95,7 +137,10 @@ export default function Footer() {
       <div className="border-t border-slate-200 bg-slate-200/50 py-6 text-center text-xs text-slate-500 font-medium">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p>© 2026 Dinas Pendidikan & Kebudayaan. All rights reserved.</p>
-          <p className="mt-1 opacity-75">Sistem dikembangkan secara resmi untuk pengelolaan portal PPDB tingkat daerah.</p>
+          <p className="mt-1 opacity-75">
+            Sistem dikembangkan secara resmi untuk pengelolaan portal PPDB
+            tingkat daerah.
+          </p>
         </div>
       </div>
     </footer>

@@ -1,18 +1,24 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Moon, Sun, Check } from "lucide-react"
-import { useTheme } from "next-themes"
+import * as React from "react";
+import { Moon, Sun, Check } from "lucide-react";
+import { useTheme } from "next-themes";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
+import { useState } from "react";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <DropdownMenu modal={false}>
@@ -24,19 +30,28 @@ export function ThemeToggle() {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")} className="cursor-pointer justify-between">
+        <DropdownMenuItem
+          onClick={() => setTheme("light")}
+          className="cursor-pointer justify-between"
+        >
           Light
-          {theme === "light" && <Check className="h-4 w-4" />}
+          {mounted && theme === "light" && <Check className="h-4 w-4" />}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")} className="cursor-pointer justify-between">
+        <DropdownMenuItem
+          onClick={() => setTheme("dark")}
+          className="cursor-pointer justify-between"
+        >
           Dark
-          {theme === "dark" && <Check className="h-4 w-4" />}
+          {mounted && theme === "dark" && <Check className="h-4 w-4" />}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")} className="cursor-pointer justify-between">
+        <DropdownMenuItem
+          onClick={() => setTheme("system")}
+          className="cursor-pointer justify-between"
+        >
           System
-          {theme === "system" && <Check className="h-4 w-4" />}
+          {mounted && theme === "system" && <Check className="h-4 w-4" />}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
