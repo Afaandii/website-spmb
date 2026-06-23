@@ -1,7 +1,20 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Bar,
+  BarChart,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
 
 const data = [
   {
@@ -32,7 +45,7 @@ const data = [
     name: "Min",
     total: Math.floor(Math.random() * 50) + 10,
   },
-]
+];
 
 export function OverviewChart() {
   return (
@@ -44,8 +57,8 @@ export function OverviewChart() {
         </CardDescription>
       </CardHeader>
       <CardContent className="pl-2">
-        <div className="h-[350px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="h-87.5 w-full">
+          <ResponsiveContainer className="h-full w-full">
             <BarChart data={data}>
               <XAxis
                 dataKey="name"
@@ -63,9 +76,16 @@ export function OverviewChart() {
                 axisLine={false}
                 tickFormatter={(value) => `${value}`}
               />
-              <Tooltip 
-                cursor={{ fill: 'hsl(var(--muted))' }}
-                contentStyle={{ borderRadius: '8px', border: '1px solid hsl(var(--border))', backgroundColor: 'hsl(var(--background))', color: 'hsl(var(--foreground))', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' }}
+              <Tooltip
+                cursor={{ fill: "hsl(var(--muted))" }}
+                contentStyle={{
+                  borderRadius: "8px",
+                  border: "1px solid hsl(var(--border))",
+                  backgroundColor: "hsl(var(--background))",
+                  color: "hsl(var(--foreground))",
+                  boxShadow:
+                    "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+                }}
               />
               <Bar
                 dataKey="total"
@@ -77,5 +97,5 @@ export function OverviewChart() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
