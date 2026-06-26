@@ -3,16 +3,23 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { 
-  UserPlus, 
-  ArrowLeft, 
-  Loader2, 
-  AlertCircle, 
-  ShieldCheck 
+import {
+  UserPlus,
+  ArrowLeft,
+  Loader2,
+  AlertCircle,
+  ShieldCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -31,7 +38,7 @@ export default function CreateUserPage() {
   const router = useRouter();
   const [roles, setRoles] = useState<RoleType[]>([]);
   const [loadingRoles, setLoadingRoles] = useState(true);
-  
+
   // Form State
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -39,8 +46,11 @@ export default function CreateUserPage() {
   const [roleId, setRoleId] = useState("");
   const [siswaId, setSiswaId] = useState("");
   const [isActive, setIsActive] = useState("1"); // Default: "1" (Aktif)
-  
-  const [alertMessage, setAlertMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  const [alertMessage, setAlertMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const API_BASE_URL = "http://localhost:8080/api/v1";
@@ -58,7 +68,7 @@ export default function CreateUserPage() {
         }
       } catch (error) {
         console.error("Terjadi kesalahan koneksi ke API:", error);
-        showAlert("error", "Koneksi backend gagal. Gagal memuat daftar role.");
+        // showAlert("error", "Koneksi backend gagal. Gagal memuat daftar role.");
       } finally {
         setLoadingRoles(false);
       }
@@ -105,7 +115,10 @@ export default function CreateUserPage() {
       const json = await res.json();
 
       if (res.status === 201 || json.status === 201) {
-        showAlert("success", "Berhasil menambahkan user baru! Mengalihkan halaman...");
+        showAlert(
+          "success",
+          "Berhasil menambahkan user baru! Mengalihkan halaman...",
+        );
         // Redirect back to users page after 1.5s
         setTimeout(() => {
           router.push("/admin/users");
@@ -133,7 +146,12 @@ export default function CreateUserPage() {
     <div className="flex-1 space-y-4 max-w-2xl mx-auto py-6">
       {/* Back Button */}
       <div className="flex items-center justify-between">
-        <Button variant="ghost" size="sm" asChild className="gap-2 text-muted-foreground hover:text-foreground">
+        <Button
+          variant="ghost"
+          size="sm"
+          asChild
+          className="gap-2 text-muted-foreground hover:text-foreground"
+        >
           <Link href="/admin/users">
             <ArrowLeft className="h-4 w-4" />
             Kembali ke Daftar Users
@@ -143,11 +161,13 @@ export default function CreateUserPage() {
 
       {/* Alert Banner */}
       {alertMessage && (
-        <div className={`flex items-center gap-3 p-4 rounded-xl border shadow-md animate-in fade-in duration-300 ${
-          alertMessage.type === "success" 
-            ? "bg-green-500/10 text-green-600 border-green-500/20" 
-            : "bg-red-500/10 text-red-600 border-red-500/20"
-        }`}>
+        <div
+          className={`flex items-center gap-3 p-4 rounded-xl border shadow-md animate-in fade-in duration-300 ${
+            alertMessage.type === "success"
+              ? "bg-green-500/10 text-green-600 border-green-500/20"
+              : "bg-red-500/10 text-red-600 border-red-500/20"
+          }`}
+        >
           {alertMessage.type === "success" ? (
             <ShieldCheck className="h-5 w-5 shrink-0" />
           ) : (
@@ -168,9 +188,13 @@ export default function CreateUserPage() {
             Lengkapi data akun pengguna portal PPDB Online di bawah ini.
           </CardDescription>
         </CardHeader>
-        
+
         <CardContent className="pt-6">
-          <form onSubmit={handleSubmit} id="create-user-form" className="space-y-5">
+          <form
+            onSubmit={handleSubmit}
+            id="create-user-form"
+            className="space-y-5"
+          >
             <div className="grid gap-5 sm:grid-cols-2">
               {/* Username */}
               <div className="space-y-1.5 sm:col-span-2">
@@ -221,9 +245,17 @@ export default function CreateUserPage() {
                 <label className="text-sm font-semibold text-foreground">
                   Pilih Role <span className="text-destructive">*</span>
                 </label>
-                <Select value={roleId} onValueChange={setRoleId} disabled={loadingRoles}>
+                <Select
+                  value={roleId}
+                  onValueChange={setRoleId}
+                  disabled={loadingRoles}
+                >
                   <SelectTrigger className="w-full border-border bg-background h-10 px-3">
-                    <SelectValue placeholder={loadingRoles ? "Memuat role..." : "Pilih jenis role..."} />
+                    <SelectValue
+                      placeholder={
+                        loadingRoles ? "Memuat role..." : "Pilih jenis role..."
+                      }
+                    />
                   </SelectTrigger>
                   <SelectContent className="border-border bg-card">
                     {roles.map((role) => (
@@ -241,7 +273,9 @@ export default function CreateUserPage() {
                   <label className="text-sm font-semibold text-foreground">
                     Siswa ID
                   </label>
-                  <span className="text-xs text-muted-foreground italic">Opsional</span>
+                  <span className="text-xs text-muted-foreground italic">
+                    Opsional
+                  </span>
                 </div>
                 <Input
                   type="number"
@@ -273,12 +307,10 @@ export default function CreateUserPage() {
 
         <CardFooter className="border-t border-border pt-6 flex justify-end gap-3 bg-muted/20">
           <Button variant="outline" asChild className="h-10 px-6">
-            <Link href="/admin/users">
-              Batal
-            </Link>
+            <Link href="/admin/users">Batal</Link>
           </Button>
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             form="create-user-form"
             disabled={isSubmitting || loadingRoles}
             className="h-10 px-6 font-semibold"
