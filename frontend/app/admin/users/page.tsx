@@ -2,16 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { 
-  Users, 
-  UserPlus, 
-  Trash2, 
-  RefreshCw, 
-  Search, 
+import {
+  Users,
+  UserPlus,
+  Trash2,
+  RefreshCw,
+  Search,
   AlertCircle,
   ShieldCheck,
   User,
-  Loader2
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -49,9 +49,12 @@ export default function UsersPage() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  
+
   // Notification / Alert State
-  const [alertMessage, setAlertMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [alertMessage, setAlertMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
   const [isDeletingId, setIsDeletingId] = useState<number | null>(null);
 
   const API_BASE_URL = "http://localhost:8080/api/v1";
@@ -60,7 +63,7 @@ export default function UsersPage() {
   const fetchData = async (showRefreshIndicator = false) => {
     if (showRefreshIndicator) setRefreshing(true);
     else setLoading(true);
-    
+
     try {
       // Fetch users
       const usersRes = await fetch(`${API_BASE_URL}/user`);
@@ -81,7 +84,10 @@ export default function UsersPage() {
       }
     } catch (error) {
       console.error("Terjadi kesalahan koneksi ke API:", error);
-      showAlert("error", "Koneksi ke backend gagal. Pastikan server backend Anda berjalan.");
+      showAlert(
+        "error",
+        "Koneksi ke backend gagal. Pastikan server backend Anda berjalan.",
+      );
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -89,7 +95,7 @@ export default function UsersPage() {
   };
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
   }, []);
 
   const showAlert = (type: "success" | "error", text: string) => {
@@ -126,7 +132,7 @@ export default function UsersPage() {
   };
 
   // Filter users based on search
-  const filteredUsers = users.filter(user => {
+  const filteredUsers = users.filter((user) => {
     const search = searchQuery.toLowerCase();
     return (
       user.username.toLowerCase().includes(search) ||
@@ -136,7 +142,7 @@ export default function UsersPage() {
   });
 
   const getRoleName = (roleId: number) => {
-    const foundRole = roles.find(r => r.id === roleId);
+    const foundRole = roles.find((r) => r.id === roleId);
     return foundRole ? foundRole.nama_role : `Role ID ${roleId}`;
   };
 
@@ -148,13 +154,19 @@ export default function UsersPage() {
         dateStyle: "medium",
         timeStyle: "short",
       }).format(date);
-    } catch (e) {
-      return dateString;
+    } catch (error) {
+      console.error("Error formatting date:", error);
     }
   };
 
   const checkIsActive = (isActiveVal: string | boolean | number) => {
-    if (isActiveVal === true || isActiveVal === "t" || isActiveVal === 1 || isActiveVal === "1" || isActiveVal === "true") {
+    if (
+      isActiveVal === true ||
+      isActiveVal === "t" ||
+      isActiveVal === 1 ||
+      isActiveVal === "1" ||
+      isActiveVal === "true"
+    ) {
       return true;
     }
     return false;
@@ -164,11 +176,13 @@ export default function UsersPage() {
     <div className="flex-1 space-y-4">
       {/* Alert Banner */}
       {alertMessage && (
-        <div className={`fixed top-4 right-4 z-50 flex items-center gap-3 p-4 rounded-xl border shadow-xl max-w-md animate-in fade-in-50 slide-in-from-top-4 duration-300 ${
-          alertMessage.type === "success" 
-            ? "bg-green-500/10 text-green-600 border-green-500/20" 
-            : "bg-red-500/10 text-red-600 border-red-500/20"
-        }`}>
+        <div
+          className={`fixed top-4 right-4 z-50 flex items-center gap-3 p-4 rounded-xl border shadow-xl max-w-md animate-in fade-in-50 slide-in-from-top-4 duration-300 ${
+            alertMessage.type === "success"
+              ? "bg-green-500/10 text-green-600 border-green-500/20"
+              : "bg-red-500/10 text-red-600 border-red-500/20"
+          }`}
+        >
           {alertMessage.type === "success" ? (
             <ShieldCheck className="h-5 w-5 shrink-0" />
           ) : (
@@ -189,23 +203,22 @@ export default function UsersPage() {
             Kelola data akun pengguna portal PPDB Online.
           </p>
         </div>
-        
+
         <div className="flex items-center gap-2">
-          <Button 
-            variant="outline" 
-            size="icon" 
+          <Button
+            variant="outline"
+            size="icon"
             onClick={() => fetchData(true)}
             disabled={loading || refreshing}
             className="h-9 w-9 shrink-0 hover:bg-muted"
             title="Muat ulang data"
           >
-            <RefreshCw className={`h-4 w-4 ${refreshing ? "animate-spin" : ""}`} />
+            <RefreshCw
+              className={`h-4 w-4 ${refreshing ? "animate-spin" : ""}`}
+            />
           </Button>
 
-          <Button 
-            asChild
-            className="h-9 gap-2 shadow-sm font-medium"
-          >
+          <Button asChild className="h-9 gap-2 shadow-sm font-medium">
             <Link href="/admin/users/users_create">
               <UserPlus className="h-4 w-4" />
               Tambah User
@@ -232,14 +245,20 @@ export default function UsersPage() {
         {loading ? (
           <div className="flex flex-col items-center justify-center p-20 gap-3 text-muted-foreground">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <span className="text-sm font-medium">Memuat data user dari database...</span>
+            <span className="text-sm font-medium">
+              Memuat data user dari database...
+            </span>
           </div>
         ) : filteredUsers.length === 0 ? (
           <div className="flex flex-col items-center justify-center p-20 gap-2 text-muted-foreground bg-card">
             <User className="h-12 w-12 text-muted-foreground/50" />
-            <span className="text-lg font-semibold text-foreground">Tidak ada user ditemukan</span>
+            <span className="text-lg font-semibold text-foreground">
+              Tidak ada user ditemukan
+            </span>
             <span className="text-sm text-center max-w-xs">
-              {searchQuery ? "Coba ganti kata kunci pencarian Anda." : "Klik tombol 'Tambah User' untuk menambahkan pengguna baru."}
+              {searchQuery
+                ? "Coba ganti kata kunci pencarian Anda."
+                : "Klik tombol 'Tambah User' untuk menambahkan pengguna baru."}
             </span>
           </div>
         ) : (
@@ -247,53 +266,90 @@ export default function UsersPage() {
             <Table>
               <TableHeader className="bg-muted/50">
                 <TableRow className="hover:bg-muted/50 border-border">
-                  <TableHead className="w-12 text-center font-semibold">No</TableHead>
+                  <TableHead className="w-12 text-center font-semibold">
+                    No
+                  </TableHead>
                   <TableHead className="font-semibold">Username</TableHead>
                   <TableHead className="font-semibold">Email</TableHead>
                   <TableHead className="font-semibold">Role</TableHead>
                   <TableHead className="font-semibold">Siswa ID</TableHead>
-                  <TableHead className="font-semibold">Terakhir Login</TableHead>
+                  <TableHead className="font-semibold">
+                    Terakhir Login
+                  </TableHead>
                   <TableHead className="font-semibold">Status</TableHead>
-                  <TableHead className="font-semibold hidden md:table-cell">Dibuat</TableHead>
-                  <TableHead className="font-semibold hidden md:table-cell">Diubah</TableHead>
-                  <TableHead className="w-20 text-center font-semibold">Aksi</TableHead>
+                  <TableHead className="font-semibold hidden md:table-cell">
+                    Dibuat
+                  </TableHead>
+                  <TableHead className="font-semibold hidden md:table-cell">
+                    Diubah
+                  </TableHead>
+                  <TableHead className="w-20 text-center font-semibold">
+                    Aksi
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredUsers.map((user, index) => {
                   const isActiveStatus = checkIsActive(user.is_active);
                   return (
-                    <TableRow key={user.id} className="border-border hover:bg-muted/30 transition-colors">
-                      <TableCell className="text-center font-medium text-muted-foreground">{index + 1}</TableCell>
-                      <TableCell className="font-semibold text-foreground">{user.username}</TableCell>
-                      <TableCell className="text-muted-foreground">{user.email}</TableCell>
+                    <TableRow
+                      key={user.id}
+                      className="border-border hover:bg-muted/30 transition-colors"
+                    >
+                      <TableCell className="text-center font-medium text-muted-foreground">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell className="font-semibold text-foreground">
+                        {user.username}
+                      </TableCell>
+                      <TableCell className="text-muted-foreground">
+                        {user.email}
+                      </TableCell>
                       <TableCell>
-                        <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20 font-medium">
+                        <Badge
+                          variant="outline"
+                          className="bg-primary/5 text-primary border-primary/20 font-medium"
+                        >
                           {getRoleName(user.role_id)}
                         </Badge>
                       </TableCell>
                       <TableCell>
                         {user.siswa_id ? (
-                          <Badge variant="secondary" className="font-medium bg-amber-500/10 text-amber-600 border-amber-500/20 border">
+                          <Badge
+                            variant="secondary"
+                            className="font-medium bg-amber-500/10 text-amber-600 border-amber-500/20 border"
+                          >
                             ID: {user.siswa_id}
                           </Badge>
                         ) : (
-                          <span className="text-xs text-muted-foreground italic">Belum Ditautkan</span>
+                          <span className="text-xs text-muted-foreground italic">
+                            Belum Ditautkan
+                          </span>
                         )}
                       </TableCell>
-                      <TableCell className="text-muted-foreground text-xs">{formatDate(user.last_login_at)}</TableCell>
+                      <TableCell className="text-muted-foreground text-xs">
+                        {formatDate(user.last_login_at)}
+                      </TableCell>
                       <TableCell>
-                        <span className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-semibold ${
-                          isActiveStatus 
-                            ? "bg-green-500/10 text-green-600" 
-                            : "bg-red-500/10 text-red-600"
-                        }`}>
-                          <span className={`h-1.5 w-1.5 rounded-full ${isActiveStatus ? "bg-green-500" : "bg-red-500"}`} />
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-semibold ${
+                            isActiveStatus
+                              ? "bg-green-500/10 text-green-600"
+                              : "bg-red-500/10 text-red-600"
+                          }`}
+                        >
+                          <span
+                            className={`h-1.5 w-1.5 rounded-full ${isActiveStatus ? "bg-green-500" : "bg-red-500"}`}
+                          />
                           {isActiveStatus ? "Aktif" : "Non-Aktif"}
                         </span>
                       </TableCell>
-                      <TableCell className="text-muted-foreground text-xs hidden md:table-cell">{formatDate(user.created_at)}</TableCell>
-                      <TableCell className="text-muted-foreground text-xs hidden md:table-cell">{formatDate(user.updated_at)}</TableCell>
+                      <TableCell className="text-muted-foreground text-xs hidden md:table-cell">
+                        {formatDate(user.created_at)}
+                      </TableCell>
+                      <TableCell className="text-muted-foreground text-xs hidden md:table-cell">
+                        {formatDate(user.updated_at)}
+                      </TableCell>
                       <TableCell className="text-center">
                         <Button
                           variant="ghost"
