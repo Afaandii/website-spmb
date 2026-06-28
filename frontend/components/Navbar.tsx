@@ -77,7 +77,7 @@ export default function Navbar() {
                 Cek Status
               </Link>
               <Link
-                href="/dashboard"
+                href="/login"
                 className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl shadow-lg shadow-blue-500/25 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 text-sm font-bold transition-all duration-200"
               >
                 Masuk / Daftar <FaArrowRight size={11} />
@@ -145,7 +145,7 @@ export default function Navbar() {
               <FaClipboardCheck className="text-blue-600" /> Cek Status Seleksi
             </Link>
             <Link
-              href="/dashboard"
+              href="/login"
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 font-bold text-white shadow-lg shadow-blue-500/20 text-sm transition-all"
             >
