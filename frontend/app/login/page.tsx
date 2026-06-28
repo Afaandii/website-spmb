@@ -24,7 +24,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="h-screen w-full grid grid-cols-1 md:grid-cols-12 overflow-hidden bg-slate-50 text-slate-800 font-sans select-none">
+    <div className="min-h-screen md:h-screen w-full grid grid-cols-1 md:grid-cols-12 overflow-y-auto md:overflow-hidden bg-slate-50 text-slate-800 font-sans select-none">
       {/* Sisi Kiri: Poster PPDB (Hanya muncul di md ke atas) */}
       <div className="hidden md:block md:col-span-5 lg:col-span-6 h-full relative overflow-hidden bg-slate-900">
         <Image
@@ -34,8 +34,8 @@ export default function LoginPage() {
         />
       </div>
 
-      {/* Sisi Kanan: Form Login (Tanpa Container Card, Tanpa Scroll) */}
-      <div className="col-span-12 md:col-span-7 lg:col-span-6 h-full flex flex-col justify-between p-8 sm:p-12 lg:p-16 bg-slate-50 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] bg-size-[24px_24px] relative">
+      {/* Sisi Kanan: Form Login (Tanpa Container Card, Tanpa Scroll di Desktop, Scrollable di Mobile) */}
+      <div className="col-span-12 md:col-span-7 lg:col-span-6 min-h-screen md:h-full flex flex-col justify-between p-5 sm:p-8 md:p-12 lg:p-8 bg-slate-50 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] bg-size-[24px_24px] relative">
         {/* Header Link */}
         <div className="flex justify-start">
           <Link
@@ -48,14 +48,14 @@ export default function LoginPage() {
         </div>
 
         {/* Form Login (Centered vertically in the remaining space) */}
-        <div className="w-full max-w-md mx-auto my-auto py-6 flex flex-col justify-center">
+        <div className="w-full max-w-md mx-auto my-auto py-4 flex flex-col justify-center">
           {/* Logo PPDB */}
-          <div className="flex flex-col items-center text-center space-y-2.5 mb-8">
-            <div className="h-12 w-12 rounded-2xl bg-linear-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white">
-              <GraduationCap className="h-6.5 w-6.5" />
+          <div className="flex flex-col items-center text-center space-y-2.5 mb-5 md:mb-8">
+            <div className="h-10 w-10 md:h-12 md:w-12 rounded-xl md:rounded-2xl bg-linear-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white">
+              <GraduationCap className="h-5.5 w-5.5 md:h-6.5 md:w-6.5" />
             </div>
             <div>
-              <h1 className="text-3xl font-black tracking-tight bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl md:text-3xl font-black tracking-tight bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Login Portal PPDB
               </h1>
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
@@ -65,11 +65,11 @@ export default function LoginPage() {
           </div>
 
           {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-3.5 md:space-y-5">
             {/* Email / Username field */}
             <div className="space-y-1.5 text-left">
               <label
-                className="text-xs font-bold text-slate-500 uppercase tracking-wider block"
+                className="text-[11px] md:text-xs font-bold text-slate-500 uppercase tracking-wider block"
                 htmlFor="email"
               >
                 NISN
@@ -81,7 +81,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full h-12 px-4 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-sm font-semibold shadow-xs"
+                className="w-full h-10 md:h-12 px-3.5 md:px-4 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-xs md:text-sm font-semibold shadow-xs"
               />
             </div>
 
@@ -89,7 +89,7 @@ export default function LoginPage() {
             <div className="space-y-1.5 text-left">
               <div className="flex items-center justify-between">
                 <label
-                  className="text-xs font-bold text-slate-500 uppercase tracking-wider"
+                  className="text-[11px] md:text-xs font-bold text-slate-500 uppercase tracking-wider"
                   htmlFor="password"
                 >
                   Password
@@ -109,17 +109,17 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full h-12 pl-4 pr-11 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-sm font-semibold shadow-xs"
+                  className="w-full h-10 md:h-12 pl-3.5 md:pl-4 pr-11 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-xs md:text-sm font-semibold shadow-xs"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-650 transition-colors focus:outline-none cursor-pointer"
+                  className="absolute right-3 md:right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-650 transition-colors focus:outline-none cursor-pointer"
                 >
                   {showPassword ? (
-                    <Eye className="h-5 w-5" />
+                    <Eye className="h-4.5 w-4.5 md:h-5 md:w-5" />
                   ) : (
-                    <EyeOff className="h-5 w-5" />
+                    <EyeOff className="h-4.5 w-4.5 md:h-5 md:w-5" />
                   )}
                 </button>
               </div>
@@ -135,7 +135,7 @@ export default function LoginPage() {
                   className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500/20 cursor-pointer"
                 />
                 <span className="text-xs font-bold text-slate-500">
-                  Ingat Saya
+                  Remember Me?
                 </span>
               </label>
             </div>
@@ -143,7 +143,7 @@ export default function LoginPage() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full h-12 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-[0.98] text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer text-sm shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/20"
+              className="w-full h-10 md:h-12 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-[0.98] text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer text-xs md:text-sm shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/20"
             >
               Masuk Sekarang
               <ArrowRight className="h-4 w-4" />
@@ -151,7 +151,7 @@ export default function LoginPage() {
           </form>
 
           {/* Signup Link */}
-          <p className="text-sm text-slate-500 font-semibold text-center mt-6">
+          <p className="text-xs md:text-sm text-slate-500 font-semibold text-center mt-4 md:mt-6">
             Belum terdaftar?{" "}
             <Link
               href="/register"
@@ -164,8 +164,8 @@ export default function LoginPage() {
 
         {/* Footer Section */}
         <div className="w-full">
-          <div className="h-px bg-slate-200/80 w-full mb-4"></div>
-          <p className="text-[11px] text-slate-400 font-semibold text-center leading-relaxed">
+          <div className="h-px bg-slate-200/80 w-full mb-3 md:mb-4"></div>
+          <p className="text-[10px] md:text-[11px] text-slate-400 font-semibold text-center leading-relaxed">
             Butuh bantuan? Silakan hubungi Layanan Pengaduan PPDB di{" "}
             <span className="text-slate-600 font-bold whitespace-nowrap">
               0812-3456-7890
