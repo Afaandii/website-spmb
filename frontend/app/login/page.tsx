@@ -11,16 +11,51 @@ import {
 } from "lucide-react";
 import posterSiswa from "@/public/assets/img/poster-siswa-auth.jpg";
 import Image from "next/image";
+// import Router from "next/router";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("PPDB Login attempt:", { email, password, rememberMe });
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch("http://localhost:8080/api/v1/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || `Terjadi Kesalahan pada server!`);
+      }
+
+      if (res.ok) {
+        console.log("Login success:", data);
+
+        // Router.push("/dashboard");
+      }
+    } catch (err: any) {
+      setError(
+        err.message || "Login Gagal!, Terjadi kesalahan koneksi server.",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -35,7 +70,7 @@ export default function LoginPage() {
       </div>
 
       {/* Sisi Kanan: Form Login (Tanpa Container Card, Tanpa Scroll di Desktop, Scrollable di Mobile) */}
-      <div className="col-span-12 md:col-span-7 lg:col-span-6 min-h-screen md:h-full flex flex-col justify-between p-5 sm:p-8 md:p-12 lg:p-8 bg-slate-50 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] bg-size-[24px_24px] relative">
+      <div className="col-span-12 md:col-span-7 lg:col-span-6 min-h-screen md:h-full flex flex-col justify-between p-5 sm:p-8 md:p-12 lg:p-16 bg-slate-50 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] bg-size-[24px_24px] relative">
         {/* Header Link */}
         <div className="flex justify-start">
           <Link
@@ -48,9 +83,9 @@ export default function LoginPage() {
         </div>
 
         {/* Form Login (Centered vertically in the remaining space) */}
-        <div className="w-full max-w-md mx-auto my-auto py-4 flex flex-col justify-center">
+        <div className="w-full max-w-md mx-auto my-auto py-6 flex flex-col justify-center space-y-4">
           {/* Logo PPDB */}
-          <div className="flex flex-col items-center text-center space-y-2.5 mb-5 md:mb-8">
+          <div className="flex flex-col items-center text-center space-y-2.5 mb-1 md:mb-2">
             <div className="h-10 w-10 md:h-12 md:w-12 rounded-xl md:rounded-2xl bg-linear-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white">
               <GraduationCap className="h-5.5 w-5.5 md:h-6.5 md:w-6.5" />
             </div>
@@ -64,6 +99,13 @@ export default function LoginPage() {
             </div>
           </div>
 
+          {/* Error Alert */}
+          {error && (
+            <div className="bg-red-50 text-red-600 text-xs font-semibold p-3.5 rounded-xl border border-red-200 text-left transition-all">
+              {error}
+            </div>
+          )}
+
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-3.5 md:space-y-5">
             {/* Email / Username field */}
@@ -72,14 +114,14 @@ export default function LoginPage() {
                 className="text-[11px] md:text-xs font-bold text-slate-500 uppercase tracking-wider block"
                 htmlFor="email"
               >
-                NISN
+                NISN / USERNAME
               </label>
               <input
                 id="email"
                 type="text"
-                placeholder="Masukkan NISN Anda"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Masukkan NISN atau Username Anda"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
                 className="w-full h-10 md:h-12 px-3.5 md:px-4 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-xs md:text-sm font-semibold shadow-xs"
               />
@@ -143,10 +185,11 @@ export default function LoginPage() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full h-10 md:h-12 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-[0.98] text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer text-xs md:text-sm shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/20"
+              disabled={loading}
+              className="w-full h-10 md:h-12 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-[0.98] text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer text-xs md:text-sm shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/20 disabled:opacity-75 disabled:pointer-events-none"
             >
-              Masuk Sekarang
-              <ArrowRight className="h-4 w-4" />
+              {loading ? "Memproses..." : "Masuk Sekarang"}
+              {!loading && <ArrowRight className="h-4 w-4" />}
             </button>
           </form>
 
