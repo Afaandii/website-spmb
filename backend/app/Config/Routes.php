@@ -9,6 +9,10 @@ $routes->get('/', 'Home::index');
 
 $routes->group('api', function($routes) {
   $routes->group('v1', function($routes){
+    // auth routing
+    $routes->post('auth/login', 'auth\Auth::login');
+    $routes->post('auth/register', 'auth\Auth::register');
+    $routes->post('auth/logout', 'auth\Auth::logout');
 
     // Roles routing
     $routes->get('role', 'role\Role::index');

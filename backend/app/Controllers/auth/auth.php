@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Controllers;
+namespace App\Controllers\auth;
 
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait; 
@@ -22,10 +22,23 @@ class Auth extends BaseController{
   }
 
   public function login(){
-    $username = $this->request->getVar('username');
+    $identifier = $this->request->getVar('username');
     $password = $this->request->getVar('password');
 
-    $user = $this->model->where('username', $username)->first();
+    if (empty($identifier) || empty($password)) {
+        return $this->respond([
+            'status' => 400,
+            'message' => 'Username/NISN dan Password wajib diisi!'
+        ], 400);
+    }
+
+    $user = $this->model->select('users.*, siswa.nisn, siswa.nama_lengkap')
+                        ->join('siswa', 'siswa.id = users.siswa_id', 'left')
+                        ->groupStart()
+                        ->where('users.username', $identifier)
+                        ->orWhere('siswa.nisn', $identifier)
+                        ->groupEnd()
+                        ->first();
 
     if($user){
       if(password_verify($password, $user['password'])){
@@ -42,12 +55,12 @@ class Auth extends BaseController{
 
         $token = JWT::encode($payload, $key, 'HS256');
 
-        $this->model->update($user['username'], [
-          'token' => $token,
+        $this->model->builder()->where('username', $user['username'])->update([
+            'token' => $token,
         ]);
 
         return $this->respond([
-          'data' => $user,
+          'datas' => $user,
           'token' => $token,
           'status' => 200,
           'message' => 'Login berhasil!'
