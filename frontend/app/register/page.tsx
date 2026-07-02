@@ -18,10 +18,48 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("PPDB Registration attempt:", { nisn, name, email, password });
+    setLoading(true);
+    setError(null);
+    setSuccessMessage(null);
+
+    try {
+      const res = await fetch("http://localhost:8080/api/v1/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: nisn, // Using NISN as the username required by backend
+          nisn: nisn,
+          name: name,
+          email: email,
+          password: password,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || "Registrasi gagal, silakan coba lagi.");
+      }
+
+      setSuccessMessage(data.message || "Registrasi berhasil! Silakan login.");
+      setNisn("");
+      setName("");
+      setEmail("");
+      setPassword("");
+    } catch (err: any) {
+      setError(
+        err.message || "Registrasi Gagal!, Terjadi kesalahan koneksi server.",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -64,6 +102,20 @@ export default function RegisterPage() {
               </p>
             </div>
           </div>
+
+          {/* Error Alert */}
+          {error && (
+            <div className="bg-red-50 text-red-600 text-xs font-semibold p-3.5 rounded-xl border border-red-200 text-left transition-all mb-4">
+              {error}
+            </div>
+          )}
+
+          {/* Success Alert */}
+          {successMessage && (
+            <div className="bg-green-50 text-green-600 text-xs font-semibold p-3.5 rounded-xl border border-green-200 text-left transition-all mb-4">
+              {successMessage}
+            </div>
+          )}
 
           {/* Register Form */}
           <form onSubmit={handleSubmit} className="space-y-3">
@@ -161,10 +213,11 @@ export default function RegisterPage() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full h-10 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-[0.98] text-white font-bold rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer text-xs shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/20 mt-1"
+              disabled={loading}
+              className="w-full h-10 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-[0.98] text-white font-bold rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer text-xs shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/20 mt-1 disabled:opacity-75 disabled:pointer-events-none"
             >
-              Daftar Sekarang
-              <ArrowRight className="h-4 w-4" />
+              {loading ? "Memproses..." : "Daftar Sekarang"}
+              {!loading && <ArrowRight className="h-4 w-4" />}
             </button>
           </form>
 
