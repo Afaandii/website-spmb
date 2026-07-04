@@ -6,19 +6,19 @@ use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait; 
 use Firebase\JWT\JWT;
 use App\Models\M_user;
+use App\Models\M_siswa;
+use Config\Database;
 
 class Auth extends BaseController{
   use ResponseTrait;
 
-   /**
-   * @var M_user
-   */
-
-  private $model;
+  private M_user $model;
+  private M_siswa $modelSiswa;
 
   public function __construct()
   {
     $this->model = new M_user();
+    $this->modelSiswa = new M_siswa();
   }
 
   public function login(){
@@ -84,23 +84,45 @@ class Auth extends BaseController{
   }
 
   public function register(){
+    $nisn = $this->request->getVar('nisn');
     $username = $this->request->getVar('username');
+    $email = $this->request->getVar('email');
     $password = $this->request->getVar('password');
 
-    $data = [
-      'username' => $username,
-      'password' => $this->model->hashPassword($password),
+    $dataSiswa = [
+      'nisn' => $nisn,
     ];
 
-    if($this->model->insert($data)){
+    // mencegah duplikasi data siswa berdasarkan NISN menggunakan transaction
+    $db = Database::connect();
+    $db->transStart();
+
+    $db->table('siswa')->insert($dataSiswa);
+    $idSiswa = $db->insertID();
+
+    $data = [
+      'role_id' => 2,
+      'siswa_id' => $idSiswa,
+      'username' => $username,
+      'email' => $email,
+      'password' => $this->model->hashPassword($password),
+      'is_active' => '1',
+    ];
+
+    $this->model->insert($data);
+
+    $db->transComplete();
+
+    if($db->transStatus() === TRUE){
       return $this->respond([
         'data' => $data,
         'status' => 200,
         'message' => 'Register berhasil!'
       ], 200);
     } else {
+      $errors = array_merge($this->model->errors() ?? [], $this->modelSiswa->errors() ?? []);
       return $this->respond([
-        'error' => $this->model->errors() ? $this->model->errors() : 'Gagal register!',
+        'error' => !empty($errors) ? $errors : 'Gagal register!',
         'status' => 403,
         'message' => 'Terjadi kesalahan!, Gagal register!'
       ], 403);

@@ -44,17 +44,17 @@ class M_siswa extends Model
 
     // Validation
     protected $validationRules      = [
-        "nik" => 'required|alpha_numeric_space',
+        "nik" => 'alpha_numeric_space',
         "nisn" => 'required|alpha_numeric_space',
-        "npsn" => 'required|alpha_numeric_space',
-        "nama_lengkap" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
-        "tempat_lahir" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
-        "tanggal_lahir" => 'required|valid_date',
-        "jenis_kelamin" => 'required|in_list[laki-laki,perempuan]',
-        "agama" => 'required|alpha_numeric_space|min_length[3]|max_length[120]',
-        "alamat" => 'required|alpha_numeric_space|min_length[3]|max_length[255]',
-        "no_telp" => 'required|integer|max_length[12]',
-        "latitude" => 'required|numeric',
-        "longitude" => 'required|numeric',
+        "npsn" => 'alpha_numeric_space',
+        "nama_lengkap" => 'alpha_numeric_space|min_length[3]|max_length[120]',
+        "tempat_lahir" => 'alpha_numeric_space|min_length[3]|max_length[120]',
+        "tanggal_lahir" => 'valid_date',
+        "jenis_kelamin" => 'in_list[laki-laki,perempuan]',
+        "agama" => 'alpha_numeric_space|min_length[3]|max_length[120]',
+        "alamat" => 'alpha_numeric_space|min_length[3]|max_length[255]',
+        "no_telp" => 'integer|max_length[12]',
+        "latitude" => 'numeric',
+        "longitude" => 'numeric',
     ];
 }
