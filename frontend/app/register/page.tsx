@@ -15,7 +15,7 @@ import Image from "next/image";
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [nisn, setNisn] = useState("");
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -34,10 +34,10 @@ export default function RegisterPage() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({
-          username: nisn, // Using NISN as the username required by backend
           nisn: nisn,
-          name: name,
+          username: username,
           email: email,
           password: password,
         }),
@@ -50,7 +50,7 @@ export default function RegisterPage() {
 
       setSuccessMessage(data.message || "Registrasi berhasil! Silakan login.");
       setNisn("");
-      setName("");
+      setUsername("");
       setEmail("");
       setPassword("");
     } catch (err: any) {
@@ -145,14 +145,14 @@ export default function RegisterPage() {
                 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block"
                 htmlFor="name"
               >
-                Nama Lengkap
+                Username
               </label>
               <input
-                id="name"
+                id="username"
                 type="text"
-                placeholder="Masukkan nama lengkap sesuai ijazah"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                placeholder="Masukkan username Anda"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
                 className="w-full h-10 px-3.5 bg-white border border-slate-200 rounded-lg text-slate-800 placeholder:text-slate-450 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-xs font-semibold shadow-xs"
               />
@@ -238,7 +238,9 @@ export default function RegisterPage() {
           <div className="h-px bg-slate-200/80 w-full mb-3"></div>
           <p className="text-[10px] text-slate-400 font-semibold text-center leading-relaxed">
             Butuh bantuan? Silakan hubungi Layanan Pengaduan PPDB di{" "}
-            <span className="text-slate-600 font-bold whitespace-nowrap">0812-3456-7890</span>
+            <span className="text-slate-600 font-bold whitespace-nowrap">
+              0812-3456-7890
+            </span>
           </p>
         </div>
       </div>
