@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { deleteCookie } from "@/lib/cookies";
+import { deleteCookie, getCookie } from "@/lib/cookies";
 import {
   FaUser,
   FaFileAlt,
@@ -20,10 +20,34 @@ import {
 
 export default function Dashboard() {
   const router = useRouter();
-  const handleLogout = (e: React.MouseEvent) => {
+  const handleLogout = async (e: React.MouseEvent) => {
     e.preventDefault();
-    deleteCookie("token");
-    router.push("/login");
+
+    try {
+      const res = await fetch("http://localhost:8080/api/v1/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: getCookie("token"),
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Terjadi kesalahan saat logout.");
+      }
+
+      console.log("Logout success", data.message);
+      deleteCookie("token");
+      router.push("/login");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Terjadi kesalahan saat logout.";
+      console.error(errorMessage);
+    }
   };
 
   const [profile] = useState({
@@ -32,7 +56,7 @@ export default function Dashboard() {
     regNum: "PPDB-2026-08912",
     gender: "Laki-laki",
     originSchool: "SMP Negeri 1 Jakarta",
-    status: "Menunggu Verifikasi", // status options: "Menunggu Verifikasi", "Verifikasi Selesai", "Perlu Perbaikan"
+    status: "Menunggu Verifikasi",
     jalur: "Jalur Zonasi",
   });
 
