@@ -61,7 +61,11 @@ export default function LoginPage() {
           }
         }
 
-        router.push("/dashboard");
+        if (data.datas.role_id == 1) {
+          router.push("/admin");
+        } else {
+          router.push("/dashboard");
+        }
       }
     } catch (err: unknown) {
       setError(
