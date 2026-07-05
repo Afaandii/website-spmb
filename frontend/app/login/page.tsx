@@ -11,9 +11,11 @@ import {
 } from "lucide-react";
 import posterSiswa from "@/public/assets/img/poster-siswa-auth.jpg";
 import Image from "next/image";
-// import Router from "next/router";
+import { useRouter } from "next/navigation";
+import { setCookie } from "@/lib/cookies";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -47,11 +49,25 @@ export default function LoginPage() {
       if (res.ok) {
         console.log("Login success:", data);
 
-        // Router.push("/dashboard");
+        const token = data.token;
+        if (token) {
+          if (rememberMe) {
+            // 14 days in seconds = 14 * 24 * 60 * 60 = 1209600
+            const maxAgeSeconds = 14 * 24 * 60 * 60;
+            setCookie("token", token, maxAgeSeconds);
+          } else {
+            // Session-only cookie
+            setCookie("token", token);
+          }
+        }
+
+        router.push("/dashboard");
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(
-        err.message || "Login Gagal!, Terjadi kesalahan koneksi server.",
+        err instanceof Error
+          ? err.message
+          : "Login Gagal!, Terjadi kesalahan koneksi server.",
       );
     } finally {
       setLoading(false);

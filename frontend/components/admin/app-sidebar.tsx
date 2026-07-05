@@ -1,4 +1,8 @@
+"use client";
+
 import * as React from "react";
+import { useRouter } from "next/navigation";
+import { deleteCookie } from "@/lib/cookies";
 import {
   LayoutDashboard,
   Calendar,
@@ -113,6 +117,13 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const router = useRouter();
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    deleteCookie("token");
+    router.push("/login");
+  };
+
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -229,13 +240,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter className="p-4">
         <Button
           variant="outline"
-          className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground border-destructive/20"
-          asChild
+          className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground border-destructive/20 cursor-pointer"
+          onClick={handleLogout}
         >
-          <a href="/login">
-            <LogOut className="mr-2 h-4 w-4" />
-            Keluar
-          </a>
+          <LogOut className="mr-2 h-4 w-4" />
+          Keluar
         </Button>
       </SidebarFooter>
       <SidebarRail />

@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { deleteCookie } from "@/lib/cookies";
 import {
   FaUser,
   FaFileAlt,
@@ -17,6 +19,13 @@ import {
 } from "react-icons/fa";
 
 export default function Dashboard() {
+  const router = useRouter();
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    deleteCookie("token");
+    router.push("/login");
+  };
+
   const [profile] = useState({
     name: "Budi Santoso",
     nisn: "0082736183",
@@ -117,12 +126,12 @@ export default function Dashboard() {
               </p>
             </div>
             <div className="h-8 w-px bg-slate-800 hidden sm:block"></div>
-            <Link
-              href="/"
-              className="p-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 transition-all text-xs font-bold flex items-center gap-1.5"
+            <button
+              onClick={handleLogout}
+              className="p-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 transition-all text-xs font-bold flex items-center gap-1.5 cursor-pointer border-none"
             >
               <FaSignOutAlt /> <span className="hidden sm:inline">Keluar</span>
-            </Link>
+            </button>
           </div>
         </div>
       </header>
