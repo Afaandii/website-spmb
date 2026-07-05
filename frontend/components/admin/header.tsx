@@ -1,4 +1,8 @@
+"use client";
+
 import { Bell, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { deleteCookie } from "@/lib/cookies";
 
 import {
   Breadcrumb,
@@ -23,6 +27,13 @@ import { Input } from "@/components/ui/input";
 import { ThemeToggle } from "./theme-toggle";
 
 export function Header() {
+  const router = useRouter();
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    deleteCookie("token");
+    router.push("/login");
+  };
+
   return (
     <header className="flex h-16 shrink-0 items-center justify-between border-b bg-background px-4 transition-[width,height] ease-linear group-has-data[collapsible=icon]/sidebar-wrapper:h-12">
       <div className="flex items-center gap-2">
@@ -86,7 +97,10 @@ export function Header() {
               Pengaturan
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive focus:bg-destructive/10 focus:text-destructive cursor-pointer">
+            <DropdownMenuItem 
+              onClick={handleLogout}
+              className="text-destructive focus:bg-destructive/10 focus:text-destructive cursor-pointer"
+            >
               Keluar
             </DropdownMenuItem>
           </DropdownMenuContent>

@@ -11,8 +11,10 @@ import {
 } from "lucide-react";
 import posterSiswa from "@/public/assets/img/poster-siswa-auth.jpg";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [nisn, setNisn] = useState("");
   const [username, setUsername] = useState("");
@@ -48,14 +50,22 @@ export default function RegisterPage() {
         throw new Error(data.message || "Registrasi gagal, silakan coba lagi.");
       }
 
-      setSuccessMessage(data.message || "Registrasi berhasil! Silakan login.");
-      setNisn("");
-      setUsername("");
-      setEmail("");
-      setPassword("");
-    } catch (err: any) {
+      if (res.ok) {
+        setSuccessMessage(
+          data.message || "Registrasi berhasil! Silakan login.",
+        );
+        setNisn("");
+        setUsername("");
+        setEmail("");
+        setPassword("");
+
+        router.push("/login");
+      }
+    } catch (err: unknown) {
       setError(
-        err.message || "Registrasi Gagal!, Terjadi kesalahan koneksi server.",
+        err instanceof Error
+          ? err.message
+          : "Registrasi Gagal!, Terjadi kesalahan koneksi server.",
       );
     } finally {
       setLoading(false);
