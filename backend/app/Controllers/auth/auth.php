@@ -56,6 +56,7 @@ class Auth extends BaseController{
         $token = JWT::encode($payload, $key, 'HS256');
 
         $this->model->builder()->where('username', $user['username'])->update([
+            'last_login_at' => date('Y-m-d H:i:s'),
             'token' => $token,
         ]);
 
@@ -125,6 +126,35 @@ class Auth extends BaseController{
         'error' => !empty($errors) ? $errors : 'Gagal register!',
         'status' => 403,
         'message' => 'Terjadi kesalahan!, Gagal register!'
+      ], 403);
+    }
+  }
+
+  public function logout(){
+    $token = $this->request->getVar('token');
+
+    if(!$token){
+      return $this->respond([
+        'status' => 400,
+        'message' => 'Token tidak ditemukan!'
+      ], 400);
+    }
+
+    $user = $this->model->where('token', $token)->first();
+
+    if($user){
+      $this->model->builder()->where('id', $user['id'])->update([
+          'token' => null,
+      ]);
+
+      return $this->respond([
+        'status' => 200,
+        'message' => 'Logout berhasil!'
+      ], 200);
+    } else {
+      return $this->respond([
+        'status' => 403,
+        'message' => 'Token tidak valid!'
       ], 403);
     }
   }
