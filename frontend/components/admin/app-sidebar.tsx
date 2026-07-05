@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { deleteCookie } from "@/lib/cookies";
+import { deleteCookie, getCookie } from "@/lib/cookies";
 import {
   LayoutDashboard,
   Calendar,
@@ -118,10 +118,34 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const router = useRouter();
-  const handleLogout = (e: React.MouseEvent) => {
+  const handleLogout = async (e: React.MouseEvent) => {
     e.preventDefault();
-    deleteCookie("token");
-    router.push("/login");
+
+    try {
+      const res = await fetch("http://localhost:8080/api/v1/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: getCookie("token"),
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Terjadi Kesalahan pada server!");
+      }
+
+      console.log("Logout success", data.message);
+      deleteCookie("token");
+      router.push("/login");
+    } catch (err: unknown) {
+      const errMess =
+        err instanceof Error ? err.message : "Terjadi kesalahan saat logout.";
+      console.log(errMess);
+    }
   };
 
   return (
