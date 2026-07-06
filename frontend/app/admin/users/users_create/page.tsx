@@ -27,7 +27,7 @@ const FALLBACK_ROLES: RoleType[] = [
 export default function CreateUserPage() {
   const router = useRouter();
   const [roles, setRoles] = useState<RoleType[]>([]);
-  const [loadingRoles, setLoadingRoles] = useState(true);
+  // const [loadingRoles, setLoadingRoles] = useState(true);
 
   // Form State
   const [fullName, setFullName] = useState("");
@@ -65,7 +65,7 @@ export default function CreateUserPage() {
       } catch (error) {
         console.error("Terjadi kesalahan koneksi ke API:", error);
       } finally {
-        setLoadingRoles(false);
+        // setLoadingRoles(false);
       }
     };
     fetchRoles();
@@ -83,7 +83,10 @@ export default function CreateUserPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !email || !password || !roleId) {
-      showAlert("error", "Harap isi semua kolom wajib (Nama Lengkap, Email, Role Akses, Password)!");
+      showAlert(
+        "error",
+        "Harap isi semua kolom wajib (Nama Lengkap, Email, Role Akses, Password)!",
+      );
       return;
     }
 
@@ -118,7 +121,7 @@ export default function CreateUserPage() {
       if (res.status === 201 || json.status === 201) {
         showAlert(
           "success",
-          "Berhasil menambahkan user baru! Mengalihkan halaman..."
+          "Berhasil menambahkan user baru! Mengalihkan halaman...",
         );
         setTimeout(() => {
           router.push("/admin/users");
@@ -137,7 +140,10 @@ export default function CreateUserPage() {
     } catch (error) {
       console.error(error);
       // Fallback local mock success for dummy implementation
-      showAlert("success", "Berhasil menambahkan user baru (Mode Demo)! Mengalihkan halaman...");
+      showAlert(
+        "success",
+        "Berhasil menambahkan user baru (Mode Demo)! Mengalihkan halaman...",
+      );
       setTimeout(() => {
         router.push("/admin/users");
       }, 1500);
@@ -150,15 +156,6 @@ export default function CreateUserPage() {
 
   return (
     <div className="bg-[#09090b] text-[#FAFAFA] min-h-screen p-1 sm:p-4 md:p-6 space-y-6">
-      {/* Breadcrumb Navigation */}
-      <div className="flex items-center gap-2 text-zinc-500 text-xs font-semibold uppercase tracking-wider">
-        <span>Management</span>
-        <span>&gt;</span>
-        <span>Users</span>
-        <span>&gt;</span>
-        <span className="text-zinc-300">Tambah User</span>
-      </div>
-
       {/* Back Button */}
       <div className="flex items-center justify-between">
         <Link

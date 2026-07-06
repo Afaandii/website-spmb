@@ -4,13 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
-  Users,
   UserPlus,
   Search,
   AlertCircle,
   ShieldCheck,
-  Zap,
-  Shield,
   UserX,
   Filter,
   ChevronLeft,
@@ -145,13 +142,6 @@ export default function UsersPage() {
     );
   });
 
-  // Calculate statistics
-  const totalUsersCount = 1284; // Dummy display count from mockup
-  const activeSessionsCount = 42; // Dummy display count from mockup
-  const superAdminCount =
-    users.filter((u) => u.role === "SUPER_ADMIN").length + 4; // Mocked count
-  const suspendedCount = 12; // Dummy display count from mockup
-
   return (
     <div className="bg-[#09090b] text-[#FAFAFA] min-h-screen p-1 sm:p-4 md:p-6 space-y-6">
       {/* Alert Banner */}
@@ -199,83 +189,6 @@ export default function UsersPage() {
             <UserPlus className="h-4 w-4 text-zinc-950" />
             <span>Tambah User</span>
           </Link>
-        </div>
-      </div>
-
-      {/* Statistics Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Card 1: Total User */}
-        <div className="bg-[#121215] border border-[#1F1F23] rounded-2xl p-5 flex flex-col justify-between h-36">
-          <div className="flex items-center justify-between">
-            <div className="p-2.5 rounded-xl bg-[#1A1A1E] border border-zinc-800 text-zinc-400">
-              <Users className="h-5 w-5 text-zinc-300" />
-            </div>
-            <span className="bg-[#1A1A1E] border border-zinc-800 text-zinc-400 text-xs px-2.5 py-1 rounded-full font-semibold">
-              +12%
-            </span>
-          </div>
-          <div>
-            <span className="text-zinc-500 text-sm font-medium">
-              Total User
-            </span>
-            <div className="text-white text-3xl font-bold tracking-tight mt-1">
-              {totalUsersCount.toLocaleString("id-ID")}
-            </div>
-          </div>
-        </div>
-
-        {/* Card 2: Sesi Aktif */}
-        <div className="bg-[#121215] border border-[#1F1F23] rounded-2xl p-5 flex flex-col justify-between h-36">
-          <div className="flex items-center justify-between">
-            <div className="p-2.5 rounded-xl bg-[#0E1B25] border border-[#16364D] text-[#30A3E6]">
-              <Zap className="h-5 w-5 text-[#30A3E6]" />
-            </div>
-            <span className="bg-[#0D2435] border border-[#1D3B54] text-[#30A3E6] text-xs px-2.5 py-1 rounded-full font-semibold">
-              Aktif
-            </span>
-          </div>
-          <div>
-            <span className="text-zinc-500 text-sm font-medium">
-              Sesi Aktif
-            </span>
-            <div className="text-white text-3xl font-bold tracking-tight mt-1">
-              {activeSessionsCount}
-            </div>
-          </div>
-        </div>
-
-        {/* Card 3: Super Admin */}
-        <div className="bg-[#121215] border border-[#1F1F23] rounded-2xl p-5 flex flex-col justify-between h-36">
-          <div className="flex items-center justify-between">
-            <div className="p-2.5 rounded-xl bg-[#281A15] border border-[#482D20] text-[#D97736]">
-              <Shield className="h-5 w-5 text-[#D97736]" />
-            </div>
-          </div>
-          <div>
-            <span className="text-zinc-500 text-sm font-medium">
-              Super Admin
-            </span>
-            <div className="text-white text-3xl font-bold tracking-tight mt-1">
-              {superAdminCount}
-            </div>
-          </div>
-        </div>
-
-        {/* Card 4: Ditangguhkan */}
-        <div className="bg-[#121215] border border-[#1F1F23] rounded-2xl p-5 flex flex-col justify-between h-36">
-          <div className="flex items-center justify-between">
-            <div className="p-2.5 rounded-xl bg-[#251316] border border-[#4D1C24] text-rose-500">
-              <UserX className="h-5 w-5 text-rose-500" />
-            </div>
-          </div>
-          <div>
-            <span className="text-zinc-500 text-sm font-medium">
-              Ditangguhkan
-            </span>
-            <div className="text-white text-3xl font-bold tracking-tight mt-1">
-              {suspendedCount}
-            </div>
-          </div>
         </div>
       </div>
 
@@ -343,6 +256,8 @@ export default function UsersPage() {
                           <Image
                             src={user.avatar}
                             alt={user.name}
+                            width={40}
+                            height={40}
                             className="h-10 w-10 rounded-full object-cover border border-zinc-800"
                           />
                           <div className="flex flex-col">

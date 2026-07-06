@@ -14,6 +14,7 @@ import {
   Lock,
 } from "lucide-react";
 import { FiRefreshCw } from "react-icons/fi";
+import Image from "next/image";
 
 interface RoleType {
   id: number;
@@ -52,7 +53,8 @@ const DUMMY_USERS_DETAIL: Record<string, DummyUser> = {
     email: "siti.aminah@ppdb.go.id",
     role: "ADMIN_PANITIA",
     status: "Online",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150",
     createdAt: "12 Okt 2023",
     phone: "+62 812-3456-7890",
     lastLogin: "2 jam yang lalu",
@@ -68,7 +70,8 @@ const DUMMY_USERS_DETAIL: Record<string, DummyUser> = {
     email: "b.susilo@ppdb.go.id",
     role: "SUPER_ADMIN",
     status: "Offline",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150",
     createdAt: "05 Sep 2023",
     phone: "+62 811-9876-5432",
     lastLogin: "1 hari yang lalu",
@@ -84,7 +87,8 @@ const DUMMY_USERS_DETAIL: Record<string, DummyUser> = {
     email: "andi.w@ppdb.go.id",
     role: "VERIFIKATOR",
     status: "Online",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150",
     createdAt: "20 Nov 2023",
     phone: "+62 813-1122-3344",
     lastLogin: "30 menit yang lalu",
@@ -100,7 +104,8 @@ const DUMMY_USERS_DETAIL: Record<string, DummyUser> = {
     email: "dewi.l@ppdb.go.id",
     role: "VERIFIKATOR",
     status: "Offline",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150&h=150",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150&h=150",
     createdAt: "01 Des 2023",
     phone: "+62 812-5566-7788",
     lastLogin: "3 hari yang lalu",
@@ -111,13 +116,17 @@ const DUMMY_USERS_DETAIL: Record<string, DummyUser> = {
   },
 };
 
-export default function EditUserPage({ params }: { params: Promise<{ id: string }> }) {
+export default function EditUserPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const router = useRouter();
   const resolvedParams = use(params);
   const id = resolvedParams.id;
 
   const [roles, setRoles] = useState<RoleType[]>([]);
-  const [loadingRoles, setLoadingRoles] = useState(true);
+  // const [loadingRoles, setLoadingRoles] = useState(true);
 
   // Load specific user detail or fallback to user 1
   const initialUser = DUMMY_USERS_DETAIL[id] || DUMMY_USERS_DETAIL["1"];
@@ -127,7 +136,11 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
   const [email, setEmail] = useState(initialUser.email);
   const [phone, setPhone] = useState(initialUser.phone);
   const [roleId, setRoleId] = useState(
-    initialUser.role === "SUPER_ADMIN" ? "2" : initialUser.role === "VERIFIKATOR" ? "3" : "1"
+    initialUser.role === "SUPER_ADMIN"
+      ? "2"
+      : initialUser.role === "VERIFIKATOR"
+        ? "3"
+        : "1",
   );
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -160,7 +173,7 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
       } catch (error) {
         console.error("Terjadi kesalahan koneksi ke API:", error);
       } finally {
-        setLoadingRoles(false);
+        // setLoadingRoles(false);
       }
     };
     fetchRoles();
@@ -219,7 +232,10 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
     } catch (error) {
       console.error(error);
       // Fallback local mock success for dummy implementation
-      showAlert("success", "Profil user berhasil diperbarui (Mode Demo)! Mengalihkan...");
+      showAlert(
+        "success",
+        "Profil user berhasil diperbarui (Mode Demo)! Mengalihkan...",
+      );
       setTimeout(() => {
         router.push("/admin/users");
       }, 1500);
@@ -234,7 +250,7 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
     setIsActive(nextStatus);
     showAlert(
       "success",
-      `Akun berhasil ${nextStatus ? "diaktifkan kembali" : "dinonaktifkan sementara"}!`
+      `Akun berhasil ${nextStatus ? "diaktifkan kembali" : "dinonaktifkan sementara"}!`,
     );
   };
 
@@ -245,13 +261,6 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
       {/* Header & Breadcrumb */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="flex items-center gap-2 text-zinc-500 text-xs font-semibold uppercase tracking-wider mb-2">
-            <Link href="/admin/users" className="hover:text-zinc-300">
-              Users
-            </Link>
-            <span>&gt;</span>
-            <span className="text-zinc-300">Edit Profil User</span>
-          </div>
           <h2 className="text-3xl font-extrabold tracking-tight text-white">
             Edit Profil User
           </h2>
@@ -268,7 +277,9 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
                 : "bg-[#251316] border border-[#4D1C24] text-rose-500"
             }`}
           >
-            <span className={`h-1.5 w-1.5 rounded-full ${isActive ? "bg-[#30A3E6]" : "bg-rose-500"}`} />
+            <span
+              className={`h-1.5 w-1.5 rounded-full ${isActive ? "bg-[#30A3E6]" : "bg-rose-500"}`}
+            />
             {isActive ? "Active Account" : "Suspended"}
           </span>
         </div>
@@ -309,48 +320,22 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
         <div className="lg:col-span-4 space-y-6">
           {/* User Profile Summary Card */}
           <div className="bg-[#121215] border border-[#1F1F23] rounded-2xl p-6 flex flex-col items-center text-center">
-            <img
+            <Image
               src={initialUser.avatar}
               alt={fullName}
+              width={112}
+              height={112}
               className="h-28 w-28 rounded-2xl object-cover border border-zinc-800 shadow-md mb-4"
             />
-            <h3 className="text-xl font-bold text-white tracking-tight">{fullName}</h3>
-            <span className="text-zinc-500 text-sm font-medium mt-1">{initialUser.userId}</span>
+            <h3 className="text-xl font-bold text-white tracking-tight">
+              {fullName}
+            </h3>
+            <span className="text-zinc-500 text-sm font-medium mt-1">
+              {initialUser.userId}
+            </span>
             <span className="text-zinc-500 text-xs mt-3">
               Terakhir login: {initialUser.lastLogin}
             </span>
-          </div>
-
-          {/* User Stats Card */}
-          <div className="bg-[#121215] border border-[#1F1F23] rounded-2xl p-6 space-y-5">
-            <div className="flex items-center gap-2 text-zinc-400 text-xs font-semibold uppercase tracking-wider">
-              <User className="h-4 w-4 text-zinc-500" />
-              <span>User Stats</span>
-            </div>
-
-            <div className="space-y-3.5">
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-zinc-400">Total Registrasi</span>
-                <span className="text-white font-bold">{initialUser.totalRegistrations.toLocaleString("id-ID")}</span>
-              </div>
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-zinc-400">Dokumen Validasi</span>
-                <span className="text-white font-bold">{initialUser.documentsValidated.toLocaleString("id-ID")}</span>
-              </div>
-
-              {/* Progress target */}
-              <div className="space-y-1.5 pt-2">
-                <div className="w-full bg-[#1A1A1E] rounded-full h-1.5">
-                  <div
-                    className="bg-[#9D90EF] h-1.5 rounded-full"
-                    style={{ width: `${initialUser.performanceTarget}%` }}
-                  />
-                </div>
-                <div className="text-[10px] text-zinc-500 text-right">
-                  Target Kinerja: {initialUser.performanceTarget}%
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -437,7 +422,11 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
                       >
                         {displayRoles.map((role) => (
                           <option key={role.id} value={String(role.id)}>
-                            {role.nama_role === "ADMIN_PANITIA" ? "Admin Panitia" : role.nama_role === "SUPER_ADMIN" ? "Super Admin" : "Verifikator"}
+                            {role.nama_role === "ADMIN_PANITIA"
+                              ? "Admin Panitia"
+                              : role.nama_role === "SUPER_ADMIN"
+                                ? "Super Admin"
+                                : "Verifikator"}
                           </option>
                         ))}
                       </select>
@@ -510,7 +499,9 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
                       />
                       <button
                         type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
                         className="absolute right-3.5 top-3.5 text-zinc-500 hover:text-white transition-colors"
                       >
                         {showConfirmPassword ? (
@@ -559,7 +550,9 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
           {/* Danger Zone: Nonaktifkan Akun */}
           <div className="bg-[#1C1213] border border-[#3A1E20] rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h4 className="text-md font-bold text-[#F87171]">Nonaktifkan Akun</h4>
+              <h4 className="text-md font-bold text-[#F87171]">
+                Nonaktifkan Akun
+              </h4>
               <p className="text-zinc-400 text-sm mt-1">
                 User tidak akan bisa login ke sistem sementara waktu.
               </p>
