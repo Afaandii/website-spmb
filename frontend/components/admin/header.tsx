@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { deleteCookie } from "@/lib/cookies";
 
@@ -62,10 +62,6 @@ export function Header() {
           />
         </div>
         <ThemeToggle />
-        <button className="relative p-2 text-muted-foreground hover:bg-muted rounded-full transition-colors">
-          <Bell className="h-5 w-5" />
-          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-destructive border border-background"></span>
-        </button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="flex items-center gap-2 outline-none">
@@ -97,7 +93,7 @@ export function Header() {
               Pengaturan
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem 
+            <DropdownMenuItem
               onClick={handleLogout}
               className="text-destructive focus:bg-destructive/10 focus:text-destructive cursor-pointer"
             >
