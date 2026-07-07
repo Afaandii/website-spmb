@@ -22,7 +22,11 @@ class User extends BaseController
 
     public function index()
     {
-        $data = $this->model->db->query("SELECT * FROM users")->getResult();
+        $data = $this->model->db->query(
+            "SELECT *, roles.nama_role as nama_role, siswa.nama_lengkap as nama_siswa FROM users 
+            LEFT JOIN roles ON users.role_id = role.id
+            LEFT JOIN siswa ON users.siswa_id = siswa.id
+        ")->getResult();
 
         return $this->respond([
             'data' => $data,
@@ -40,7 +44,12 @@ class User extends BaseController
             ], 403);
         }
         
-        $data = $this->model->db->query("SELECT * FROM users WHERE id = ?", [$id])->getRow();
+        $data = $this->model->db->query(
+            "SELECT *, roles.nama_role as nama_role, siswa.nama_lengkap as nama_siswa FROM users 
+            LEFT JOIN roles ON users.role_id = roles.id
+            LEFT JOIN siswa ON users.siswa_id = siswa.id
+            WHERE id = ?", [$id]
+        )->getRow();
         
         if($data){
             return $this->respond([
